@@ -16,24 +16,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class DoctorServiceImpl implements DoctorService, UserDetailsService {
+public class DoctorServiceImpl implements DoctorService {
     private final DoctorsRepository doctorsRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public DoctorServiceImpl(DoctorsRepository doctorsRepository,
-                             PasswordEncoder passwordEncoder) {
+    public DoctorServiceImpl(DoctorsRepository doctorsRepository) {
         this.doctorsRepository = doctorsRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    @Override
-    public Doctor registerDoctor(DoctorRegisterRequestModel model) {
-        //System.out.println(String.format("%s %s", model.getUserName(), model.getPassword()));
-        Doctor doctor = new Doctor();
-        doctor.setUserName(model.getuserName());
-        doctor.setPassword(this.passwordEncoder.encode(model.getPassword()));
-        return this.doctorsRepository.save(doctor);
     }
 
     @Override
@@ -46,8 +34,4 @@ public class DoctorServiceImpl implements DoctorService, UserDetailsService {
         return this.doctorsRepository.getOne(id);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
-    }
 }

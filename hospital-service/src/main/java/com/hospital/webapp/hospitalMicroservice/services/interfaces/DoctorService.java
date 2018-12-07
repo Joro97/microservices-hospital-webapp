@@ -6,7 +6,6 @@ import com.hospital.webapp.hospitalMicroservice.models.view.DoctorRegisterReques
 import java.util.List;
 
 public interface DoctorService {
-    Doctor registerDoctor(DoctorRegisterRequestModel model);
     List<Doctor> getAllDoctors();
     Doctor getDoctorById(long id);
 }

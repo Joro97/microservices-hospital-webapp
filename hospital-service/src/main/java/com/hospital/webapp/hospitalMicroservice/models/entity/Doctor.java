@@ -6,62 +6,26 @@ import java.util.Set;
 @Entity
 @Table(name = "doctors")
 public class Doctor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
     @Column
-    private String userName;
+    private String specialty;
 
     @Column
-    private String password;
+    private int experience;
 
-    @Column
-    private long doctorId;
-
-    @ManyToMany
-    @JoinTable(name = "doctors_patients",
-        joinColumns = @JoinColumn(name = "doctor_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "patient_id", referencedColumnName = "id"))
-    private Set<Patient> patients;
-
-    public long getId() {
-        return id;
+    public String getSpecialty() {
+        return specialty;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
     }
 
-    public String getUserName() {
-        return userName;
+    public int getExperience() {
+        return experience;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public long getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(long doctorId) {
-        this.doctorId = doctorId;
-    }
-
-    public Set<Patient> getPatients() {
-        return patients;
-    }
-
-    public void setPatients(Set<Patient> patients) {
-        this.patients = patients;
+    public void setExperience(int experience) {
+        this.experience = experience;
     }
 }
