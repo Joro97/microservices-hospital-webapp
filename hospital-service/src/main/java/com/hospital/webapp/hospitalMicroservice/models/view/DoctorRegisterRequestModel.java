@@ -1,9 +1,5 @@
 package com.hospital.webapp.hospitalMicroservice.models.view;
 
-import com.hospital.webapp.hospitalMicroservice.models.entity.Patient;
-
-import java.util.Set;
-
 public class DoctorRegisterRequestModel {
     private String userName;
     private String password;

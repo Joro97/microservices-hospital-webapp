@@ -34,4 +34,9 @@ public class DoctorServiceImpl implements DoctorService {
         return this.doctorsRepository.getOne(id);
     }
 
+    @Override
+    public Doctor registerDoctor(Doctor doctor) {
+        return this.doctorsRepository.save(doctor);
+    }
+
 }

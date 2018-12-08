@@ -4,6 +4,8 @@ import { DoctorsComponent } from './doctors/doctors.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
 import { RegisterComponent } from './register/register.component';
+import { DoctorRegisterComponent } from './doctor-register/doctor-register.component';
+import { PatientRegisterComponent } from './patient-register/patient-register.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -11,6 +13,8 @@ const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent },
   { path: 'detail/:id', component: DoctorDetailComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'register/doctor', component: DoctorRegisterComponent },
+  { path: 'register/patient', component: PatientRegisterComponent },
 ];
 
 @NgModule({

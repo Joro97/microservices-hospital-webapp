@@ -32,4 +32,9 @@ public class DoctorsController {
         return this.doctorService.getDoctorById(id);
     }
 
+    @PostMapping("/api/doctors/register")
+    public Doctor registerDoctor(@RequestBody Doctor doctor) {
+        return this.doctorService.registerDoctor(doctor);
+    }
+
 }
