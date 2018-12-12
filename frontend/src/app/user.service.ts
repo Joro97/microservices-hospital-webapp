@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class UserService {
-  private registerUserUrl = 'http://localhost:8000/api/register';
+  private registerUserUrl = 'http://localhost:8000/api/patients/register';
   private registerDoctorUrl = 'http://localhost:8000/api/doctors/register';
 
   constructor(

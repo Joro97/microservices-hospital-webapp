@@ -6,6 +6,7 @@ import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
 import { RegisterComponent } from './register/register.component';
 import { DoctorRegisterComponent } from './doctor-register/doctor-register.component';
 import { PatientRegisterComponent } from './patient-register/patient-register.component';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'register/doctor', component: DoctorRegisterComponent },
   { path: 'register/patient', component: PatientRegisterComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

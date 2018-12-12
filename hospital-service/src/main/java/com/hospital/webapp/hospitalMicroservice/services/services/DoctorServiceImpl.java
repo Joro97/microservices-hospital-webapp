@@ -1,13 +1,9 @@
 package com.hospital.webapp.hospitalMicroservice.services.services;
 
 import com.hospital.webapp.hospitalMicroservice.models.entity.Doctor;
-import com.hospital.webapp.hospitalMicroservice.models.view.DoctorRegisterRequestModel;
 import com.hospital.webapp.hospitalMicroservice.repositories.DoctorsRepository;
 import com.hospital.webapp.hospitalMicroservice.services.interfaces.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +14,12 @@ import java.util.List;
 @Transactional
 public class DoctorServiceImpl implements DoctorService {
     private final DoctorsRepository doctorsRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public DoctorServiceImpl(DoctorsRepository doctorsRepository) {
+    public DoctorServiceImpl(DoctorsRepository doctorsRepository, PasswordEncoder passwordEncoder) {
         this.doctorsRepository = doctorsRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -36,6 +34,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor registerDoctor(Doctor doctor) {
+        doctor.setPassword(this.passwordEncoder.encode(doctor.getPassword()));
         return this.doctorsRepository.save(doctor);
     }
 

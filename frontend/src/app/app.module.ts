@@ -11,6 +11,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { DoctorRegisterComponent } from './doctor-register/doctor-register.component';
 import { PatientRegisterComponent } from './patient-register/patient-register.component';
+import { LoginComponent } from './login/login.component';
+import {JwtInterceptor} from './jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { PatientRegisterComponent } from './patient-register/patient-register.co
     RegisterComponent,
     DoctorRegisterComponent,
     PatientRegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { PatientRegisterComponent } from './patient-register/patient-register.co
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [JwtInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

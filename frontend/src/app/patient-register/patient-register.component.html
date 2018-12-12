@@ -1,3 +1,21 @@
-<p>
-  patient-register works!
-</p>
+<form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+  <div>
+    <label for="">First Name: </label>
+    <input type="text" formControlName="firstName">
+  </div>
+  <div>
+    <label for="">Last Name: </label>
+    <input type="text" formControlName="lastName">
+  </div>
+  <div>
+    <label for="">Username: </label>
+    <input type="text" formControlName="userName">
+  </div>
+  <div>
+    <label for="">Password: </label>
+    <input type="password" formControlName="password">
+  </div>
+  <div>
+    <button type="submit">Register</button>
+  </div>
+</form>

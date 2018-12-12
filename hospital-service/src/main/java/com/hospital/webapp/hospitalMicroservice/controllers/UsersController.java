@@ -18,12 +18,12 @@ public class UsersController {
         this.usersService = usersService;
     }
 
-    @PostMapping("/api/register")
+    @PostMapping("/api/patients/register")
     public User registerUser(@RequestBody User user) {
         return this.usersService.registerUser(user);
     }
 
-    @PostMapping("/api/login")
+    @PostMapping("/api/authenticate")
     public boolean login(@RequestBody User user) {
         return true;
     }
