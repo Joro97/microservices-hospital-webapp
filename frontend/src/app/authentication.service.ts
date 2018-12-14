@@ -9,7 +9,7 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private authUrl = 'http://localhost:8000/api/authenticate';
+  private authUrl = 'http://localhost:8000/login';
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
@@ -22,8 +22,8 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string) {
-    return this.http.post<any>(this.authUrl, { username, password} )
+  login(userName: string, password: string) {
+    return this.http.post<any>(this.authUrl, { userName, password} )
       .pipe(map(user => {
 
         if  (user && user.token) {
