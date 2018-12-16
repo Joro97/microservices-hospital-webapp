@@ -1,0 +1,13 @@
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/config/CustomTokenEnhancer.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/controller/TokenController.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/config/CorsFilter.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/config/WebSecurityConfig.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/model/User.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/model/Authority.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/AppConfig.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/AuthorizationServerApplication.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/service/HospitalUserDetailsService.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/repository/UserRepository.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/config/RevokeTokenEndpoint.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/model/UserWrapper.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/main/java/com/baeldung/config/OAuth2AuthorizationServerConfigJwt.java

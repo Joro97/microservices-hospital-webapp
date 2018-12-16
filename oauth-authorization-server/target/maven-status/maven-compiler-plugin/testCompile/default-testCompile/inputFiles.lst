@@ -1,0 +1,4 @@
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/test/java/com/baeldung/test/OAuthMvcTest.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/test/java/com/baeldung/test/AuthServerIntegrationTest.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/test/java/com/baeldung/test/TokenControllerIntegrationTest.java
+/home/otsvetkov/Desktop/hospital-example/spring-security-oauth/oauth-authorization-server/src/test/java/com/baeldung/test/TokenRevocationLiveTest.java
