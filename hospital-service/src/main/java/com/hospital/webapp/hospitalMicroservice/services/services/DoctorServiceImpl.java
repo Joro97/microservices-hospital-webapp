@@ -14,12 +14,10 @@ import java.util.List;
 @Transactional
 public class DoctorServiceImpl implements DoctorService {
     private final DoctorsRepository doctorsRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public DoctorServiceImpl(DoctorsRepository doctorsRepository, PasswordEncoder passwordEncoder) {
+    public DoctorServiceImpl(DoctorsRepository doctorsRepository) {
         this.doctorsRepository = doctorsRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -34,7 +32,6 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor registerDoctor(Doctor doctor) {
-        doctor.setPassword(this.passwordEncoder.encode(doctor.getPassword()));
         return this.doctorsRepository.save(doctor);
     }
 

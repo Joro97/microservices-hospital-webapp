@@ -1,4 +1,4 @@
-package com.hospital.webapp.hospitalMicroservice.config;
+package com.hospital.webapp.authservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -5,7 +5,14 @@ import java.util.Set;
 
 @Entity
 @Table(name = "doctors")
-public class Doctor extends User {
+public class Doctor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(unique = true)
+    private String username;
 
     @Column
     private String specialty;

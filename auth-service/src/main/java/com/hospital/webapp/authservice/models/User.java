@@ -1,17 +1,17 @@
-package com.hospital.webapp.hospitalMicroservice.models.entity;
+package com.hospital.webapp.authservice.models;
 
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "users")
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
-    private String userName;
+    @Column(name = "username", unique = true)
+    private String username;
 
     @Column
     private String password;
@@ -22,6 +22,12 @@ public class User {
     @Column
     private String lastName;
 
+    @Column
+    private boolean isAdmin;
+
+    @Column
+    private boolean isDoctor;
+
     public long getId() {
         return id;
     }
@@ -30,12 +36,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -60,5 +66,21 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public boolean isDoctor() {
+        return isDoctor;
+    }
+
+    public void setDoctor(boolean doctor) {
+        isDoctor = doctor;
     }
 }

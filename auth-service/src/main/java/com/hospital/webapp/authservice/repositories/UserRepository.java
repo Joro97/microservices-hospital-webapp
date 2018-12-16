@@ -1,0 +1,10 @@
+package com.hospital.webapp.authservice.repositories;
+
+import com.hospital.webapp.authservice.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
+}
