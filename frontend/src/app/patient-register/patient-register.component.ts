@@ -19,10 +19,10 @@ export class PatientRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstName: [],
-      lastName: [],
-      userName: [],
-      password: [],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
