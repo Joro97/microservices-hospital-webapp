@@ -7,9 +7,10 @@
 	<packaging>war</packaging>
 
 	<parent>
-		<groupId>com.baeldung</groupId>
-		<artifactId>spring-security-oauth</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.1.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<dependencies>
@@ -56,13 +57,14 @@
 		<dependency>
 			<groupId>org.springframework.security.oauth</groupId>
 			<artifactId>spring-security-oauth2</artifactId>
-			<version>${oauth.version}</version>
+			<version>2.3.3.RELEASE</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-jwt</artifactId>
-			<version>${jwt.version}</version>
+			<version>1.0.8.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -92,12 +94,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-        
-		<dependency>
-		    <groupId>io.rest-assured</groupId>
-		    <artifactId>rest-assured</artifactId>
-		    <scope>test</scope>
 		</dependency>
 
 	</dependencies>

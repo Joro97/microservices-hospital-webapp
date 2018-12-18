@@ -39,19 +39,23 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
 
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("sampleClientId").authorizedGrantTypes("implicit").scopes("read", "write", "foo", "bar").autoApprove(false).accessTokenValiditySeconds(3600).redirectUris("http://localhost:8083/")
-
-                .and().withClient("fooClientIdPassword").secret(passwordEncoder.encode("secret")).authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("foo", "read", "write").accessTokenValiditySeconds(3600)
+        clients.inMemory()
+                .withClient("sampleClientId").authorizedGrantTypes("implicit").scopes("read", "write", "foo", "bar")
+                .autoApprove(false).accessTokenValiditySeconds(3600).redirectUris("http://localhost:8083/")
+                .and().withClient("fooClientIdPassword").secret(passwordEncoder.encode("secret"))
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("foo", "read", "write").accessTokenValiditySeconds(3600)
                 // 1 hour
                 .refreshTokenValiditySeconds(2592000)
                 // 30 days
                 .redirectUris("xxx","http://localhost:8089/","http://localhost:8080/login/oauth2/code/custom")
 
-                .and().withClient("barClientIdPassword").secret(passwordEncoder.encode("secret")).authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("bar", "read", "write").accessTokenValiditySeconds(3600)
+                .and().withClient("barClientIdPassword").secret(passwordEncoder.encode("secret"))
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("bar", "read", "write").accessTokenValiditySeconds(3600)
                 // 1 hour
                 .refreshTokenValiditySeconds(2592000) // 30 days
 
-                .and().withClient("testImplicitClientId").authorizedGrantTypes("implicit").scopes("read", "write", "foo", "bar").autoApprove(true).redirectUris("xxx");
+                .and().withClient("testImplicitClientId").authorizedGrantTypes("implicit")
+                .scopes("read", "write", "foo", "bar").autoApprove(true).redirectUris("xxx");
 
     }
 
@@ -88,8 +92,8 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
         return new CustomTokenEnhancer();
     }
 
-    //@Bean
-    //public BCryptPasswordEncoder passwordEncoder() {
-    //    return new BCryptPasswordEncoder();
-   // }
+   @Bean
+   public BCryptPasswordEncoder passwordEncoder() {
+       return new BCryptPasswordEncoder();
+   }
 }
