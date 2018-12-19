@@ -2,7 +2,9 @@
 <nav>
   <a routerLink="/dashboard">Dashboard</a>
   <a routerLink="/doctors">Doctors</a>
-  <a routerLink="/register">Register</a>
+  <a routerLink="/register/patient">Register</a>
+  <a *ngIf="authenticationService.currentUserValue
+  && authenticationService.currentUserValue.role === 'Admin'" routerLink="/register/doctor">Register Doctor</a>
   <a routerLink="/login">Login</a>
 </nav>
 <router-outlet></router-outlet>

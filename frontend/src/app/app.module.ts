@@ -8,11 +8,10 @@ import { AppComponent } from './app.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { RegisterComponent } from './register/register.component';
 import { DoctorRegisterComponent } from './doctor-register/doctor-register.component';
 import { PatientRegisterComponent } from './patient-register/patient-register.component';
 import { LoginComponent } from './login/login.component';
-import {JwtInterceptor} from './jwt.interceptor';
+import {JwtInterceptor} from './_interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import {JwtInterceptor} from './jwt.interceptor';
     DoctorsComponent,
     DoctorDetailComponent,
     DashboardComponent,
-    RegisterComponent,
     DoctorRegisterComponent,
     PatientRegisterComponent,
     LoginComponent,

@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Doctor } from '../doctor';
-import { DoctorService } from '../doctor.service';
-import { User } from '../user';
-import {AuthenticationService} from '../authentication.service';
+import { Doctor } from '../_models/doctor';
+import { DoctorService } from '../_services/doctor.service';
+import { User } from '../_models/user';
+import {AuthenticationService} from '../_services/authentication.service';
 
 @Component({
   selector: 'app-doctors',
