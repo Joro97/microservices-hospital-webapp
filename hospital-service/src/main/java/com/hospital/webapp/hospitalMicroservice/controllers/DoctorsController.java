@@ -26,4 +26,9 @@ public class DoctorsController {
     public Doctor getDoctorById(@PathVariable long id) {
         return this.doctorService.getDoctorById(id);
     }
+
+    @PostMapping("/api/doctors/register")
+    public void registerDoctor(@RequestBody Doctor doctor) {
+        this.doctorService.registerDoctor(doctor);
+    }
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { UserService } from '../_services/user.service';
 import { DoctorService } from '../_services/doctor.service';
+import {FileService} from '../_services/file.service';
 
 @Component({
   selector: 'app-doctor-register',
@@ -13,12 +14,14 @@ import { DoctorService } from '../_services/doctor.service';
 export class DoctorRegisterComponent implements OnInit {
   userRegisterForm: FormGroup;
   doctorRegisterForm: FormGroup;
+  avatar: File;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private userService: UserService,
-    private doctorsService: DoctorService
+    private doctorsService: DoctorService,
+    private fileService: FileService
   ) { }
 
   ngOnInit() {
@@ -56,12 +59,25 @@ export class DoctorRegisterComponent implements OnInit {
       .subscribe(
         data => {
           console.log(data);
-          this.router.navigate(['/login']);
         },
         error => {
           console.log('failed to add doctor');
           console.log(error);
         }
       );
+
+    this.fileService.uploadFile(this.avatar)
+      .pipe(first())
+      .subscribe(data => {
+        console.log('Uploaded image');
+        this.router.navigate(['/login']);
+      },
+        error => {
+          console.log('Failed to upload the image');
+        });
+  }
+
+  onFileChanged(event) {
+    this.avatar = event.target.files[0];
   }
 }

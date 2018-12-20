@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,8 @@ import { DoctorRegisterComponent } from './doctor-register/doctor-register.compo
 import { PatientRegisterComponent } from './patient-register/patient-register.component';
 import { LoginComponent } from './login/login.component';
 import {JwtInterceptor} from './_interceptors/jwt.interceptor';
+import { fakeBackendProvider } from './_interceptors/fake-backend';
+import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import {JwtInterceptor} from './_interceptors/jwt.interceptor';
     DoctorRegisterComponent,
     PatientRegisterComponent,
     LoginComponent,
+    DoctorProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,10 @@ import {JwtInterceptor} from './_interceptors/jwt.interceptor';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [JwtInterceptor],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

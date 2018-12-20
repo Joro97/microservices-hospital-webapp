@@ -20,6 +20,7 @@
     <input type="password" formControlName="password" class="form-control" id="password"/>
   </div>
 </form>
+
 <form [formGroup]="doctorRegisterForm">
   <div class="form-group">
     <label>Specialty: <input type="text" formControlName="specialty" class="form-control"  />
@@ -31,4 +32,5 @@
     </label>
   </div>
 </form>
+  <input type="file" size="66" (change)="onFileChanged($event)" >
 <button [disabled]="userRegisterForm.invalid || doctorRegisterForm.invalid" (click)="onSubmit()">Register</button>

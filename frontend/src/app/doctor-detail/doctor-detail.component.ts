@@ -24,7 +24,7 @@ export class DoctorDetailComponent implements OnInit {
 
   getDoctor(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.doctorService.getDoctor(id)
+    this.doctorService.getDoctor('str')
       .subscribe(doctor => this.doctor = doctor);
   }
 

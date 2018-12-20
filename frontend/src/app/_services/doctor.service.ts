@@ -28,11 +28,17 @@ export class DoctorService {
       );
   }
 
-  getDoctor(id: number): Observable<Doctor> {
+/*  getDoctor(id: number): Observable<Doctor> {
     const url = `${this.doctorsUrl}/${id}`;
     return this.http.get<Doctor>(url).pipe(
       catchError(this.handleError<Doctor>('getDoctor id=${id}'))
     );
+  }*/
+
+  getDoctor(username: string): Observable<Doctor> {
+    const url = `${this.doctorsUrl}/${username}/profile`;
+    return this.http.post<Doctor>(url, { username: username })
+      .pipe(catchError(this.handleError<Doctor>('failD')));
   }
 
   registerDoctor(doctor: Doctor): Observable<Doctor> {

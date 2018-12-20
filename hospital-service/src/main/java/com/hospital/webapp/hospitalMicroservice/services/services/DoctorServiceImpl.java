@@ -4,7 +4,6 @@ import com.hospital.webapp.hospitalMicroservice.models.entity.Doctor;
 import com.hospital.webapp.hospitalMicroservice.repositories.DoctorsRepository;
 import com.hospital.webapp.hospitalMicroservice.services.interfaces.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
