@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Doctor } from '../doctor';
-import { DoctorService } from '../doctor.service';
+import { Doctor } from '../_models/doctor';
+import { DoctorService } from '../_services/doctor.service';
 
 @Component({
   selector: 'app-doctor-detail',

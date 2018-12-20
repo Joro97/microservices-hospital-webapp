@@ -1,21 +1,21 @@
 <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
   <div>
-    <label for="">First Name: </label>
-    <input type="text" formControlName="firstName">
+    <label for="firstName">First Name: </label>
+    <input type="text" formControlName="firstName" id="firstName" >
   </div>
   <div>
-    <label for="">Last Name: </label>
-    <input type="text" formControlName="lastName">
+    <label for="lastName">Last Name: </label>
+    <input type="text" formControlName="lastName" id="lastName">
   </div>
   <div>
-    <label for="">Username: </label>
-    <input type="text" formControlName="userName">
+    <label for="username">Username: </label>
+    <input type="text" formControlName="username" id="username">
   </div>
   <div>
-    <label for="">Password: </label>
-    <input type="password" formControlName="password">
+    <label for="password">Password: </label>
+    <input type="password" formControlName="password" id="password">
   </div>
   <div>
-    <button type="submit">Register</button>
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
   </div>
 </form>

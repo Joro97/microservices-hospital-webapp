@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Doctor } from './doctor';
+import { Doctor } from '../_models/doctor';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class DoctorService {
   private doctorsUrl = 'http://localhost:8000/api/doctors';
 
@@ -29,6 +33,12 @@ export class DoctorService {
     return this.http.get<Doctor>(url).pipe(
       catchError(this.handleError<Doctor>('getDoctor id=${id}'))
     );
+  }
+
+  registerDoctor(doctor: Doctor): Observable<Doctor> {
+    const registerDoctorUrl = `${this.doctorsUrl}/register`;
+    return this.http.post<Doctor>(registerDoctorUrl, doctor, httpOptions)
+      .pipe(tap(_ => console.log(`added doctor with id=${doctor.id}`)));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

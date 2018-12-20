@@ -1,7 +1,9 @@
-export class  Doctor {
+export class User {
   id: number;
   firstName: string;
   lastName: string;
-  userName: string;
+  username: string;
   password: string;
+  role: string;
+  token?: string;
 }
