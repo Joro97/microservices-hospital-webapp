@@ -1,3 +1,4 @@
+/*
 package com.baeldung.test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -52,4 +53,4 @@ public class TokenRevocationLiveTest {
         params.put("scope", "read,write");
         final Response response = RestAssured.given().auth().preemptive().basic(clientId, "secret").and().with().params(params).when().post("http://localhost:8081/spring-security-oauth-server/oauth/authorize");
     }
-}
+}*/
