@@ -1,5 +1,7 @@
 package com.hospital.webapp.hospitalMicroservice.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -20,6 +22,25 @@ public class Doctor {
     @Column
     private int experience;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private DBFile avatar;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getSpecialty() {
         return specialty;
     }
@@ -34,5 +55,13 @@ public class Doctor {
 
     public void setExperience(int experience) {
         this.experience = experience;
+    }
+
+    public DBFile getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(DBFile avatar) {
+        this.avatar = avatar;
     }
 }

@@ -28,7 +28,7 @@ public class DoctorsController {
     }
 
     @PostMapping("/api/doctors/register")
-    public void registerDoctor(@RequestBody Doctor doctor) {
-        this.doctorService.registerDoctor(doctor);
+    public Doctor registerDoctor(@RequestBody Doctor doctor) {
+        return this.doctorService.registerDoctor(doctor);
     }
 }

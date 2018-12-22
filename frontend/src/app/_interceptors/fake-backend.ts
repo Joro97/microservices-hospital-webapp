@@ -56,11 +56,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return ok(user);
       }
 
-      // Show doctor profile
+/*      // Show doctor profile
       if (request.url.includes('/api/doctors') && request.method === 'POST') {
         const doctor = doctors.find(x => x.username === request.body.username);
         return ok(doctor);
-      }
+      }*/
 
       // get all users (admin only)
       if (request.url.endsWith('/users') && request.method === 'GET') {

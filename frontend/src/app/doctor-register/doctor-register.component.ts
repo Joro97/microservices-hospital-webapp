@@ -39,42 +39,41 @@ export class DoctorRegisterComponent implements OnInit {
 
   onSubmit() {
     if (this.userRegisterForm.invalid || this.doctorRegisterForm.invalid) {
-      console.log('invalid');
       return;
     }
 
-    this.userService.registerUser(this.userRegisterForm.value)
+    /*this.userService.registerUser(this.userRegisterForm.value)
       .pipe(first())
       .subscribe(
         data => {
-          console.log('Successfully added user');
+          console.log(`Successfully added user: ${data}`);
         },
         error => {
-          console.log('failed to add user');
+          console.log('Failed to add user');
           console.log(error);
         }
-      );
+      );*/
+
+    this.doctorRegisterForm.addControl('username', this.userRegisterForm.controls['username']);
     this.doctorsService.registerDoctor(this.doctorRegisterForm.value)
       .pipe(first())
       .subscribe(
-        data => {
-          console.log(data);
+        doc => {
+          console.log(`Added doctor ${doc}`);
+          this.fileService.uploadFile(this.avatar, doc.username)
+            .pipe(first())
+            .subscribe(data => {
+                this.router.navigate(['/login']);
+              },
+              error => {
+                console.log('Failed to upload the image and register doctor');
+              });
         },
-        error => {
+        errorDoc => {
           console.log('failed to add doctor');
-          console.log(error);
+          console.log(errorDoc);
         }
       );
-
-    this.fileService.uploadFile(this.avatar)
-      .pipe(first())
-      .subscribe(data => {
-        console.log('Uploaded image');
-        this.router.navigate(['/login']);
-      },
-        error => {
-          console.log('Failed to upload the image');
-        });
   }
 
   onFileChanged(event) {

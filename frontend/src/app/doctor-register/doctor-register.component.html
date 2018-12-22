@@ -32,5 +32,5 @@
     </label>
   </div>
 </form>
-  <input type="file" size="66" (change)="onFileChanged($event)" >
+<input type="file" size="66" (change)="onFileChanged($event)" >
 <button [disabled]="userRegisterForm.invalid || doctorRegisterForm.invalid" (click)="onSubmit()">Register</button>

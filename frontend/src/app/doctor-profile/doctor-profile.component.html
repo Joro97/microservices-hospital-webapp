@@ -1,6 +1,10 @@
 <p>
   doctor-profile works!
 </p>
+<img [src]="avatar" alt="Doctor's avatar" *ngIf="!isImageLoading; else noImageFound">
+<ng-template #noImageFound>
+  <img src="fallbackImage.png" alt="Fallbackimage">
+</ng-template>
 <ul>
   <li *ngFor="let detail of userDetails | keyvalue">
     {{detail.key}}: {{detail.value}}

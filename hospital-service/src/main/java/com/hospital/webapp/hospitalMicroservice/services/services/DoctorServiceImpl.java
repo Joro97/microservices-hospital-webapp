@@ -1,6 +1,8 @@
 package com.hospital.webapp.hospitalMicroservice.services.services;
 
+import com.hospital.webapp.hospitalMicroservice.models.entity.DBFile;
 import com.hospital.webapp.hospitalMicroservice.models.entity.Doctor;
+import com.hospital.webapp.hospitalMicroservice.repositories.DBFileRepository;
 import com.hospital.webapp.hospitalMicroservice.repositories.DoctorsRepository;
 import com.hospital.webapp.hospitalMicroservice.services.interfaces.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor getDoctorById(long id) {
-        return this.doctorsRepository.getOne(id);
+        return this.doctorsRepository.findById(id);
     }
 
     @Override

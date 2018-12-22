@@ -1,9 +1,9 @@
 <div *ngIf="doctor">
-  <h2>{{doctor.userName | uppercase}} Details</h2>
+  <h2>{{doctor.username | uppercase}} Details</h2>
   <div><span>id: </span>{{doctor.id}}</div>
   <div>
     <label>name:
-      <input [(ngModel)]="doctor.userName" placeholder="userName">
+      <input [(ngModel)]="doctor.username" placeholder="username">
     </label>
   </div>
 </div>

@@ -16,6 +16,13 @@ public class DBFile {
     @Lob
     private byte[] data;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "avatar")
+    private Doctor doctor;
+
+    public DBFile() {
+
+    }
+
     public DBFile(String fileName, String fileType, byte[] bytes) {
         this.fileName = fileName;
         this.fileType = fileType;
@@ -52,5 +59,13 @@ public class DBFile {
 
     public void setData(byte[] data) {
         this.data = data;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 }

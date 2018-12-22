@@ -22,9 +22,9 @@ public class FileController {
         this.dbFileStorageService = dbFileStorageService;
     }
 
-    @PostMapping("/api/upload/image")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        DBFile dbFile = this.dbFileStorageService.storeFile(file);
+    @PostMapping("/api/upload/image/{username}")
+    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String username){
+        DBFile dbFile = this.dbFileStorageService.storeFile(file, username);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/downloadFile/")
@@ -34,9 +34,9 @@ public class FileController {
         return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri, file.getContentType(), file.getSize());
     }
 
-    @GetMapping("/downloadFile/{fileId}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable long fileId) {
-        DBFile dbFile = this.dbFileStorageService.getFile(fileId);
+    @GetMapping("/api/image/{username}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String username) {
+        DBFile dbFile = this.dbFileStorageService.getFile(username);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(dbFile.getFileType()))

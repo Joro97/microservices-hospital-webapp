@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Doctor } from '../_models/doctor';
 import { DoctorService } from '../_services/doctor.service';
 import {User} from '../_models/user';
+import {FileService} from '../_services/file.service';
 
 const blacklisted = ['id', 'role', 'token'];
 
@@ -13,9 +14,12 @@ const blacklisted = ['id', 'role', 'token'];
 export class DoctorProfileComponent implements OnInit {
   doctor: Doctor;
   userDetails: User;
+  avatar: any;
+  isImageLoading: boolean;
 
   constructor(
-    private doctorService: DoctorService
+    private doctorService: DoctorService,
+    private fileService: FileService
   ) { }
 
   ngOnInit() {
@@ -24,11 +28,31 @@ export class DoctorProfileComponent implements OnInit {
 
   getAdditionalDoctorInfo() {
     this.userDetails = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(this.userDetails);
+
     this.doctorService.getDoctor(this.userDetails.username)
       .subscribe(doc => {
         this.doctor = doc;
-        console.log(doc);
       });
+
+    this.isImageLoading = true;
+    this.fileService.getAvatar(this.doctor.username)
+      .subscribe(data => {
+        this.createImageFromBlob(data);
+        this.isImageLoading = false;
+      }, error => {
+        this.isImageLoading = false;
+        console.log(error);
+      });
+  }
+
+  createImageFromBlob(image: Blob) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      this.avatar = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
   }
 }
