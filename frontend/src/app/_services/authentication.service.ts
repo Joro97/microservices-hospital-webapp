@@ -9,7 +9,6 @@ import { User } from '../_models/user';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private authUrl = 'http://localhost:8008/login';
    private currentUserSubject: BehaviorSubject<User>;
    public currentUser: Observable<User>;
 

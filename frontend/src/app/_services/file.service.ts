@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import {Observable} from 'rxjs';
-
-const fileUploadUrl = 'http://localhost:8000/api/upload/image';
-const fileRetrievalUrl = 'http://localhost:8000/api/image';
+import {environment} from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +14,13 @@ export class FileService {
   uploadFile(file: File, username: string): Observable<any> {
     const avatarFormData = new FormData();
     avatarFormData.append('file', file, file.name);
-    const uploadUrl = `${fileUploadUrl}/${username}`;
+    const uploadUrl = `${environment.apiUrl}${environment.fileUploadUrl}/${username}`;
     return this.http.post<any>(uploadUrl, avatarFormData);
   }
 
   getAvatar(docUsername: string): Observable<Blob> {
     const headers = new HttpHeaders('Cache-Control: max-age=3600');
-    return this.http.get(`${fileRetrievalUrl}/${docUsername}`, {responseType: 'blob', headers: headers});
+    return this.http.get(`${environment.apiUrl}${environment.fileRetrievalUrl}/${docUsername}`,
+      {responseType: 'blob', headers: headers});
   }
 }

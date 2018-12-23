@@ -27,8 +27,7 @@ public class FileController {
         DBFile dbFile = this.dbFileStorageService.storeFile(file, username);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
-                .path(dbFile.getId() + "")
+                .path(String.format("api/image/%s", username))
                 .toUriString();
 
         return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri, file.getContentType(), file.getSize());

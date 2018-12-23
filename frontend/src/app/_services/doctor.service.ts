@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Doctor } from '../_models/doctor';
+import {environment} from '../../environments/environment.prod';
 
 
 const httpOptions = {
@@ -14,7 +15,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DoctorService {
-  private doctorsUrl = 'http://localhost:8000/api/doctors';
 
   constructor(
     private http: HttpClient
@@ -22,7 +22,7 @@ export class DoctorService {
 
 
   getDoctors(): Observable<Doctor[]> {
-    return this.http.get<Doctor[]>(this.doctorsUrl)
+    return this.http.get<Doctor[]>(`${environment.apiUrl}${environment.allDoctorsUrl}`)
       .pipe(
         catchError(this.handleError('getDoctors', []))
       );
@@ -36,14 +36,13 @@ export class DoctorService {
   }*/
 
   getDoctor(username: string): Observable<Doctor> {
-    const url = `${this.doctorsUrl}/${username}/profile`;
+    const url = `${environment.apiUrl}${environment.allDoctorsUrl}/${username}/profile`;
     return this.http.post<Doctor>(url, { username: username })
       .pipe(catchError(this.handleError<Doctor>('failD')));
   }
 
   registerDoctor(doctor: Doctor): Observable<Doctor> {
-    const registerDoctorUrl = `${this.doctorsUrl}/register`;
-    return this.http.post<Doctor>(registerDoctorUrl, doctor, httpOptions)
+    return this.http.post<Doctor>(`${environment.apiUrl}${environment.registerDoctorUrl}`, doctor, httpOptions)
       .pipe(tap(_ => console.log(`added doctor with id=${doctor.id}`)));
   }
 
