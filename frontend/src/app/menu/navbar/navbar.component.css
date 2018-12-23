@@ -1,0 +1,28 @@
+.example-icon {
+    padding: 0 14px;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.mat-toolbar {
+    background-color: #314351;
+    color:white;
+    font-family: metropolis-semibold;
+}
+
+.mat-toolbar-row {
+    width:1100px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color:white;
+}
+
+.mat-icon-button {
+    color:white;
+    background-color:transparent;
+}

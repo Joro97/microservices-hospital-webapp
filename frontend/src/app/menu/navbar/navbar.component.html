@@ -1,0 +1,52 @@
+<div style="height: 100vh;">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <h3>Princeton Plainsboro</h3>
+
+      <div fxShow="true" fxHide.lt-md="true">
+        <a href="#" mat-button>
+          Doctors
+        </a>
+      </div>
+
+      <div fxShow="true" fxHide.lt-md="true">
+        <a href="#" mat-button>
+          Patients
+        </a>
+      </div>
+
+      <span class="example-spacer"></span>
+
+      <div fxShow="true" fxHide.lt-md="true">
+        <a href="#" mat-button>
+          <mat-icon>account_box</mat-icon> Log in
+        </a>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a href="#" mat-list-item>
+          Doctors
+        </a>
+        <a href="#" mat-list-item>
+            Patients
+          </a>
+        <a href="#" mat-list-item>
+          <mat-icon>account_box</mat-icon> Log in
+        </a>
+        <a (click)="sidenav.toggle()" mat-list-item>
+          <mat-icon>close</mat-icon> Close
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>Main content</mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

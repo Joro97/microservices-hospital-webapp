@@ -14,6 +14,16 @@ import { LoginComponent } from './login/login.component';
 import {JwtInterceptor} from './_interceptors/jwt.interceptor';
 import { fakeBackendProvider } from './_interceptors/fake-backend';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
+import { NavbarComponent } from './menu/navbar/navbar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatListModule,
+  MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,12 +35,22 @@ import { DoctorProfileComponent } from './doctor-profile/doctor-profile.componen
     PatientRegisterComponent,
     LoginComponent,
     DoctorProfileComponent,
+    NavbarComponent,
   ],
   imports: [
-    BrowserModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    FlexLayoutModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

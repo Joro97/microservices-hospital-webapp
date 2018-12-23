@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: metropolis-semibold;
+  src: url("assets/fonts/Metropolis-SemiBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: metropolis-regular;
+  src: url("assets/fonts/Metropolis-Regular.otf") format("opentype");
+}
+
+body,
+html {
+  margin: 0 auto;
+}
