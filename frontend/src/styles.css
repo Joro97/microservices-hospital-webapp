@@ -9,7 +9,12 @@
   src: url("assets/fonts/Metropolis-Regular.otf") format("opentype");
 }
 
+
 body,
 html {
   margin: 0 auto;
+}
+
+body {
+  width:100%;
 }

@@ -1,12 +1,8 @@
 <div style="height: 100vh;">
-  <mat-toolbar color="primary">
+  <mat-toolbar style="max-height:20px">
     <mat-toolbar-row>
 
-      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
-        <mat-icon>menu</mat-icon>
-      </button>
-
-      <h3>Princeton Plainsboro</h3>
+      <h4>Princeton Plainsboro</h4>
 
       <div fxShow="true" fxHide.lt-md="true">
         <a href="#" mat-button>
@@ -21,6 +17,10 @@
       </div>
 
       <span class="example-spacer"></span>
+
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+      </button>  
 
       <div fxShow="true" fxHide.lt-md="true">
         <a href="#" mat-button>
@@ -47,6 +47,6 @@
         </a>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content fxFlexFill>Main content</mat-sidenav-content>
+    <mat-sidenav-content fxFlexFill><app-video></app-video></mat-sidenav-content>
   </mat-sidenav-container>
 </div>

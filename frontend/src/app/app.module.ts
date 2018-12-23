@@ -24,6 +24,7 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { VideoComponent } from './home/video/video.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     DoctorProfileComponent,
     NavbarComponent,
+    VideoComponent,
   ],
   imports: [
     FormsModule,
