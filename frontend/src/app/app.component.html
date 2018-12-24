@@ -1,16 +1,1 @@
 <app-navbar></app-navbar>
-
-<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/doctors">Doctors</a>
-  <a *ngIf="!authenticationService.currentUserValue" routerLink="/register/patient">Register</a>
-  <a *ngIf="authenticationService.currentUserValue
-  && authenticationService.currentUserValue.role === 'Admin'" routerLink="/register/doctor">Register Doctor</a>
-  <a *ngIf="authenticationService.currentUserValue
-  && authenticationService.currentUserValue.role=== 'Doctor'" routerLink="/profile">My Profile</a>
-  <a *ngIf="!authenticationService.currentUserValue" routerLink="/login">Login</a>
-  <a *ngIf="authenticationService.currentUserValue" routerLink="/" (click)="logout()">Logout</a>
-</nav>
-
-<router-outlet></router-outlet>

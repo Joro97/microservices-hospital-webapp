@@ -1,4 +1,4 @@
-<form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+<!--<form [formGroup]="registerForm" (ngSubmit)="registerUser()">
   <div>
     <label for="firstName">First Name: </label>
     <input type="text" formControlName="firstName" id="firstName" >
@@ -19,3 +19,43 @@
     <button type="submit" [disabled]="registerForm.invalid">Register</button>
   </div>
 </form>
+-->
+ <!-- Sign up form -->
+ <div id="darkout" (click)="fade()"></div>
+ <section class="signup">
+  <div class="container">
+      <div class="signup-content">
+          <div class="signup-form">
+              <h2 class="form-title">Sign up</h2>
+              <form [formGroup]="registerForm" (ngSubmit)="registerUser()" class="register-form" id="register-form">
+                  <div class="form-group">
+                      <input type="text" name="name" id="name" placeholder="Your First Name" formControlName="firstName" id="firstName" />
+                  </div>
+                  <div class="form-group">
+                      <input type="email" name="email" id="email" placeholder="Your Last Name" formControlName="lastName" id="lastName"/>
+                  </div>
+                  <div class="form-group">
+                      <input type="email" name="email" id="email" placeholder="Your Email" formControlName="email" id="email"/>
+                  </div>
+                  <div class="form-group">
+                      <input type="password" name="pass" id="pass" placeholder="Password" formControlName="password" id="password"/>
+                  </div>
+                  <div class="form-group">
+                      <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" />
+                  </div>
+                  <div class="form-group">
+                      <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                      <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                  </div>
+                  <div class="form-group form-button">
+                      <input type="submit" [disabled]="registerForm.invalid" name="signup" id="signup" class="form-submit" value="Register"/>
+                  </div>
+              </form>
+          </div>
+          <div class="signup-image">
+              <figure><img src="../../assets/images/signup-image.jpg" alt="sing up image"></figure>
+              <a routerLink="/login" class="signup-image-link">I am already member</a>
+          </div>
+      </div>
+  </div>
+</section>

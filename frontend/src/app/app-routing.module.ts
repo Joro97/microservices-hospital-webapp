@@ -11,7 +11,7 @@ import {Role} from './_models/Role';
 import {DoctorProfileComponent} from './doctor-profile/doctor-profile.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  //{ path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'doctors', component: DoctorsComponent },
   { path: 'detail/:id', component: DoctorDetailComponent },
@@ -28,7 +28,7 @@ const routes: Routes = [
     data: { roles: Role.Doctor }
   },
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: '/dashboard' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

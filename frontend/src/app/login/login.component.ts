@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
-
 import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
@@ -56,5 +55,9 @@ export class LoginComponent implements OnInit {
             this.loading = false;
         }
       );
+  }
+
+  public fade() {
+    this.router.navigateByUrl('');
   }
 }

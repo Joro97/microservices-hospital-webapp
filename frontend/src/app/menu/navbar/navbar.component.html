@@ -1,4 +1,6 @@
 <div style="height: 100vh;">
+  <!--<app-patient-register></app-patient-register>-->
+  <router-outlet></router-outlet>
   <mat-toolbar style="max-height:20px">
     <mat-toolbar-row>
 
@@ -23,8 +25,14 @@
       </button>  
 
       <div fxShow="true" fxHide.lt-md="true">
-        <a href="#" mat-button>
-          <mat-icon>account_box</mat-icon> Log in
+        <a routerLink="/login" mat-button>
+          <mat-icon>account_box</mat-icon> Sign in
+        </a>
+      </div>
+
+      <div fxShow="true" fxHide.lt-md="true">
+        <a routerLink="/register/patient" mat-button>
+          <mat-icon>lock</mat-icon> Sign up
         </a>
       </div>
     </mat-toolbar-row>
@@ -47,6 +55,24 @@
         </a>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content fxFlexFill><app-video></app-video></mat-sidenav-content>
+    <mat-sidenav-content fxFlexFill>
+      <app-video></app-video>
+    
+    </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
+
+<!--<h1>{{title}}</h1>
+<nav>
+  <a routerLink="/dashboard">Dashboard</a>
+  <a routerLink="/doctors">Doctors</a>
+  <a routerLink="/register/patient">Register</a>
+  <a *ngIf="authenticationService.currentUserValue
+  && authenticationService.currentUserValue.role === 'Admin'" routerLink="/register/doctor">Register Doctor</a>
+  <a *ngIf="authenticationService.currentUserValue
+  && authenticationService.currentUserValue.role=== 'Doctor'" routerLink="/profile">My Profile</a>
+  <a *ngIf="!authenticationService.currentUserValue" routerLink="/login">Login</a>
+  <a *ngIf="authenticationService.currentUserValue" routerLink="/" (click)="logout()">Logout</a>
+</nav>
+
+<router-outlet></router-outlet>-->

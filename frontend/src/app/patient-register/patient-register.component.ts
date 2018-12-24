@@ -14,14 +14,14 @@ export class PatientRegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private usersService: UserService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
@@ -29,5 +29,9 @@ export class PatientRegisterComponent implements OnInit {
   registerUser() {
     this.usersService.registerUser(this.registerForm.value)
       .subscribe(data => this.router.navigate(['/']));
+  }
+
+  public fade() {
+    this.router.navigateByUrl('');
   }
 }
