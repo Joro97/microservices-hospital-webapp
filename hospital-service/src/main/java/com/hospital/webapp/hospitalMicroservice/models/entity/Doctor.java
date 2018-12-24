@@ -22,8 +22,12 @@ public class Doctor {
     @Column
     private int experience;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private DBFile avatar;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctor")
+    Set<ScheduleHour> scheduleHours;
 
     public long getId() {
         return id;
@@ -63,5 +67,13 @@ public class Doctor {
 
     public void setAvatar(DBFile avatar) {
         this.avatar = avatar;
+    }
+
+    public Set<ScheduleHour> getScheduleHours() {
+        return scheduleHours;
+    }
+
+    public void setScheduleHours(Set<ScheduleHour> scheduleHours) {
+        this.scheduleHours = scheduleHours;
     }
 }

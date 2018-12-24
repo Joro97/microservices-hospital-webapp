@@ -5,6 +5,8 @@ import com.hospital.webapp.hospitalMicroservice.services.interfaces.DoctorServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -15,7 +17,6 @@ public class DoctorsController {
     public DoctorsController(DoctorService doctorService) {
         this.doctorService = doctorService;
     }
-
 
     @GetMapping("/api/doctors")
     public List<Doctor> doctors() {
@@ -30,5 +31,10 @@ public class DoctorsController {
     @PostMapping("/api/doctors/register")
     public Doctor registerDoctor(@RequestBody Doctor doctor) {
         return this.doctorService.registerDoctor(doctor);
+    }
+
+    @PostMapping("/api/schedule/{username}")
+    public List<LocalTime> getDoctorFreeHours(@RequestBody LocalDateTime dateTime, @PathVariable String username) {
+        return this.doctorService.handleFreeHoursRequest(username, dateTime);
     }
 }
