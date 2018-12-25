@@ -11,12 +11,17 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class DoctorServiceImpl implements DoctorService {
+    private static final int WORKING_DAYS = 3;
+    private static final int WORKING_HOURS = 4;
+    private static final int VISITS_PER_HOUR = 2;
     private final DoctorsRepository doctorsRepository; //TODO: Add some exception handling
 
     @Autowired
@@ -36,6 +41,19 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor registerDoctor(Doctor doctor) {
+        Set<ScheduleHour> doctorsMonthlyHours = new HashSet<>();
+        LocalDate date = LocalDate.now();   //Start from today
+        for (int i = 0; i < WORKING_DAYS; i++) {
+            LocalTime time = LocalTime.of(9, 0);    //Start the workday from 9AM
+            for (int j = 0; j < WORKING_HOURS * VISITS_PER_HOUR; j++) {
+                ScheduleHour currHour = new ScheduleHour(date.plusDays(i), time.plusMinutes(30 * j), true);
+                currHour.setDoctor(doctor);
+
+                doctorsMonthlyHours.add(currHour);
+            }
+        }
+        doctor.setScheduleHours(doctorsMonthlyHours);
+
         return this.doctorsRepository.save(doctor);
     }
 

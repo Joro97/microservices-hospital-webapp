@@ -27,6 +27,16 @@ public class ScheduleHour {
     @JsonIgnore
     private Doctor doctor;
 
+    public ScheduleHour() {
+
+    }
+
+    public ScheduleHour(LocalDate date, LocalTime time, boolean isFreeHour) {
+        this.date = date;
+        this.time = time;
+        this.isFreeHour = isFreeHour;
+    }
+
     public long getId() {
         return id;
     }
