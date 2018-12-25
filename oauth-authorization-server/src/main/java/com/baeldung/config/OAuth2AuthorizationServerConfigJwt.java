@@ -92,8 +92,8 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
         return new CustomTokenEnhancer();
     }
 
-   @Bean
-   public BCryptPasswordEncoder passwordEncoder() {
-       return new BCryptPasswordEncoder();
-   }
+   //@Bean
+   //public BCryptPasswordEncoder passwordEncoder() {
+   //    return new BCryptPasswordEncoder();
+   //}
 }

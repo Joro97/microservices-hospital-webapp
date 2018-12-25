@@ -53,6 +53,19 @@
             <scope>runtime</scope>
         </dependency>
 
+		<!-- embedded derby. Comment-out here and in persistence.properties
+			 if you want to use another db. -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbyclient</artifactId>
+            <version>10.14.2.0</version>
+        </dependency>
+
 		<!-- oauth -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2 -->
 		<dependency>

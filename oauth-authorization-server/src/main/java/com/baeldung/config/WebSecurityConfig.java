@@ -59,12 +59,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
     @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
     private HospitalUserDetailsService userDetailsService;
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(encoder())
+                .passwordEncoder(passwordEncoder)
                 .and()
                 .authenticationProvider(authenticationProvider())
                 .jdbcAuthentication()
@@ -73,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        User user = new User("john", encoder().encode("123"));
+        User user = new User("john", "123");
 
         List<Authority> s = new ArrayList<>();
         s.add(new Authority("ADMIN"));
@@ -84,13 +86,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider authProvider
                 = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
-        authProvider.setPasswordEncoder(encoder());
+        authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
-    }
-
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(11);
     }
 
     @Override
