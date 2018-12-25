@@ -24,15 +24,21 @@
         <mat-icon>menu</mat-icon>
       </button>  
 
-      <div fxShow="true" fxHide.lt-md="true">
+      <div *ngIf="isUserLoggedIn() == false" fxShow="true" fxHide.lt-md="true">
         <a routerLink="/login" mat-button>
           <mat-icon>account_box</mat-icon> Sign in
         </a>
       </div>
 
-      <div fxShow="true" fxHide.lt-md="true">
+      <div *ngIf="isUserLoggedIn() == false" fxShow="true" fxHide.lt-md="true">
         <a routerLink="/register/patient" mat-button>
           <mat-icon>lock</mat-icon> Sign up
+        </a>
+      </div>
+
+      <div *ngIf="isUserLoggedIn() == true" fxShow="true" fxHide.lt-md="true">
+        <a (click)="logout()" mat-button>
+          <mat-icon>account_box</mat-icon> Logout
         </a>
       </div>
     </mat-toolbar-row>

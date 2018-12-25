@@ -11,7 +11,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DoctorRegisterComponent } from './doctor-register/doctor-register.component';
 import { PatientRegisterComponent } from './patient-register/patient-register.component';
 import { LoginComponent } from './login/login.component';
-import {JwtInterceptor} from './_interceptors/jwt.interceptor';
 import { fakeBackendProvider } from './_interceptors/fake-backend';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { NavbarComponent } from './menu/navbar/navbar.component';
@@ -37,7 +36,7 @@ import { VideoComponent } from './home/video/video.component';
     LoginComponent,
     DoctorProfileComponent,
     NavbarComponent,
-    VideoComponent,
+    VideoComponent
   ],
   imports: [
     FormsModule,
@@ -55,7 +54,6 @@ import { VideoComponent } from './home/video/video.component';
     FlexLayoutModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     fakeBackendProvider
   ],
   bootstrap: [AppComponent]

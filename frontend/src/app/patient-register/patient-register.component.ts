@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { UserService } from '../_services/user.service';
 
 @Component({
@@ -10,11 +10,13 @@ import { UserService } from '../_services/user.service';
 })
 export class PatientRegisterComponent implements OnInit {
   registerForm: FormGroup;
+  returnUrl:String;
 
   constructor(
     private formBuilder: FormBuilder,
     private usersService: UserService,
     private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -24,6 +26,8 @@ export class PatientRegisterComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   registerUser() {
@@ -31,7 +35,7 @@ export class PatientRegisterComponent implements OnInit {
       .subscribe(data => this.router.navigate(['/']));
   }
 
-  public fade() {
-    this.router.navigateByUrl('');
+  public close() {
+    this.router.navigate([this.returnUrl]);
   }
 }
