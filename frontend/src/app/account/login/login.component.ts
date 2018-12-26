@@ -11,8 +11,6 @@ import { RouterExtService } from '../../_services/router.ext.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loading = false;
-  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,13 +37,12 @@ export class LoginComponent implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
-    this.submitted = true;
-
     if (this.loginForm.invalid) {
+      alert("Invalid form data !")
       return;
     }
-    this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value);
+    this.routerExtService.router.navigateByUrl(this.routerExtService.getBaseUrl());
   }
 }
 

@@ -14,9 +14,6 @@ export class DarkoutComponent implements OnInit {
   }
 
   public close() {
-    let currRoute = this.routerExtService.getCurrentUrl();
-    let redirTo = currRoute.substr(0, currRoute.indexOf('(sign:'));
-
-    this.routerExtService.router.navigateByUrl(redirTo);
+    this.routerExtService.router.navigateByUrl(this.routerExtService.getBaseUrl());
   }
 }

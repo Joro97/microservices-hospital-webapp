@@ -22,6 +22,11 @@ export class RouterExtService {
     return this.currentUrl;
   }
 
+  public getBaseUrl() {
+    let currRoute = this.getCurrentUrl();
+    return currRoute.substr(0, currRoute.indexOf('(sign:'));
+  }
+
   public getPreviousUrl(){
     if(this.previousUrl) {
         return this.previousUrl;

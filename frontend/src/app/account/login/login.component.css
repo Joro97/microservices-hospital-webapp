@@ -179,8 +179,15 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     -ms-border-radius: 5px;
     margin-top: 25px;
     cursor: pointer; }
+    .form-submit:disabled{
+      background: #314351;
+      cursor: not-allowed;
+    }
+    .form-submit:disabled:hover{
+      background: #1B2A32;
+    }
     .form-submit:hover {
-      background: #4292dc; }
+      background: #789C98; }
   
   #signin {
     margin-top: 16px; }

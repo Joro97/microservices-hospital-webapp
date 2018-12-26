@@ -4,6 +4,7 @@ import { Router, ActivatedRoute} from '@angular/router';
 import { UserService } from '../../_services/user.service';
 import { AuthenticationService } from '../../_services/authentication.service';
 import { RouterExtService } from '../../_services/router.ext.service';
+import { ConfirmPasswordValidator } from '../../_validators/confirm.password.validator';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,6 @@ import { RouterExtService } from '../../_services/router.ext.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  returnUrl:String;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,17 +33,30 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.required],
+      name: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
+    },{
+      validator: ConfirmPasswordValidator.MatchPassword
     });
   }
 
   registerUser() {
-    // TODO: implement
-    /*this.usersService.registerUser(this.registerForm.value)
-      .subscribe(data => this.router.navigate(['/']));*/
+    if (this.registerForm.invalid) {
+      alert("Invalid form data !")
+      return;
+    }
+  
+    const userToRegister = {
+      'username': this.registerForm.value.username,
+      'password': this.registerForm.value.password,
+      'roles': ['USER'],
+      'enabled': true
+    }
+
+    this.authenticationService.registerUser(userToRegister);
+    this.redirectToLogin();
   }
 
 }
