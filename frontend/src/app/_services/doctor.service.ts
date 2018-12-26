@@ -35,7 +35,7 @@ export class DoctorService {
     );
   }*/
 
-  getDoctor(username: string): Observable<Doctor> {
+  getDoctor(username: String): Observable<Doctor> {
     const url = `${environment.apiUrl}${environment.allDoctorsUrl}/${username}/profile`;
     return this.http.post<Doctor>(url, { username: username })
       .pipe(catchError(this.handleError<Doctor>('failD')));

@@ -3,6 +3,7 @@ import { Doctor } from '../_models/doctor';
 import { DoctorService } from '../_services/doctor.service';
 import {User} from '../_models/user';
 import {FileService} from '../_services/file.service';
+import { AuthenticationService } from '../_services/authentication.service';
 
 const blacklisted = ['id', 'role', 'token'];
 
@@ -19,7 +20,8 @@ export class DoctorProfileComponent implements OnInit {
 
   constructor(
     private doctorService: DoctorService,
-    private fileService: FileService
+    private fileService: FileService,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -29,7 +31,7 @@ export class DoctorProfileComponent implements OnInit {
   getAdditionalDoctorInfo() {
     this.userDetails = JSON.parse(localStorage.getItem('currentUser'));
 
-    this.doctorService.getDoctor(this.userDetails.username)
+    this.doctorService.getDoctor(this.authenticationService.getCurrentUser().user_name)
       .subscribe(doc => {
         this.doctor = doc;
       });
