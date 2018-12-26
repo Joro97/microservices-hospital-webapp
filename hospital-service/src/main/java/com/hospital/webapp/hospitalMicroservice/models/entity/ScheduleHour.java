@@ -22,6 +22,8 @@ public class ScheduleHour {
     @Column
     private boolean isFreeHour;
 
+    private String patientUsername;
+
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable = false)
     @JsonIgnore
@@ -67,6 +69,14 @@ public class ScheduleHour {
 
     public void setFreeHour(boolean freeHour) {
         isFreeHour = freeHour;
+    }
+
+    public String getPatientUsername() {
+        return patientUsername;
+    }
+
+    public void setPatientUsername(String patientUsername) {
+        this.patientUsername = patientUsername;
     }
 
     public Doctor getDoctor() {

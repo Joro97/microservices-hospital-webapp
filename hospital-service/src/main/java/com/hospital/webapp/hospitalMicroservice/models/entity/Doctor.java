@@ -26,6 +26,7 @@ public class Doctor {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private DBFile avatar;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctor")
     Set<ScheduleHour> scheduleHours;
 

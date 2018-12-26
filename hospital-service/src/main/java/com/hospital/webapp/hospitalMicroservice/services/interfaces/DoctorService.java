@@ -14,4 +14,5 @@ public interface DoctorService {
     List<ScheduleHour> getFreeScheduleHours(String username, LocalDateTime dateTime);
     List<LocalTime> parseScheduleHoursToTimes(List<ScheduleHour> scheduleHours);
     List<LocalTime> handleFreeHoursRequest(String username, LocalDateTime dateTime);
+    void bookAppointment(String doctorUsername, String patientUsername, LocalDateTime dateTime);
 }

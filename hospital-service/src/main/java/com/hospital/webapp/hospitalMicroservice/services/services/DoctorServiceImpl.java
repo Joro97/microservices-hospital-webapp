@@ -61,10 +61,9 @@ public class DoctorServiceImpl implements DoctorService {
     public List<ScheduleHour> getFreeScheduleHours(String username, LocalDateTime dateTime) {
         Doctor doctor = this.doctorsRepository.findByUsername(username);
         LocalDate date = dateTime.toLocalDate();
-
         return doctor.getScheduleHours()
                 .stream()
-                .filter(x -> x.getDate() == date && x.isFreeHour())
+                .filter(x -> x.getDate().equals(date) && x.isFreeHour())
                 .collect(Collectors.toList());
     }
 
@@ -79,6 +78,19 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<LocalTime> handleFreeHoursRequest(String username, LocalDateTime dateTime) {
         return parseScheduleHoursToTimes(getFreeScheduleHours(username, dateTime));
+    }
+
+    @Override
+    public void bookAppointment(String doctorUsername, String patientUsername, LocalDateTime dateTime) {
+        LocalDate date = dateTime.toLocalDate();
+        LocalTime time = dateTime.toLocalTime();
+        ScheduleHour bookedHour = new ScheduleHour(date, time, false);
+        bookedHour.setPatientUsername(patientUsername);
+
+        Doctor doctor = this.doctorsRepository.findByUsername(doctorUsername);
+        doctor.getScheduleHours().add(bookedHour);
+        bookedHour.setDoctor(doctor);
+        this.doctorsRepository.save(doctor);
     }
 
 

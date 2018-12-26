@@ -34,7 +34,13 @@ public class DoctorsController {
     }
 
     @PostMapping("/api/schedule/{username}")
-    public List<LocalTime> getDoctorFreeHours(@RequestBody LocalDateTime dateTime, @PathVariable String username) {
+    public List<LocalTime> getDoctorFreeHours(@PathVariable String username, @RequestBody LocalDateTime dateTime) {
         return this.doctorService.handleFreeHoursRequest(username, dateTime);
+    }
+
+    @PostMapping("api/book/{doctorUsername}/{patientUsername}")
+    public void bookHour(@PathVariable String doctorUsername, @PathVariable String patientUsername,
+                         @RequestBody LocalDateTime dateTime) {
+        this.doctorService.bookAppointment(doctorUsername, patientUsername, dateTime);
     }
 }
