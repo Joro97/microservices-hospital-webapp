@@ -1,9 +1,11 @@
+import { Role } from './Role';
+
 export class User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  username: string;
-  password: string;
-  role: string;
-  token?: string;
+  user_name:String;
+  scope:Array<String>;
+  organization:String;
+  exp: Number;
+  authorities:Array<Role>;
+  jti:String;
+  client_id:String;
 }

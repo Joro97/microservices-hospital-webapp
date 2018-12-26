@@ -1,28 +1,5 @@
-<!--<form [formGroup]="registerForm" (ngSubmit)="registerUser()">
-  <div>
-    <label for="firstName">First Name: </label>
-    <input type="text" formControlName="firstName" id="firstName" >
-  </div>
-  <div>
-    <label for="lastName">Last Name: </label>
-    <input type="text" formControlName="lastName" id="lastName">
-  </div>
-  <div>
-    <label for="username">Username: </label>
-    <input type="text" formControlName="username" id="username">
-  </div>
-  <div>
-    <label for="password">Password: </label>
-    <input type="password" formControlName="password" id="password">
-  </div>
-  <div>
-    <button type="submit" [disabled]="registerForm.invalid">Register</button>
-  </div>
-</form>
--->
- <!-- Sign up form -->
- <div id="darkout" (click)="close()"></div>
- <section class="signup">
+<app-darkout></app-darkout>
+<section class="signup">
   <div class="container">
       <div class="signup-content">
           <div class="signup-form">
@@ -53,8 +30,10 @@
               </form>
           </div>
           <div class="signup-image">
-              <figure><img src="../../assets/images/signup-image.jpg" alt="sing up image"></figure>
-              <a routerLink="/login" class="signup-image-link">I am already member</a>
+            <figure><img src="../../assets/images/signup-image.jpg" alt="sing up image"></figure>
+            <a style="cursor: pointer;" (click)="redirectToLogin()" class="signup-image-link">
+                I am already member
+            </a>
           </div>
       </div>
   </div>

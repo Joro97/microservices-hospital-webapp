@@ -1,27 +1,12 @@
-<!--<h2>Login</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="username">Username: </label>
-    <input type="text" formControlName="username" id="username">
-  </div>
-  <div>
-    <label for="password">Password: </label>
-    <input type="password" formControlName="password" id="password">
-  </div>
-  <div>
-    <button type="submit" [disabled]="loginForm.invalid">Login</button>
-  </div>
-</form>
--->
-
-<!-- Sing in  Form -->
-<div id="darkout" (click)="close()"></div>
+<app-darkout></app-darkout>
 <section class="sign-in">
   <div class="container">
       <div class="signin-content">
           <div class="signin-image">
-              <figure><img src="../../assets/images/signup-image.jpg" alt="sing up image"></figure>
-              <a routerLink="/register/patient" class="signup-image-link">Create an account</a>
+            <figure><img src="../../assets/images/signup-image.jpg" alt="sing up image"></figure>
+            <a style="cursor: pointer;" (click)="redirectToRegister()" class="signup-image-link">
+                Create an account
+            </a>
           </div>
 
           <div class="signin-form">
@@ -45,19 +30,3 @@
       </div>
   </div>
 </section>
-
-
-<!--<div class="col-sm-6">
-    <h1>Login</h1>
-    <div class="col-sm-12 form-group">
-         <label>Username</label>
-         <input class="form-control" type="text" [(ngModel)]="loginData.username" />
-    </div>
-    <div class="col-sm-12 form-group">
-        <label>Password</label>
-        <input class="form-control" type="password"  [(ngModel)]="loginData.password"/>
-    </div>
-    <div class="col-sm-12">
-        <button class="btn btn-primary pull-right" (click)="login()" type="submit">Login</button>
-    </div>
-</div>`-->

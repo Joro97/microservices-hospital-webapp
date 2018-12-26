@@ -21,6 +21,6 @@ export class UserService {
 
   registerUser(user: User): Observable<User> {
     return this.http.post<User>(this.registerUserUrl, user, httpOptions)
-      .pipe(tap(_ => console.log(`added patient w/ id=${user.id}`)));
+      .pipe(tap(_ => console.log(`added patient w/ id=${user.user_name}`)));
   }
 }

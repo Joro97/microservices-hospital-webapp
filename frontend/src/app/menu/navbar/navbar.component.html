@@ -1,13 +1,17 @@
 <div style="height: 100vh;">
-  <!--<app-patient-register></app-patient-register>-->
-  <router-outlet></router-outlet>
+  <!-- DOCS: secondary router used to display login & register forms.
+      This way, components can be displayed on different document places
+      depending on route value.-->
+  <router-outlet name="sign"></router-outlet>
   <mat-toolbar style="max-height:20px">
     <mat-toolbar-row>
 
-      <h4>Princeton Plainsboro</h4>
+      <a [routerLink]="[{ outlets: { primary: ['home']} }]" mat-button>
+        <h4>Princeton Plainsboro</h4>
+      </a>
 
       <div fxShow="true" fxHide.lt-md="true">
-        <a href="#" mat-button>
+        <a [routerLink]="[{ outlets: { primary: ['doctors']} }]" mat-button>
           Doctors
         </a>
       </div>
@@ -25,13 +29,13 @@
       </button>  
 
       <div *ngIf="isUserLoggedIn() == false" fxShow="true" fxHide.lt-md="true">
-        <a routerLink="/login" mat-button>
+        <a [routerLink]="[{ outlets: { sign: ['login'] } }]" mat-button>
           <mat-icon>account_box</mat-icon> Sign in
         </a>
       </div>
 
       <div *ngIf="isUserLoggedIn() == false" fxShow="true" fxHide.lt-md="true">
-        <a routerLink="/register/patient" mat-button>
+        <a [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>
           <mat-icon>lock</mat-icon> Sign up
         </a>
       </div>
@@ -62,8 +66,7 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content fxFlexFill>
-      <app-video></app-video>
-    
+      <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

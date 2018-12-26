@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';
-import {User} from '../_models/user';
+import {OldUser} from '../_models/olduser';
 import {Role} from '../_models/Role';
 import {delay, dematerialize, materialize, mergeMap} from 'rxjs/operators';
 import {Doctor} from '../_models/doctor';
@@ -10,10 +10,10 @@ import {Doctor} from '../_models/doctor';
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const users: User[] = [
-      { id: 1, username: 'admin', password: 'admin',  firstName: 'Admin', lastName: 'User', role: Role.Admin },
-      { id: 2, username: 'user', password: 'user', firstName: 'Normal', lastName: 'User', role: Role.User },
-      { id: 3, username: 'doctor', password: 'doctor', firstName: 'Doctor', lastName: 'User', role: Role.Doctor }
+    const users: OldUser[] = [
+      { id: 1, username: 'admin', password: 'admin',  firstName: 'Admin', lastName: 'OldUser', role: Role.ADMIN },
+      { id: 2, username: 'user', password: 'user', firstName: 'Normal', lastName: 'OldUser', role: Role.USER },
+      { id: 3, username: 'doctor', password: 'doctor', firstName: 'Doctor', lastName: 'OldUser', role: Role.DOCTOR }
     ];
     const doctors: Doctor[] = [
       { id: 1, username: 'doctor', specialty: 'surgeon' }
@@ -29,7 +29,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       // authenticate - public
       if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
         const user = users.find(x => x.username === request.body.username && x.password === request.body.password);
-        if (!user) { return error('Username or password is incorrect'); }
+        if (!user) { return error('OldUsername or password is incorrect'); }
         return ok({
           id: user.id,
           username: user.username,
@@ -49,8 +49,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         const id = parseInt(urlParts[urlParts.length - 1]);
 
         // only allow normal users access to their own record
-        const currentUser = users.find(x => x.role === role);
-        if (id !== currentUser.id && role !== Role.Admin) { return unauthorised(); }
+        const currentOldUser = users.find(x => x.role === role);
+        if (id !== currentOldUser.id && role !== Role.ADMIN) { return unauthorised(); }
 
         const user = users.find(x => x.id === id);
         return ok(user);
@@ -64,7 +64,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
       // get all users (admin only)
       if (request.url.endsWith('/users') && request.method === 'GET') {
-        if (role !== Role.Admin) { return unauthorised(); }
+        if (role !== Role.ADMIN) { return unauthorised(); }
         return ok(users);
       }
 
