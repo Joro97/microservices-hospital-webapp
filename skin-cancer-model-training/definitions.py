@@ -7,6 +7,8 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 INPUT_PATH = os.path.join(ROOT_DIR, 'input')
 
+INPUT_ZIP_PATH = os.path.join(ROOT_DIR, 'input.zip')
+
 TRAINING_FOLDER_PATH = os.path.join(INPUT_PATH, 'training')
 
 VALIDATION_FOLDER_PATH = os.path.join(INPUT_PATH, 'validation')
