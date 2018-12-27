@@ -2,7 +2,6 @@ package com.baeldung.config;
 
 import com.baeldung.model.Authority;
 import com.baeldung.model.User;
-import com.baeldung.model.UserWrapper;
 import com.baeldung.service.HospitalUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,14 +12,11 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @PropertySource({ "classpath:persistence.properties" })
 @Configuration
@@ -56,12 +52,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// @formatter:on
     }*/
 
+    private final DataSource dataSource;
+    private final PasswordEncoder passwordEncoder;
+    private final HospitalUserDetailsService userDetailsService;
+
     @Autowired
-    DataSource dataSource;
-    @Autowired
-    PasswordEncoder passwordEncoder;
-    @Autowired
-    private HospitalUserDetailsService userDetailsService;
+    public WebSecurityConfig(DataSource dataSource, PasswordEncoder passwordEncoder, HospitalUserDetailsService userDetailsService) {
+        this.dataSource = dataSource;
+        this.passwordEncoder = passwordEncoder;
+        this.userDetailsService = userDetailsService;
+    }
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -82,6 +82,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         user.setRoles(s);
         user.setEnabled(true);
         userDetailsService.registerUser(user);
+
+        User doctor = new User("doctor", "doctor");
+        List<Authority> roles = new ArrayList<>();
+        roles.add(new Authority("DOCTOR"));
+        doctor.setRoles(roles);
+        doctor.setEnabled(true);
+        userDetailsService.registerUser(doctor);
+
+        User normalUser = new User("user", "user");
+        List<Authority> noRoles = new ArrayList<>();
+        noRoles.add(new Authority("USER"));
+        normalUser.setRoles(noRoles);
+        normalUser.setEnabled(true);
+        userDetailsService.registerUser(normalUser);
 
         DaoAuthenticationProvider authProvider
                 = new DaoAuthenticationProvider();
