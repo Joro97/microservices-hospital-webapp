@@ -27,6 +27,7 @@ import { VideoComponent } from './home/video/video.component';
 import { HomeComponent } from './home/home.component';
 import { RouterExtService } from './_services/router.ext.service';
 import { DarkoutComponent } from './account/darkout/darkout.component';
+import { DoctorCardComponent } from './doctors/doctor-card/doctor-card.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DarkoutComponent } from './account/darkout/darkout.component';
     NavbarComponent,
     VideoComponent,
     HomeComponent,
-    DarkoutComponent
+    DarkoutComponent,
+    DoctorCardComponent
   ],
   imports: [
     FormsModule,

@@ -1,4 +1,4 @@
-<h2>Doctors list:</h2>
+<!--<h2>Doctors list:</h2>
 <input type="text" (keyup)="valueChange($event.target.value)">
 <ul class="doctors">
   <li *ngFor="let doctor of filteredDoctors" >
@@ -7,5 +7,16 @@
     </a>
   </li>
 </ul>
+-->
 
-
+<section class="container">
+    <div class="page-header">
+        <h1>Browse our doctors<br>
+          <small>All the best doctors in the world</small></h1>
+    </div>
+    <div class="row active-with-click">
+        <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let _ of [1,2,3,4,5,6,7,8,9,10]">
+          <app-doctor-card></app-doctor-card>
+        </div>
+    </div>
+</section>

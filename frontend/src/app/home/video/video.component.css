@@ -4,6 +4,7 @@
     height: 500px;
     overflow:hidden;
     background-color: red;
+    padding: 0;
 }
 
 #home_video {

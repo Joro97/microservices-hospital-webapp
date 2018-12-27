@@ -276,53 +276,53 @@
 .material-card.mc-active .mc-footer h4 {
   top: -32px;
 }
-.material-card.Red h2 {
-  background-color: #F44336;
+.material-card.PrincetonGreen h2 {
+  background-color: #32CDB8;
 }
-.material-card.Red h2:after {
-  border-top-color: #F44336;
-  border-right-color: #F44336;
+.material-card.PrincetonGreen h2:after {
+  border-top-color: #32CDB8;
+  border-right-color: #32CDB8;
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
-.material-card.Red h2:before {
+.material-card.PrincetonGreen h2:before {
   border-top-color: transparent;
-  border-right-color: #B71C1C;
-  border-bottom-color: #B71C1C;
+  border-right-color: #218273;
+  border-bottom-color: #218273;
   border-left-color: transparent;
 }
-.material-card.Red.mc-active h2:before {
+.material-card.PrincetonGreen.mc-active h2:before {
   border-top-color: transparent;
-  border-right-color: #F44336;
-  border-bottom-color: #F44336;
+  border-right-color: #32CDB8;
+  border-bottom-color: #32CDB8;
   border-left-color: transparent;
 }
-.material-card.Red.mc-active h2:after {
-  border-top-color: #B71C1C;
-  border-right-color: #B71C1C;
+.material-card.PrincetonGreen.mc-active h2:after {
+  border-top-color: #218273;
+  border-right-color: #218273;
   border-bottom-color: transparent;
   border-left-color: transparent;
 }
-.material-card.Red .mc-btn-action {
-  background-color: #F44336;
+.material-card.PrincetonGreen .mc-btn-action {
+  background-color: #32CDB8;
 }
-.material-card.Red .mc-btn-action:hover {
-  background-color: #B71C1C;
+.material-card.PrincetonGreen .mc-btn-action:hover {
+  background-color: #218273;
 }
-.material-card.Red .mc-footer h4 {
-  color: #B71C1C;
+.material-card.PrincetonGreen .mc-footer h4 {
+  color: #218273;
 }
-.material-card.Red .mc-footer a {
-  background-color: #B71C1C;
+.material-card.PrincetonGreen .mc-footer a {
+  background-color: #218273;
 }
-.material-card.Red.mc-active .mc-content {
-  background-color: #FFEBEE;
+.material-card.PrincetonGreen.mc-active .mc-content {
+  background-color: #f4fbfc;
 }
-.material-card.Red.mc-active .mc-footer {
-  background-color: #FFCDD2;
+.material-card.PrincetonGreen.mc-active .mc-footer {
+  background-color: #98cfc9;
 }
-.material-card.Red.mc-active .mc-btn-action {
-  border-color: #FFEBEE;
+.material-card.PrincetonGreen.mc-active .mc-btn-action {
+  border-color: #f4fbfc;
 }
 .material-card.Blue-Grey h2 {
   background-color: #607D8B;
