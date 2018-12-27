@@ -1,8 +1,8 @@
 import zipfile
-import logging
 
 from argparse import ArgumentParser
-from src.train import lesions_model, generators
+import lesions_model
+import generators
 
 from definitions import *
 
@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
     if not os.path.exists(output_path):
 
-        logging.warning('Model save path {} does not exist. Using default path'.format(output_path))
+        LOGGER.warning('Model save path {} does not exist. Using default path'.format(output_path))
 
         model.train(images_generators)
 
