@@ -12,7 +12,7 @@ import {DoctorProfileComponent} from './doctor-profile/doctor-profile.component'
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  //{ path: '', redirectTo: '/home', pathMatch: 'full' },
+  // { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'doctors', component: DoctorsComponent },
   { path: 'detail/:id', component: DoctorDetailComponent },

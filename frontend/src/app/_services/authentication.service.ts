@@ -5,15 +5,15 @@ import { map } from 'rxjs/operators';
 import { Router , ActivatedRoute} from '@angular/router';
 import { User } from '../_models/user';
 import { JwtToken } from '../_models/jwt.token';
-import * as jwt_decode from "jwt-decode";
+import * as jwt_decode from 'jwt-decode';
 import { RouterExtService } from './router.ext.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  
-  authServiceUrl:String = 'http://localhost:8090/spring-security-oauth-server'
+
+  authServiceUrl: String = 'http://localhost:8090/spring-security-oauth-server';
 
   constructor(private http: HttpClient,
               private routerExtService: RouterExtService) {}
@@ -21,23 +21,23 @@ export class AuthenticationService {
 
   login(username: string, password: string) {
     const headers = {
-      'Authorization': 'Basic ' + btoa("fooClientIdPassword:secret"),
+      'Authorization': 'Basic ' + btoa('fooClientIdPassword:secret'),
       'Content-type': 'application/x-www-form-urlencoded'
-    }
+    };
 
-    let params = new URLSearchParams();
-    params.append('username',username);
-    params.append('password',password);    
-    params.append('grant_type','password');
-    params.append('client_id','fooClientIdPassword');
+    const params = new URLSearchParams();
+    params.append('username', username);
+    params.append('password', password);
+    params.append('grant_type', 'password');
+    params.append('client_id', 'fooClientIdPassword');
 
-    return this.http.post<JwtToken>(this.authServiceUrl +'/oauth/token', params.toString(), {headers})
+    return this.http.post<JwtToken>(this.authServiceUrl + '/oauth/token', params.toString(), {headers})
       .subscribe(token => {
         // TODO: add time of get token for expiration monitoring
         localStorage.setItem('token', JSON.stringify(token));
         console.log(token.access_token);
       }, error => {
-          alert("error:" + error)
+          alert('error:' + error);
       });
   }
 
@@ -51,8 +51,8 @@ export class AuthenticationService {
   }
 
   getCurrentUser(): User {
-    let token: JwtToken = this.getCurrentAccessToken();
-    let user:User = jwt_decode(token.access_token);
+    const token: JwtToken = this.getCurrentAccessToken();
+    const user: User = jwt_decode(token.access_token);
     return user;
   }
 
@@ -63,7 +63,7 @@ export class AuthenticationService {
 
   isUserLoggedIn() {
     // TODO: implement expiration check
-    if(this.getCurrentAccessToken()){
+    if (this.getCurrentAccessToken()) {
       return true;
     }
     return false;
@@ -72,9 +72,9 @@ export class AuthenticationService {
   registerUser(userToRegister) {
     return this.http.post(this.authServiceUrl + '/register/user', userToRegister)
     .subscribe(response => {
-      alert("Registration was successful")
+      alert('Registration was successful');
     }, error => {
-      alert("error:" + error)
+      alert('error:' + error);
     });
   }
 }

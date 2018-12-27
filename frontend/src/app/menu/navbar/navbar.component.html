@@ -15,11 +15,11 @@
           Doctors
         </a>
       </div>
-
-      <div fxShow="true" fxHide.lt-md="true">
-        <a href="#" mat-button>
-          Patients
-        </a>
+      <div *ngIf="isUserLoggedIn() && userHasRole(userRole.USER)">
+        <a routerLink="/" mat-button>My appointments</a>
+      </div>
+      <div *ngIf="isUserLoggedIn() && userHasRole(userRole.DOCTOR)">
+        <a routerLink="/" mat-button>Diagnose help</a>
       </div>
 
       <span class="example-spacer"></span>
@@ -28,19 +28,27 @@
         <mat-icon>menu</mat-icon>
       </button>  
 
-      <div *ngIf="isUserLoggedIn() == false" fxShow="true" fxHide.lt-md="true">
+      <div *ngIf="!isUserLoggedIn()" fxShow="true" fxHide.lt-md="true">
         <a [routerLink]="[{ outlets: { sign: ['login'] } }]" mat-button>
           <mat-icon>account_box</mat-icon> Sign in
         </a>
       </div>
 
-      <div *ngIf="isUserLoggedIn() == false" fxShow="true" fxHide.lt-md="true">
+      <div *ngIf="!isUserLoggedIn()" fxShow="true" fxHide.lt-md="true">
         <a [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>
           <mat-icon>lock</mat-icon> Sign up
         </a>
       </div>
 
-      <div *ngIf="isUserLoggedIn() == true" fxShow="true" fxHide.lt-md="true">
+      <div *ngIf="isUserLoggedIn() && userHasRole(userRole.ADMIN)">
+        <a routerLink="/register/doctor" mat-button>
+          Register doctor
+        </a>
+      </div>
+      <div *ngIf="isUserLoggedIn() && userHasRole(userRole.DOCTOR)">
+        <a routerLink="/profile" mat-button>My profile</a>
+      </div>
+      <div *ngIf="isUserLoggedIn()" fxShow="true" fxHide.lt-md="true">
         <a (click)="logout()" mat-button>
           <mat-icon>account_box</mat-icon> Logout
         </a>

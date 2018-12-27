@@ -4,6 +4,8 @@ export const environment = {
   loginUrl: '/login',
   allDoctorsUrl: '/doctors',
   registerDoctorUrl: '/doctors/register',
-  fileUploadUrl: '/upload/image',
-  fileRetrievalUrl: '/image'
+  fileUploadUrl: '/upload/image', // Plus doctor username, example: /upload/image/cvetan
+  fileRetrievalUrl: '/image', // Plus doctor username, example: /image/joro
+  patientAppointmentsUrl: '/appointments', // Plus patient username, example: /appointments/ognyan
+  doctorsHoursUrl: '/schedule' // Plus doctor username, example: /schedule/ognyan
 };
