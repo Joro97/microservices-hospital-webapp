@@ -3,7 +3,7 @@ import logging
 
 LABEL_COLUMN_NAME = 'dx'
 
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(os.path.abspath(os.path.join(__file__, os.pardir)))
 
 INPUT_PATH = os.path.join(ROOT_DIR, 'input')
 
