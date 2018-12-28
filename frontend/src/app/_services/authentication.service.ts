@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Router , ActivatedRoute} from '@angular/router';
+import * as jwt_decode from 'jwt-decode';
 import { User } from '../_models/user';
 import { JwtToken } from '../_models/jwt.token';
-import * as jwt_decode from 'jwt-decode';
 import { RouterExtService } from './router.ext.service';
+import {Role} from '../_models/Role';
 
 @Injectable({
   providedIn: 'root'
@@ -76,5 +74,9 @@ export class AuthenticationService {
     }, error => {
       alert('error:' + error);
     });
+  }
+
+  userHasRole(role: Role) {
+    return this.getCurrentUser().authorities.includes(role);
   }
 }

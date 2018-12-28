@@ -22,7 +22,17 @@ public class FileController {
         this.dbFileStorageService = dbFileStorageService;
     }
 
-    @PostMapping("/api/upload/image/{username}")
+    @GetMapping("/api/images/{username}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable String username) {
+        DBFile dbFile = this.dbFileStorageService.getFile(username);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(dbFile.getFileType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"")
+                .body(new ByteArrayResource(dbFile.getData()));
+    }
+
+    @PostMapping("/api/images/{username}")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String username){
         DBFile dbFile = this.dbFileStorageService.storeFile(file, username);
 
@@ -31,15 +41,5 @@ public class FileController {
                 .toUriString();
 
         return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri, file.getContentType(), file.getSize());
-    }
-
-    @GetMapping("/api/image/{username}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String username) {
-        DBFile dbFile = this.dbFileStorageService.getFile(username);
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(dbFile.getFileType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"")
-                .body(new ByteArrayResource(dbFile.getData()));
     }
 }

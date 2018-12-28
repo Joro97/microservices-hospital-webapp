@@ -23,17 +23,17 @@ public class DoctorsController {
         return this.doctorService.getAllDoctors();
     }
 
+    @PostMapping("/api/doctors")
+    public Doctor registerDoctor(@RequestBody Doctor doctor) {
+        return this.doctorService.registerDoctor(doctor);
+    }
+
     @GetMapping("/api/doctors/{id}")
     public Doctor getDoctorById(@PathVariable long id) {
         return this.doctorService.getDoctorById(id);
     }
 
-    @PostMapping("/api/doctors/register")
-    public Doctor registerDoctor(@RequestBody Doctor doctor) {
-        return this.doctorService.registerDoctor(doctor);
-    }
-
-    @PostMapping("/api/schedule/{username}")
+    @PostMapping("/api/schedules/{username}")
     public List<LocalTime> getDoctorFreeHours(@PathVariable String username, @RequestBody LocalDateTime dateTime) {
         return this.doctorService.handleFreeHoursRequest(username, dateTime);
     }

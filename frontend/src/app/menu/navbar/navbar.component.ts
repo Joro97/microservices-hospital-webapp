@@ -10,13 +10,9 @@ import {Role} from '../../_models/Role';
 export class NavbarComponent implements OnInit {
   public userRole = Role;
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(protected authenticationService: AuthenticationService) { }
 
   ngOnInit() {
-  }
-
-  userHasRole(role: Role) {
-    return this.authenticationService.getCurrentUser().authorities.includes(role);
   }
 
   isUserLoggedIn() {

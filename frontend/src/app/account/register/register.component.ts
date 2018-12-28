@@ -37,23 +37,23 @@ export class RegisterComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
-    },{
+    }, {
       validator: ConfirmPasswordValidator.MatchPassword
     });
   }
 
   registerUser() {
     if (this.registerForm.invalid) {
-      alert("Invalid form data !")
+      alert('Invalid form data !');
       return;
     }
-  
+
     const userToRegister = {
       'username': this.registerForm.value.username,
       'password': this.registerForm.value.password,
       'roles': ['USER'],
       'enabled': true
-    }
+    };
 
     this.authenticationService.registerUser(userToRegister);
     this.redirectToLogin();

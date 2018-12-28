@@ -15,10 +15,10 @@
           Doctors
         </a>
       </div>
-      <div *ngIf="isUserLoggedIn() && userHasRole(userRole.USER)">
+      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.USER)">
         <a routerLink="/" mat-button>My appointments</a>
       </div>
-      <div *ngIf="isUserLoggedIn() && userHasRole(userRole.DOCTOR)">
+      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)">
         <a routerLink="/" mat-button>Diagnose help</a>
       </div>
 
@@ -40,12 +40,12 @@
         </a>
       </div>
 
-      <div *ngIf="isUserLoggedIn() && userHasRole(userRole.ADMIN)">
+      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN)">
         <a routerLink="/register/doctor" mat-button>
           Register doctor
         </a>
       </div>
-      <div *ngIf="isUserLoggedIn() && userHasRole(userRole.DOCTOR)">
+      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)">
         <a routerLink="/profile" mat-button>My profile</a>
       </div>
       <div *ngIf="isUserLoggedIn()" fxShow="true" fxHide.lt-md="true">
@@ -78,18 +78,3 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-
-<!--<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/doctors">Doctors</a>
-  <a routerLink="/register/patient">Register</a>
-  <a *ngIf="authenticationService.currentUserValue
-  && authenticationService.currentUserValue.role === 'Admin'" routerLink="/register/doctor">Register Doctor</a>
-  <a *ngIf="authenticationService.currentUserValue
-  && authenticationService.currentUserValue.role=== 'Doctor'" routerLink="/profile">My Profile</a>
-  <a *ngIf="!authenticationService.currentUserValue" routerLink="/login">Login</a>
-  <a *ngIf="authenticationService.currentUserValue" routerLink="/" (click)="logout()">Logout</a>
-</nav>
-
-<router-outlet></router-outlet>-->

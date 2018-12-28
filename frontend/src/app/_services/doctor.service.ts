@@ -22,7 +22,7 @@ export class DoctorService {
 
 
   getDoctors(): Observable<Doctor[]> {
-    return this.http.get<Doctor[]>(`${environment.apiUrl}${environment.allDoctorsUrl}`)
+    return this.http.get<Doctor[]>(`${environment.hospitalApiUrl}${environment.doctorsUrl}`)
       .pipe(
         catchError(this.handleError('getDoctors', []))
       );
@@ -36,13 +36,13 @@ export class DoctorService {
   }*/
 
   getDoctor(username: String): Observable<Doctor> {
-    const url = `${environment.apiUrl}${environment.allDoctorsUrl}/${username}/profile`;
+    const url = `${environment.hospitalApiUrl}${environment.doctorsUrl}/${username}/profile`;
     return this.http.post<Doctor>(url, { username: username })
       .pipe(catchError(this.handleError<Doctor>('failD')));
   }
 
   registerDoctor(doctor: Doctor): Observable<Doctor> {
-    return this.http.post<Doctor>(`${environment.apiUrl}${environment.registerDoctorUrl}`, doctor, httpOptions)
+    return this.http.post<Doctor>(`${environment.hospitalApiUrl}${environment.doctorsUrl}`, doctor, httpOptions)
       .pipe(tap(_ => console.log(`added doctor with id=${doctor.id}`)));
   }
 
