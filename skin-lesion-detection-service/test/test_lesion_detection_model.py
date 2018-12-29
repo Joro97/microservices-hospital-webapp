@@ -31,6 +31,18 @@ class LesionDetectionTest(unittest.TestCase):
         print(label)
         print(probability)
 
+    def test_bcc_lesion(self):
+        img = self._load_image(os.path.join(self.RESOURCES_PATH, 'resources/bcc.jpg'))
+
+        result = self._model.predict(img)
+
+        print(result)
+
+        label, probability = self._model.get_most_probable_result(result)
+
+        print(label)
+        print(probability)
+
     def test_akiec_lesion(self):
         img = self._load_image(os.path.join(self.RESOURCES_PATH, 'resources/akiec.jpg'))
 
@@ -43,17 +55,6 @@ class LesionDetectionTest(unittest.TestCase):
         print(label)
         print(probability)
 
-    def test_bcc_lesion(self):
-        img = self._load_image(os.path.join(self.RESOURCES_PATH, 'resources/bcc.jpg'))
-
-        result = self._model.predict(img)
-
-        print(result)
-
-        label, probability = self._model.get_most_probable_result(result)
-
-        print(probability)
-
     def test_bkl_lesion(self):
         img = self._load_image(os.path.join(self.RESOURCES_PATH, 'resources/bkl.jpg'))
 
@@ -62,7 +63,7 @@ class LesionDetectionTest(unittest.TestCase):
         print(result)
 
         label, probability = self._model.get_most_probable_result(result)
-
+        print(label)
         print(probability)
 
     def test_df_lesion(self):
@@ -73,7 +74,7 @@ class LesionDetectionTest(unittest.TestCase):
         print(result)
 
         label, probability = self._model.get_most_probable_result(result)
-
+        print(label)
         print(probability)
 
     def test_mel_lesion(self):
@@ -84,7 +85,7 @@ class LesionDetectionTest(unittest.TestCase):
         print(result)
 
         label, probability = self._model.get_most_probable_result(result)
-
+        print(label)
         print(probability)
 
     def test_vasc_lesion(self):

@@ -33,10 +33,9 @@ class LesionDetectionModel:
 
     def predict(self, lesion_image):
         '''
-        :param lesion_image:  A PIL Image instance.
+        :param lesion_image:  A PIL Image instance with size 224 X 224
         :return: A probability array
         '''
-
         img_arr = image.img_to_array(lesion_image)
         img_arr = numpy.expand_dims(img_arr, axis=0)
 
@@ -50,6 +49,6 @@ class LesionDetectionModel:
         :param prob: Probability array returned from the predict method
         :return: (Most probable label, probability)
         '''
-        label_index = numpy.argmax(prob, axis=-1)[0]
+        label_index = numpy.argmax(prob)
 
         return self.LABEL_MAP[label_index], prob[0, label_index]
