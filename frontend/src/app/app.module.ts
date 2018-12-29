@@ -11,7 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DoctorRegisterComponent } from './doctor-register/doctor-register.component';
 import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/login/login.component';
-import { fakeBackendProvider } from './_interceptors/fake-backend';
+// import { fakeBackendProvider } from './_interceptors/fake-backend';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { NavbarComponent } from './menu/navbar/navbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -60,14 +60,13 @@ import { DoctorCardComponent } from './doctors/doctor-card/doctor-card.component
     FlexLayoutModule
   ],
   providers: [
-    fakeBackendProvider,
     RouterExtService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 
   /* To store the current variable as soon as possible,
    it's necessary to use the service in the AppModule. */
-  constructor(private routerExtService: RouterExtService){}
+  constructor(private routerExtService: RouterExtService) {}
 }

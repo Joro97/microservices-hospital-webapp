@@ -3,6 +3,8 @@ package com.hospital.webapp.hospitalMicroservice.models.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -14,12 +16,14 @@ public class Doctor {
     private long id;
 
     @Column(unique = true)
+    @Size(min = 3, max = 33, message = "Doctor's username should be between 3 and 33 characters long and unique")
     private String username;
 
     @Column
     private String specialty;
 
     @Column
+    @PositiveOrZero
     private int experience;
 
     @JsonIgnore

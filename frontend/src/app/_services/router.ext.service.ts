@@ -8,13 +8,13 @@ export class RouterExtService {
   private previousUrl: string = undefined;
   private currentUrl: string = undefined;
 
-  constructor(public router : Router) {
+  constructor(public router: Router) {
     this.currentUrl = this.router.url;
     router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {        
+      if (event instanceof NavigationEnd) {
         this.previousUrl = this.currentUrl;
         this.currentUrl = event.url;
-      };
+      }
     });
   }
 
@@ -23,15 +23,15 @@ export class RouterExtService {
   }
 
   public getBaseUrl() {
-    let currRoute = this.getCurrentUrl();
+    const currRoute = this.getCurrentUrl();
     return currRoute.substr(0, currRoute.indexOf('(sign:'));
   }
 
-  public getPreviousUrl(){
-    if(this.previousUrl) {
+  public getPreviousUrl() {
+    if (this.previousUrl) {
         return this.previousUrl;
     } else {
         return '';
     }
-  }    
+  }
 }

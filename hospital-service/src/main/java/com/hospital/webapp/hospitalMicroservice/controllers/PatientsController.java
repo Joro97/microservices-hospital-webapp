@@ -5,11 +5,13 @@ import com.hospital.webapp.hospitalMicroservice.services.interfaces.ScheduleHour
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class PatientsController {
     private final ScheduleHourService scheduleHourService;
 
@@ -18,7 +20,7 @@ public class PatientsController {
         this.scheduleHourService = scheduleHourService;
     }
 
-    @GetMapping("/api/appointments/{patientUsername}")
+    @GetMapping("/appointments/{patientUsername}")
     public List<ScheduleHour> patientAppointments(@PathVariable String patientUsername) {
         return this.scheduleHourService.getPatientsAppointments(patientUsername);
     }

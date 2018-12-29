@@ -34,19 +34,15 @@
         </a>
       </div>
 
-      <div *ngIf="!isUserLoggedIn()" fxShow="true" fxHide.lt-md="true">
+      <div *ngIf="!isUserLoggedIn() || (isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN))"
+           fxShow="true" fxHide.lt-md="true">
         <a [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>
           <mat-icon>lock</mat-icon> Sign up
         </a>
       </div>
 
-      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN)">
-        <a routerLink="/register/doctor" mat-button>
-          Register doctor
-        </a>
-      </div>
       <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)">
-        <a routerLink="/profile" mat-button>My profile</a>
+        <a routerLink="profile" mat-button>My profile</a>
       </div>
       <div *ngIf="isUserLoggedIn()" fxShow="true" fxHide.lt-md="true">
         <a (click)="logout()" mat-button>

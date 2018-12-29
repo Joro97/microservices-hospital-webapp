@@ -1,3 +1,4 @@
+/*
 import {Injectable} from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';
@@ -56,11 +57,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return ok(user);
       }
 
-/*      // Show doctor profile
+/!*      // Show doctor profile
       if (request.url.includes('/api/doctors') && request.method === 'POST') {
         const doctor = doctors.find(x => x.username === request.body.username);
         return ok(doctor);
-      }*/
+      }*!/
 
       // get all users (admin only)
       if (request.url.endsWith('/users') && request.method === 'GET') {
@@ -98,3 +99,4 @@ export let fakeBackendProvider = {
   useClass: FakeBackendInterceptor,
   multi: true
 };
+*/
