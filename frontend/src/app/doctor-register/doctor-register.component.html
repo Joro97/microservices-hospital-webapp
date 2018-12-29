@@ -1,36 +1,8 @@
-<h2>Register</h2>
-
-<form [formGroup]="userRegisterForm" >
+<div [formGroup]="doctorRegisterForm">
   <div class="form-group">
-    <label>
-      First Name: <input type="text" class="form-control"  formControlName="firstName" />
-    </label>
+    <input type="text" name="specialty" id="specialty" placeholder="Your specialty" formControlName="specialty">
   </div>
-  <div class="form-group">
-    <label>
-      Last Name: <input type="text" class="form-control" formControlName="lastName" />
-    </label>
+  <div>
+    <input type="number" name="experience" id="experience" placeholder="Your experience in years" formControlName="experience">
   </div>
-  <div class="form-group">
-    <label for="username" >Username</label>
-    <input type="text" formControlName="username" class="form-control" id="username" />
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" formControlName="password" class="form-control" id="password"/>
-  </div>
-</form>
-
-<form [formGroup]="doctorRegisterForm">
-  <div class="form-group">
-    <label>Specialty: <input type="text" formControlName="specialty" class="form-control"  />
-    </label>
-  </div>
-  <div class="form-group">
-    <label>
-      <input type="number" formControlName="experience" class="form-control"  />
-    </label>
-  </div>
-</form>
-<input type="file" size="66" (change)="onFileChanged($event)" >
-<button [disabled]="userRegisterForm.invalid || doctorRegisterForm.invalid" (click)="onSubmit()">Register</button>
+</div>

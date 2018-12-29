@@ -43,7 +43,7 @@ export class DoctorService {
 
   registerDoctor(doctor: Doctor): Observable<Doctor> {
     return this.http.post<Doctor>(`${environment.hospitalApiUrl}${environment.doctorsUrl}`, doctor, httpOptions)
-      .pipe(tap(_ => console.log(`added doctor with id=${doctor.id}`)));
+      .pipe(tap(_ => console.log(`added new doctor`)));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

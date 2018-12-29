@@ -17,11 +17,6 @@ const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent },
   { path: 'detail/:id', component: DoctorDetailComponent },
   {
-    path: 'register/doctor',
-    component: DoctorRegisterComponent,
-    canActivate: [AuthGuard],
-    data: { roles: Role.ADMIN } },
-  {
     path: 'profile',
     component: DoctorProfileComponent,
     canActivate: [AuthGuard],
@@ -29,13 +24,11 @@ const routes: Routes = [
   },
 
   // signin & signup components rentered by secondary outlet e.g. "sign"
-  { path: 'login', component: LoginComponent, outlet: "sign" },
-  { path: 'register', component: RegisterComponent, outlet: "sign" },
+  { path: 'login', component: LoginComponent, outlet: 'sign' },
+  { path: 'register', component: RegisterComponent, outlet: 'sign' },
 
   // uris that do not match any previous path should redirect to home
-  { path: 'home', component: HomeComponent},
-  { path: '', redirectTo: 'home', pathMatch: 'full'  },
-  { path: '**', redirectTo: 'home' }
+  { path: '**', component: HomeComponent }
 ];
 
 @NgModule({
