@@ -21,6 +21,9 @@
       <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)">
         <a routerLink="/" mat-button>Diagnose help</a>
       </div>
+      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN)">
+        <a [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>Register Doctor</a>
+      </div>
 
       <span class="example-spacer"></span>
 
@@ -34,8 +37,7 @@
         </a>
       </div>
 
-      <div *ngIf="!isUserLoggedIn() || (isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN))"
-           fxShow="true" fxHide.lt-md="true">
+      <div *ngIf="!isUserLoggedIn()" fxShow="true" fxHide.lt-md="true">
         <a [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>
           <mat-icon>lock</mat-icon> Sign up
         </a>
