@@ -1,0 +1,42 @@
+<div class="calendarContainer">
+  <div class="row text-center">
+    <div class="col-sm-6">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+    <div class="col-sm-6">
+      <div class="btn-group">
+        <div
+          id="previous"
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate">
+          Previous
+        </div>
+        <div
+          id="today"
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate">
+          Today
+        </div>
+        <div
+          id="next"
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate">
+          Next
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      (dayClicked)="dayClicked($event.day)">
+    </mwl-calendar-month-view>
+  </div>
+</div>

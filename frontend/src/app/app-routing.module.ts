@@ -10,11 +10,13 @@ import {AuthGuard} from './_guards/auth.guard';
 import {Role} from './_models/Role';
 import {DoctorProfileComponent} from './doctor-profile/doctor-profile.component';
 import { HomeComponent } from './home/home.component';
+import { AppointmentComponent } from './doctors/appointment/appointment.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'doctors', component: DoctorsComponent },
+  { path: 'doctors/1/appointment', component: AppointmentComponent},
   { path: 'detail/:id', component: DoctorDetailComponent },
   {
     path: 'profile',

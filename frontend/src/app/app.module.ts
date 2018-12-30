@@ -28,6 +28,12 @@ import { HomeComponent } from './home/home.component';
 import { RouterExtService } from './_services/router.ext.service';
 import { DarkoutComponent } from './account/darkout/darkout.component';
 import { DoctorCardComponent } from './doctors/doctor-card/doctor-card.component';
+import { AppointmentComponent } from './doctors/appointment/appointment.component';
+import { CommonModule } from '@angular/common';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 @NgModule({
   declarations: [
@@ -43,7 +49,8 @@ import { DoctorCardComponent } from './doctors/doctor-card/doctor-card.component
     VideoComponent,
     HomeComponent,
     DarkoutComponent,
-    DoctorCardComponent
+    DoctorCardComponent,
+    AppointmentComponent
   ],
   imports: [
     FormsModule,
@@ -57,7 +64,14 @@ import { DoctorCardComponent } from './doctors/doctor-card/doctor-card.component
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    CommonModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers: [
     RouterExtService
