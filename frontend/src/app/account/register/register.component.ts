@@ -30,9 +30,9 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.authenticationService.isUserLoggedIn()) {
-      this.routerExtService.router.navigateByUrl(this.routerExtService.getPreviousUrl());
-    }
+    //if (this.authenticationService.isUserLoggedIn()) {
+    //  this.routerExtService.router.navigateByUrl(this.routerExtService.getPreviousUrl());
+    //}
     this.setAdditionalDoctorInfo();
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],

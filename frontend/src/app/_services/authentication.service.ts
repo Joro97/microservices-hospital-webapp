@@ -41,7 +41,6 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('token');
-    this.routerExtService.router.navigate([this.routerExtService.getPreviousUrl()]);
   }
 
   getCurrentAccessToken(): JwtToken {
