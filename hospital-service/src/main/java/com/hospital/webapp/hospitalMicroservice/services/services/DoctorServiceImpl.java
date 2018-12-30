@@ -40,7 +40,12 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Doctor registerDoctor(Doctor doctor) {
+    public void registerDoctor(Doctor doctor) throws IllegalArgumentException {
+        if (this.doctorsRepository.findByUsername(doctor.getUsername()) != null) {
+            throw new IllegalArgumentException(String.format("Doctor with username %s already exists!",
+                    doctor.getUsername()));
+        }
+
         Set<ScheduleHour> doctorsMonthlyHours = new HashSet<>();
         LocalDate date = LocalDate.now();   //Start from today
         for (int i = 0; i < WORKING_DAYS; i++) {
@@ -54,7 +59,7 @@ public class DoctorServiceImpl implements DoctorService {
         }
         doctor.setScheduleHours(doctorsMonthlyHours);
 
-        return this.doctorsRepository.save(doctor);
+        this.doctorsRepository.save(doctor);
     }
 
     @Override
@@ -92,6 +97,4 @@ public class DoctorServiceImpl implements DoctorService {
         bookedHour.setDoctor(doctor);
         this.doctorsRepository.save(doctor);
     }
-
-
 }

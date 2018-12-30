@@ -17,9 +17,6 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private routerExtService: RouterExtService
   ) {
-    if (this.authenticationService.isUserLoggedIn()) {
-      this.routerExtService.router.navigateByUrl(this.routerExtService.getPreviousUrl());
-    }
   }
 
   redirectToRegister() {
@@ -28,6 +25,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.authenticationService.isUserLoggedIn()) {
+      this.routerExtService.router.navigateByUrl(this.routerExtService.getPreviousUrl());
+    }
+
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      alert("Invalid form data !")
+      alert('Invalid form data !');
       return;
     }
     this.authenticationService.login(this.f.username.value, this.f.password.value);
