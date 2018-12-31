@@ -25,10 +25,10 @@ export class DoctorsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-   $(document).ready(function(){
+   $(document).ready(function() {
       $('.material-card > .mc-btn-action').click(function () {
-          var card = $(this).parent('.material-card');
-          var icon = $(this).children('i');
+          const card = $(this).parent('.material-card');
+          const icon = $(this).children('i');
           icon.addClass('fa-spin-fast');
 
           if (card.hasClass('mc-active')) {
@@ -58,10 +58,6 @@ export class DoctorsComponent implements OnInit, OnDestroy {
     // this.getDoctors();
     // Some mock data below to test the search bar
     this.doctors = [
-      {'id': 2, 'username': 'Joro', 'specialty': 'cardio-surgeon'},
-      {'id': 3, 'username': 'Ivan', 'specialty': 'neuro-surgeon'},
-      {'id': 1, 'username': 'Ogi M.D', 'specialty': 'special diagnostics'},
-      {'id': 4, 'username': 'Teodor', 'specialty': 'YNT'},
     ];
     this.filteredDoctors = this.doctors;
   }

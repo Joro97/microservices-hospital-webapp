@@ -1,8 +1,8 @@
-<div [formGroup]="doctorRegisterForm">
+<div class="form-group" [formGroup]="doctorRegisterForm">
   <div class="form-group">
-    <input type="text" name="specialty" id="specialty" placeholder="Your specialty" formControlName="specialty">
+    <input type="text" name="specialty" id="specialty" placeholder="Your specialty" formControlName="specialty" (blur)="onTouched()">
   </div>
-  <div>
-    <input type="number" name="experience" id="experience" placeholder="Your experience in years" formControlName="experience">
-  </div>
+    <div class="form-group">
+      <input type="number" name="experience" id="experience" placeholder="Your experience in years"  formControlName="experience" (blur)="onTouched()">
+    </div>
 </div>
