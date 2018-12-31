@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AuthenticationService} from '../../_services/authentication.service';
-import {RouterExtService} from '../../_services/router.ext.service';
-import {ConfirmPasswordValidator} from '../../_validators/confirm.password.validator';
-import {DoctorService} from '../../_services/doctor.service';
-import {Role} from '../../_models/Role';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../../_services/authentication.service';
+import { RouterExtService } from '../../_services/router.ext.service';
+import { ConfirmPasswordValidator } from '../../_validators/confirm.password.validator';
+import { DoctorService } from '../../_services/doctor.service';
+import { Role } from '../../_models/Role';
+import { first } from 'rxjs/operators';
+import { FileService } from '../../_services/file.service';
+import {Doctor} from '../../_models/doctor';
 
 @Component({
   selector: 'app-register',
@@ -14,12 +17,13 @@ import {Role} from '../../_models/Role';
 export class RegisterComponent implements OnInit {
   public shouldAddDoctorInfo: boolean;
   public userRole = Role;
-  registerForm: FormGroup;
+  public registerForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private doctorService: DoctorService,
+    private fileService: FileService,
     private routerExtService: RouterExtService
   ) {
   }
@@ -30,9 +34,6 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    //if (this.authenticationService.isUserLoggedIn()) {
-    //  this.routerExtService.router.navigateByUrl(this.routerExtService.getPreviousUrl());
-    //}
     this.setAdditionalDoctorInfo();
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -40,9 +41,9 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       doctorAdditional: this.formBuilder.control({
-        specialty: [''],
-        experience: [0]
-      })
+        specialty: [],
+        experience: []
+      }, Validators.required)
     }, {
       validator: ConfirmPasswordValidator.MatchPassword
     });
@@ -51,8 +52,7 @@ export class RegisterComponent implements OnInit {
   setAdditionalDoctorInfo() {
     if (!this.authenticationService.isUserLoggedIn()) {
       this.shouldAddDoctorInfo = false;
-    } else if (this.authenticationService.isUserLoggedIn()
-      && this.authenticationService.userHasRole(Role.ADMIN)) {
+    } else if (this.authenticationService.isUserLoggedIn() && this.authenticationService.userHasRole(Role.ADMIN)) {
       this.shouldAddDoctorInfo = true;
     }
   }
@@ -66,19 +66,37 @@ export class RegisterComponent implements OnInit {
     const userToRegister = {
       'username': this.registerForm.value.username,
       'password': this.registerForm.value.password,
-      'roles': [this.userRole.USER],
+      'roles': [isDoctor ? this.userRole.DOCTOR : this.userRole.USER],
       'enabled': true
     };
+    this.authenticationService.registerUser(userToRegister);
+
     if (isDoctor) {
-      userToRegister['roles'].push(this.userRole.DOCTOR);
+      this.registerDoctor();
     }
 
-    this.authenticationService.registerUser(userToRegister);
     this.redirectToLogin();
   }
 
   registerDoctor() {
-    this.registerUser(true);
-
+    const docUsername = this.registerForm.get('username').value;
+    const doctorToRegister: Doctor = {
+      'username': docUsername,
+      'specialty': this.registerForm.get('doctorAdditional').value.specialty,
+      'experience': this.registerForm.get('doctorAdditional').value.experience
+    };
+    console.log(this.registerForm.get('doctorAdditional'));
+    this.doctorService.registerDoctor(doctorToRegister)
+      .pipe(first())
+      .subscribe(
+        response => {
+          console.log(`Added doctor`);
+          this.routerExtService.router.navigate(['/home']);
+        },
+        errorDoc => {
+          console.log('Failed to add doctor');
+          console.log(errorDoc);
+        }
+      );
   }
 }

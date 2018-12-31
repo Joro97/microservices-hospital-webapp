@@ -28,12 +28,12 @@ public class DoctorsController {
     }
 
     @PostMapping("/doctors")
-    public ResponseEntity registerDoctor(@Valid @RequestBody Doctor doctor) {
+    public ResponseEntity registerDoctor(@RequestBody Doctor doctor) {
         try {
             this.doctorService.registerDoctor(doctor);
             return ResponseEntity.status(HttpStatus.OK).build();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }

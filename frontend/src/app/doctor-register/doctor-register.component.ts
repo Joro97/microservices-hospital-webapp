@@ -1,5 +1,5 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { DoctorService } from '../_services/doctor.service';
@@ -14,70 +14,31 @@ import { RegisterComponent } from '../account/register/register.component';
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => RegisterComponent)
+      useExisting: forwardRef(() => DoctorRegisterComponent)
     }
   ]
 })
-export class DoctorRegisterComponent implements OnInit, ControlValueAccessor {
-  doctorRegisterForm: FormGroup;
-  avatar: File;
+export class DoctorRegisterComponent implements ControlValueAccessor {
+  doctorRegisterForm: FormGroup = new FormGroup({
+    specialty: new FormControl,
+    experience: new FormControl
+    });
+
   onTouched: () => void = () => {};
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private doctorsService: DoctorService,
-    private fileService: FileService
-  ) { }
-
-  ngOnInit() {
-    this.doctorRegisterForm = this.formBuilder.group({
-      specialty: new FormControl,
-      experience: new FormControl
-    });
-  }
-
-  onSubmit() {
-
-    // this.doctorRegisterForm.addControl('username', this.userRegisterForm.controls['username']);
-    this.doctorsService.registerDoctor(this.doctorRegisterForm.value)
-      .pipe(first())
-      .subscribe(
-        doc => {
-          console.log(`Added doctor ${doc}`);
-          this.fileService.uploadFile(this.avatar, doc.username)
-            .pipe(first())
-            .subscribe(data => {
-                this.router.navigate(['/login']);
-              },
-              error => {
-                console.log('Failed to upload the image and register doctor');
-              });
-        },
-        errorDoc => {
-          console.log('failed to add doctor');
-          console.log(errorDoc);
-        }
-      );
-  }
-
-  onFileChanged(event) {
-    this.avatar = event.target.files[0];
+  writeValue(v: any) {
+    this.doctorRegisterForm.setValue(v, { emitEvent: false });
   }
 
   registerOnChange(fn: (v: any) => void) {
     this.doctorRegisterForm.valueChanges.subscribe(fn);
   }
 
-  registerOnTouched(fn: () => void): void {
+  setDisabledState(disabled: boolean) {
+    disabled ? this.doctorRegisterForm.disable() : this.doctorRegisterForm.enable();
+  }
+
+  registerOnTouched(fn: () => void) {
     this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    isDisabled ? this.doctorRegisterForm.disable() : this.doctorRegisterForm.enable();
-  }
-
-  writeValue(v: any): void {
-    this.doctorRegisterForm.setValue(v, { emitEvent: false });
   }
 }
