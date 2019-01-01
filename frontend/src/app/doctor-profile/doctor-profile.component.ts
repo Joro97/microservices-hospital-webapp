@@ -28,16 +28,16 @@ export class DoctorProfileComponent implements OnInit {
     this.doctorService.getDoctor(this.authenticationService.getCurrentUser().user_name)
       .subscribe(doc => {
         this.doctor = doc;
-      });
 
-    this.isImageLoading = true;
-    this.fileService.getAvatar(this.doctor.username)
-      .subscribe(data => {
-        this.createImageFromBlob(data, this.avatar);
-        this.isImageLoading = false;
-      }, error => {
-        this.isImageLoading = false;
-        console.log(error);
+        this.isImageLoading = true;
+        this.fileService.getAvatar(this.doctor.username)
+          .subscribe(data => {
+            this.createImageFromBlob(data, this.avatar);
+            this.isImageLoading = false;
+          }, error => {
+            this.isImageLoading = false;
+            console.log(error);
+          });
       });
   }
 

@@ -1,14 +1,10 @@
 package com.baeldung.model;
 
+import org.hibernate.annotations.SQLInsert;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,12 +22,11 @@ public class User implements Serializable {
 
     private boolean enabled;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
-    @JoinTable(name = "authorities",
+    @JoinTable(name = "users_roles",
             joinColumns = { @JoinColumn(name = "username", referencedColumnName="username", nullable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "authority") })
-    private List<Authority> roles = new ArrayList<>();
+            inverseJoinColumns = { @JoinColumn(name = "role", referencedColumnName = "roleName", nullable = false) })
+    private Set<Authority> authorities = new HashSet<>();
 
     public User(){}
 
@@ -64,11 +59,11 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-    public List<Authority> getRoles() {
-        return roles;
+    public Set<Authority> getAuthorities() {
+        return authorities;
     }
 
-    public void setRoles(List<Authority> roles) {
-        this.roles = roles;
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
     }
 }

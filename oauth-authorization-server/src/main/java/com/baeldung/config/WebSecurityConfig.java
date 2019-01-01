@@ -15,8 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @PropertySource({ "classpath:persistence.properties" })
 @Configuration
@@ -77,23 +77,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider authenticationProvider() {
         User user = new User("john", "123");
 
-        List<Authority> s = new ArrayList<>();
+        Set<Authority> s = new HashSet<>();
         s.add(new Authority("ADMIN"));
-        user.setRoles(s);
+        user.setAuthorities(s);
         user.setEnabled(true);
         userDetailsService.registerUser(user);
 
         User doctor = new User("doctor", "doctor");
-        List<Authority> roles = new ArrayList<>();
+        Set<Authority> roles = new HashSet<>();
         roles.add(new Authority("DOCTOR"));
-        doctor.setRoles(roles);
+        doctor.setAuthorities(roles);
         doctor.setEnabled(true);
         userDetailsService.registerUser(doctor);
 
         User normalUser = new User("user", "user");
-        List<Authority> noRoles = new ArrayList<>();
+        Set<Authority> noRoles = new HashSet<>();
         noRoles.add(new Authority("USER"));
-        normalUser.setRoles(noRoles);
+        normalUser.setAuthorities(noRoles);
         normalUser.setEnabled(true);
         userDetailsService.registerUser(normalUser);
 
