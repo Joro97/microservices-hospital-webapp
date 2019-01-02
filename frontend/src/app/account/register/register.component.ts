@@ -7,7 +7,7 @@ import { DoctorService } from '../../_services/doctor.service';
 import { Role } from '../../_models/Role';
 import { first } from 'rxjs/operators';
 import { FileService } from '../../_services/file.service';
-import {Doctor} from '../../_models/doctor';
+import { Doctor } from '../../_models/doctor';
 
 @Component({
   selector: 'app-register',
@@ -63,10 +63,10 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    const userToRegister = {
+    const userToRegister = { // TODO: Make this of type User!
       'username': this.registerForm.value.username,
       'password': this.registerForm.value.password,
-      'roles': [isDoctor ? this.userRole.DOCTOR : this.userRole.USER],
+      'authorities': [isDoctor ? this.userRole.DOCTOR : this.userRole.USER],
       'enabled': true
     };
     this.authenticationService.registerUser(userToRegister);
@@ -85,12 +85,11 @@ export class RegisterComponent implements OnInit {
       'specialty': this.registerForm.get('doctorAdditional').value.specialty,
       'experience': this.registerForm.get('doctorAdditional').value.experience
     };
-    console.log(this.registerForm.get('doctorAdditional'));
+
     this.doctorService.registerDoctor(doctorToRegister)
       .pipe(first())
       .subscribe(
         response => {
-          console.log(`Added doctor`);
           this.routerExtService.router.navigate(['/home']);
         },
         errorDoc => {

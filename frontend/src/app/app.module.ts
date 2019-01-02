@@ -1,17 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { DoctorRegisterComponent } from './doctor-register/doctor-register.component';
 import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/login/login.component';
-// import { fakeBackendProvider } from './_interceptors/fake-backend';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { NavbarComponent } from './menu/navbar/navbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -41,7 +39,6 @@ import { IconsrowComponent } from './home/iconsrow/iconsrow.component';
     AppComponent,
     DoctorsComponent,
     DoctorDetailComponent,
-    DashboardComponent,
     DoctorRegisterComponent,
     RegisterComponent,
     LoginComponent,

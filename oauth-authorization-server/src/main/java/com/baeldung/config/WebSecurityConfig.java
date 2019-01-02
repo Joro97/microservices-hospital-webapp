@@ -15,8 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @PropertySource({ "classpath:persistence.properties" })
 @Configuration
@@ -77,28 +77,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider authenticationProvider() {
         User user = new User("john", "123");
 
-        List<Authority> s = new ArrayList<>();
-        s.add(new Authority("ADMIN"));
-        user.setRoles(s);
-        user.setEnabled(true);
-        userDetailsService.registerUser(user);
+        if  (this.userDetailsService.loadUserByUsername(user.getUsername()) == null) {
+            Set<Authority> s = new HashSet<>();
+            s.add(new Authority("ADMIN"));
+            user.setAuthorities(s);
+            user.setEnabled(true);
+            userDetailsService.registerUser(user);
+        }
 
         User doctor = new User("doctor", "doctor");
-        List<Authority> roles = new ArrayList<>();
-        roles.add(new Authority("DOCTOR"));
-        doctor.setRoles(roles);
-        doctor.setEnabled(true);
-        userDetailsService.registerUser(doctor);
+        if  (this.userDetailsService.loadUserByUsername(doctor.getUsername()) == null) {
+            Set<Authority> roles = new HashSet<>();
+            roles.add(new Authority("DOCTOR"));
+            doctor.setAuthorities(roles);
+            doctor.setEnabled(true);
+            userDetailsService.registerUser(doctor);
+        }
+
 
         User normalUser = new User("user", "user");
-        List<Authority> noRoles = new ArrayList<>();
-        noRoles.add(new Authority("USER"));
-        normalUser.setRoles(noRoles);
-        normalUser.setEnabled(true);
-        userDetailsService.registerUser(normalUser);
+        if  (this.userDetailsService.loadUserByUsername(normalUser.getUsername()) == null) {
+            Set<Authority> noRoles = new HashSet<>();
+            noRoles.add(new Authority("USER"));
+            normalUser.setAuthorities(noRoles);
+            normalUser.setEnabled(true);
+            userDetailsService.registerUser(normalUser);
+        }
 
-        DaoAuthenticationProvider authProvider
-                = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;

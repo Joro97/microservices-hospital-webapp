@@ -13,7 +13,6 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,19 +26,20 @@ public class TokenController {
 
     @PostMapping("/oauth/token/revokeById/{tokenId}")
     public void revokeToken(HttpServletRequest request, @PathVariable String tokenId) {
-        tokenServices.revokeToken(tokenId);
+        this.tokenServices.revokeToken(tokenId);
     }
 
     @GetMapping("/tokens")
     public List<String> getTokens() {
-        Collection<OAuth2AccessToken> tokens = tokenStore.findTokensByClientId("sampleClientId");
-        return Optional.ofNullable(tokens).orElse(Collections.emptyList()).stream().map(OAuth2AccessToken::getValue).collect(Collectors.toList());
+        Collection<OAuth2AccessToken> tokens = this.tokenStore.findTokensByClientId("sampleClientId");
+        return Optional.ofNullable(tokens).orElse(Collections.emptyList())
+                .stream().map(OAuth2AccessToken::getValue).collect(Collectors.toList());
     }
 
     @PostMapping("/tokens/revokeRefreshToken/{tokenId:.*}")
     public String revokeRefreshToken(@PathVariable String tokenId) {
-        if (tokenStore instanceof JdbcTokenStore) {
-            ((JdbcTokenStore) tokenStore).removeRefreshToken(tokenId);
+        if (this.tokenStore instanceof JdbcTokenStore) {
+            ((JdbcTokenStore) this.tokenStore).removeRefreshToken(tokenId);
         }
         return tokenId;
     }

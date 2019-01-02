@@ -3,7 +3,6 @@ package com.baeldung.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import java.util.Collection;
 
 public class UserWrapper implements UserDetails {
@@ -16,7 +15,7 @@ public class UserWrapper implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getRoles();
+        return this.user.getAuthorities();
     }
 
     @Override

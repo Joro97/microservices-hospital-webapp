@@ -1,11 +1,5 @@
-import {Component, forwardRef, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { DoctorService } from '../_services/doctor.service';
-import { FileService } from '../_services/file.service';
-import { RegisterComponent } from '../account/register/register.component';
-
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-doctor-register',
@@ -18,13 +12,18 @@ import { RegisterComponent } from '../account/register/register.component';
     }
   ]
 })
-export class DoctorRegisterComponent implements ControlValueAccessor {
-  doctorRegisterForm: FormGroup = new FormGroup({
-    specialty: new FormControl,
-    experience: new FormControl
-    });
+export class DoctorRegisterComponent implements OnInit, ControlValueAccessor {
+  doctorRegisterForm: FormGroup;
+  constructor(private formBuilder: FormBuilder) {}
 
   onTouched: () => void = () => {};
+
+  ngOnInit(): void {
+    this.doctorRegisterForm = this.formBuilder.group({
+      specialty: ['', Validators.required],
+      experience: [0, Validators.required]
+      });
+  }
 
   writeValue(v: any) {
     this.doctorRegisterForm.setValue(v, { emitEvent: false });
