@@ -1,6 +1,5 @@
 package com.baeldung.model;
 
-import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;

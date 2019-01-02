@@ -1,7 +1,5 @@
 package com.baeldung.model;
 
-import org.hibernate.annotations.SQLInsert;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
