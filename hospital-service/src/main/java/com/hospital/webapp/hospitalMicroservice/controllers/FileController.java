@@ -24,7 +24,7 @@ public class FileController {
     }
 
     @GetMapping("/images/{username}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String username) {
+    public ResponseEntity<Resource> getAvatar(@PathVariable String username) {
         DBFile dbFile = this.dbFileStorageService.getFile(username);
 
         return ResponseEntity.ok()
@@ -34,7 +34,7 @@ public class FileController {
     }
 
     @PostMapping("/images/{username}")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String username){
+    public UploadFileResponse updateAvatar(@RequestParam("file") MultipartFile file, @PathVariable String username){
         DBFile dbFile = this.dbFileStorageService.storeFile(file, username);
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()

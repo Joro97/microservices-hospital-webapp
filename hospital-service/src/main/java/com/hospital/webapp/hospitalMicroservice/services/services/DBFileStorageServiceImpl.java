@@ -29,7 +29,10 @@ public class DBFileStorageServiceImpl implements DBFileStorageService {
         try {
             DBFile dbFile = new DBFile(fileName, file.getContentType(), file.getBytes());
             Doctor doctor = this.doctorsRepository.findByUsername(doctorUsername);
+            DBFile oldAvatar = doctor.getAvatar();
             doctor.setAvatar(dbFile);
+
+            this.dbFileRepository.delete(oldAvatar);
             return this.dbFileRepository.save(dbFile);
         } catch (IOException ex) {
             System.out.println(ex);

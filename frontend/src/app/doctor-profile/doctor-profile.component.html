@@ -5,8 +5,10 @@
 <ng-template #noImageFound>
   <img src="fallbackImage.png" alt="Fallbackimage">
 </ng-template>
-<ul>
-  <li *ngFor="let detail of doctor | keyvalue">
-    {{detail.key}}: {{detail.value}}
-  </li>
-</ul>
+<input type="file" (change)="onFileChanged($event)" placeholder="Update your avatar" />
+<form [formGroup]="avatarUpdateForm" (ngSubmit)="onSubmit()">
+  <input type="submit" value="Update Avatar" />
+</form>
+
+
+

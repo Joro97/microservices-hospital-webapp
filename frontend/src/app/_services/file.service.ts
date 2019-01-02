@@ -11,14 +11,14 @@ export class FileService {
     private http: HttpClient
   ) { }
 
-  uploadFile(file: File, username: string): Observable<any> {
+  updateAvatar(avatar: File, username: String): Observable<any> {
     const avatarFormData = new FormData();
-    avatarFormData.append('file', file, file.name);
+    avatarFormData.append('file', avatar, avatar.name);
     const uploadUrl = `${environment.hospitalApiUrl}${environment.avatarsUrl}/${username}`;
     return this.http.post<any>(uploadUrl, avatarFormData);
   }
 
-  getAvatar(docUsername: string): Observable<Blob> {
+  getAvatar(docUsername: String): Observable<Blob> {
     const headers = new HttpHeaders('Cache-Control: max-age=3600');
     return this.http.get(`${environment.hospitalApiUrl}${environment.avatarsUrl}/${docUsername}`,
       {responseType: 'blob', headers: headers});

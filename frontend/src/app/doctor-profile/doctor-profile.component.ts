@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Doctor } from '../_models/doctor';
 import { DoctorService } from '../_services/doctor.service';
 import { FileService } from '../_services/file.service';
 import { AuthenticationService } from '../_services/authentication.service';
+
 
 @Component({
   selector: 'app-doctor-profile',
@@ -10,12 +12,12 @@ import { AuthenticationService } from '../_services/authentication.service';
   styleUrls: ['./doctor-profile.component.css']
 })
 export class DoctorProfileComponent implements OnInit {
-  public doctor: Doctor;
+  public avatarUpdateForm = new FormGroup({});
   public avatar: any;
+  private newAvatar: File;
   public isImageLoading: boolean;
 
   constructor(
-    private doctorService: DoctorService,
     private fileService: FileService,
     private authenticationService: AuthenticationService
   ) { }
@@ -25,26 +27,23 @@ export class DoctorProfileComponent implements OnInit {
   }
 
   getAdditionalDoctorInfo() {
-    this.doctorService.getDoctor(this.authenticationService.getCurrentUser().user_name)
-      .subscribe(doc => {
-        this.doctor = doc;
-
+    const docUsername = this.authenticationService.getCurrentUser().user_name;
         this.isImageLoading = true;
-        this.fileService.getAvatar(this.doctor.username)
+        this.fileService.getAvatar(docUsername)
           .subscribe(data => {
-            this.createImageFromBlob(data, this.avatar);
+            this.createImageFromBlob(data);
             this.isImageLoading = false;
           }, error => {
             this.isImageLoading = false;
             console.log(error);
           });
-      });
+
   }
 
-  createImageFromBlob(image: Blob, store: any) {
+  createImageFromBlob(image: Blob) {
     const reader = new FileReader();
     reader.addEventListener('load', () => {
-      store = reader.result;
+      this.avatar = reader.result;
     }, false);
 
     if (image) {
@@ -53,6 +52,18 @@ export class DoctorProfileComponent implements OnInit {
   }
 
   onFileChanged(event) {
-    this.avatar = event.target.files[0];
+    this.newAvatar = event.target.files[0];
+  }
+
+  onSubmit() {
+    console.log('here');
+    const docUsername = this.authenticationService.getCurrentUser().user_name;
+    this.fileService.updateAvatar(this.newAvatar, docUsername)
+      .subscribe(data => {
+          console.log('Successfully updated avatar!');
+          this.ngOnInit();
+      }, error => {
+          console.log(`Could not update avatar!: Error: ${error}`);
+      });
   }
 }

@@ -22,7 +22,7 @@
                       <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
                   </div>-->
                  <app-doctor-register *ngIf="authenticationService.isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN)" formControlName="doctorAdditional"></app-doctor-register>
-                  <div class="form-group form-button">
+                  <div class="form-group">
                       <input type="submit" [disabled]="registerForm.invalid" name="signup" id="signup" class="form-submit" value="Register"/>
                   </div>
               </form>

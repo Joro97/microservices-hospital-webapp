@@ -12,15 +12,15 @@ declare var renderPage: any;
 export class IconsrowComponent implements OnInit {
 
   constructor() {
-    
+
   }
 
   ngOnInit() {
     buildIcons();
-    renderPage(); 
+    renderPage();
 
     setInterval(playRandom, 1000);
   }
 
-  
+
 }

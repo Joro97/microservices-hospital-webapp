@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DBFileRepository extends JpaRepository<DBFile, Long> {
-    DBFile findById(long id);
+
 }
