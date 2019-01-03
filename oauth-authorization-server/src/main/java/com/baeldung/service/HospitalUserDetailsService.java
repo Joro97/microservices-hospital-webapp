@@ -34,7 +34,7 @@ public class HospitalUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         User user = this.userRepository.findByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException(username);
+            return null;
         }
         return new UserWrapper(user);
     }
