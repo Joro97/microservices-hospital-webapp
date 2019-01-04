@@ -1,8 +1,12 @@
 import time
 import io
 import os
+import keras
+import shutil
 import lesion_detection_model
+import numpy
 from PIL import Image
+from keras.preprocessing.image import ImageDataGenerator
 from cgi import parse_header, parse_multipart
 from urllib.parse import parse_qsl
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -14,6 +18,7 @@ class LesionPredictCategoryController(BaseHTTPRequestHandler):
     rel_path = 'images/'
 
     SAVE_PATH = os.path.join(root, rel_path)
+    SAVE_TMP_PATH = os.path.join(root, 'tmp/')
 
     MODEL = lesion_detection_model.LesionDetectionModel()
 
@@ -47,17 +52,20 @@ class LesionPredictCategoryController(BaseHTTPRequestHandler):
                 image_byte_array = postvars['image'][0]
 
                 try:
-                    image = self._parse_image(image_byte_array)
 
-                    prediction = self.MODEL.predict(image)
+                    generator = self._prepare_generator(image_byte_array)
+
+                    predictions = self.MODEL.predict_generator(generator)
+
+                    prediction = self._avg_from_predictions(predictions)
+
+                    shutil.rmtree(self.SAVE_TMP_PATH)
+
                     result = self.MODEL.get_most_probable_result(prediction)
 
                     self.send_response(200)
                     self.end_headers()
                     self.wfile.write(bytes(str(result), "utf-8"))
-
-                    image.save(self.SAVE_PATH + '{}-{}-{}.jpg'
-                               .format(str(time.strftime("%Y%m%d-%H%M%S")), result[0], result[1]))
 
                 except:
                     import logging
@@ -77,12 +85,37 @@ class LesionPredictCategoryController(BaseHTTPRequestHandler):
         '''
         return True
 
-    def _parse_image(self, image_byte_array):
-        # img = image.load_img(image_byte_array, target_size=(224, 224))
+    def _avg_from_predictions(self, predictions):
+        return numpy.average(predictions, axis=0)
+
+    def _prepare_generator(self, image_byte_array):
+        os.mkdir(self.SAVE_TMP_PATH)
+        class_tmp_folder = os.path.join(self.SAVE_TMP_PATH, 'temp')
+
+        os.mkdir(class_tmp_folder)
 
         image = Image.open(io.BytesIO(image_byte_array))
-        image = image.resize((224, 224))
-        return image
+        image.save(self.SAVE_PATH + '{}.jpg'.format(str(time.strftime("%Y%m%d-%H%M%S"))))
+
+        image.save(class_tmp_folder + '/tmp.jpg')
+
+        generator = ImageDataGenerator(
+            preprocessing_function=
+            keras.applications.mobilenet.preprocess_input,
+            rotation_range=180,
+            width_shift_range=0.1,
+            height_shift_range=0.1,
+            zoom_range=0.1,
+            horizontal_flip=True,
+            vertical_flip=True,
+            fill_mode='nearest')
+
+        generator_with_aug = generator.flow_from_directory(
+            self.SAVE_TMP_PATH,
+            target_size=(224, 224),
+            batch_size=1) #There is only 1 picture in the directory
+
+        return generator_with_aug
 
     def _extract_param_val(self, param_name, params):
         try:
