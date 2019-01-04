@@ -2,8 +2,10 @@ import time
 import io
 import os
 import keras
+import jwt
 import shutil
 import lesion_detection_model
+import logging
 import numpy
 from PIL import Image
 from keras.preprocessing.image import ImageDataGenerator
@@ -21,6 +23,8 @@ class LesionPredictCategoryController(BaseHTTPRequestHandler):
     SAVE_TMP_PATH = os.path.join(root, 'tmp/')
 
     MODEL = lesion_detection_model.LesionDetectionModel()
+
+    PRIVILEGED_ROLES = {'ADMIN', 'DOCTOR'}
 
     def do_GET(self):
         self.send_response(200)
@@ -47,7 +51,7 @@ class LesionPredictCategoryController(BaseHTTPRequestHandler):
 
             auth_token = self._extract_param_val('auth_token', postvars)
 
-            if self._authorize(auth_token):
+            if self._authenticate_and_authorize(auth_token):
 
                 image_byte_array = postvars['image'][0]
 
@@ -64,26 +68,42 @@ class LesionPredictCategoryController(BaseHTTPRequestHandler):
                     result = self.MODEL.get_most_probable_result(prediction)
 
                     self.send_response(200)
+                    self._send_custom_headers()
                     self.end_headers()
-                    self.wfile.write(bytes(str(result), "utf-8"))
+
+                    res = '{"class":"' + str(result[0]) + '", "certainty":"' + str(result[1]) + '"}'
+
+                    self.wfile.write(bytes(res, "utf-8"))
 
                 except:
                     import logging
                     logging.exception("ERROR")
 
                     self.send_response(400, "Param image is invalid")
+                    self._send_custom_headers()
                     self.end_headers()
             else:
                 self.send_response(403, "Invalid auth_token")
+                self._send_custom_headers()
                 self.end_headers()
 
-    def _authorize(self, auth_token):
-        '''
-        TODO: Fix
-        :param auth_token:
-        :return:
-        '''
-        return True
+    def _send_custom_headers(self):
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS, DELETE')
+        self.send_header('Access-Control-Allow-Headers', 'Authorization, Content-Type')
+        self.send_header('Access-Control-Max-Age', '3600')
+
+    def _authenticate_and_authorize(self, auth_token):
+        try:
+            token = jwt.decode(auth_token, '123')
+
+            roles = set(token['authorities'])
+
+            return len(roles.intersection(self.PRIVILEGED_ROLES))
+        except:
+            logging.exception('Error while parsing the token')
+
+            return False
 
     def _avg_from_predictions(self, predictions):
         return numpy.average(predictions, axis=0)
