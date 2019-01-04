@@ -20,7 +20,7 @@ public class User implements Serializable {
 
     private boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     @JoinTable(name = "users_roles",
             joinColumns = { @JoinColumn(name = "username", referencedColumnName="username", nullable = false) },
             inverseJoinColumns = { @JoinColumn(name = "role", referencedColumnName = "roleName", nullable = false) })

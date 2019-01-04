@@ -38,11 +38,6 @@ public class DoctorsController {
         }
     }
 
-    @GetMapping("/doctors/{id}")
-    public Doctor getDoctorById(@PathVariable long id) {
-        return this.doctorService.getDoctorById(id);
-    }
-
     @PostMapping("/schedules/{username}")
     public List<LocalTime> getDoctorFreeHours(@PathVariable String username, @RequestBody LocalDateTime dateTime) {
         return this.doctorService.handleFreeHoursRequest(username, dateTime);

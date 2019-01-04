@@ -2,6 +2,7 @@ package com.baeldung.config;
 
 import com.baeldung.model.Authority;
 import com.baeldung.model.User;
+import com.baeldung.repository.AuthorityRepository;
 import com.baeldung.service.HospitalUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +16,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @PropertySource({ "classpath:persistence.properties" })
@@ -55,12 +58,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final DataSource dataSource;
     private final PasswordEncoder passwordEncoder;
     private final HospitalUserDetailsService userDetailsService;
+    private final AuthorityRepository authorityRepository;
 
     @Autowired
-    public WebSecurityConfig(DataSource dataSource, PasswordEncoder passwordEncoder, HospitalUserDetailsService userDetailsService) {
+    public WebSecurityConfig(DataSource dataSource, PasswordEncoder passwordEncoder, HospitalUserDetailsService userDetailsService, AuthorityRepository authorityRepository) {
         this.dataSource = dataSource;
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
+        this.authorityRepository = authorityRepository;
     }
 
     @Override
@@ -75,39 +80,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        User user = new User("john", "123");
+        List<String> roleNames = Arrays.asList("ADMIN", "DOCTOR", "USER");
+        roleNames.forEach(r -> {
+            if (this.authorityRepository.findByRoleName(r) == null) {
+                this.authorityRepository.save(new Authority(r));
+            }
+        });
 
-        if  (this.userDetailsService.loadUserByUsername(user.getUsername()) == null) {
-            Set<Authority> s = new HashSet<>();
-            s.add(new Authority("ADMIN"));
-            user.setAuthorities(s);
-            user.setEnabled(true);
-            userDetailsService.registerUser(user);
-        }
+       final List<String> adminsNames = Arrays.asList("john");
+       this.seedEntities(adminsNames, new HashSet<>(Arrays.asList(new Authority("ADMIN"))));
 
-        User doctor = new User("doctor", "doctor");
-        if  (this.userDetailsService.loadUserByUsername(doctor.getUsername()) == null) {
-            Set<Authority> roles = new HashSet<>();
-            roles.add(new Authority("DOCTOR"));
-            doctor.setAuthorities(roles);
-            doctor.setEnabled(true);
-            userDetailsService.registerUser(doctor);
-        }
+        final List<String> doctorsNames = Arrays.asList(
+                "Gregory House", "Eric Foreman", "James Wilson",
+                "Allison Cameron", "Lisa Cuddy", "Remy Hadley", "Robert Chase", "Chris Taub");
+        this.seedEntities(doctorsNames, new HashSet<>(Arrays.asList(new Authority("DOCTOR"))));
 
-
-        User normalUser = new User("user", "user");
-        if  (this.userDetailsService.loadUserByUsername(normalUser.getUsername()) == null) {
-            Set<Authority> noRoles = new HashSet<>();
-            noRoles.add(new Authority("USER"));
-            normalUser.setAuthorities(noRoles);
-            normalUser.setEnabled(true);
-            userDetailsService.registerUser(normalUser);
-        }
+        final List<String> normalUsersNames = Arrays.asList("user");
+        this.seedEntities(normalUsersNames, new HashSet<>(Arrays.asList(new Authority("USER"))));
 
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
+    }
+
+    private void seedEntities(List<String> names, Set<Authority> authorities) {
+        names.forEach(name -> {
+            User user = new User(name, "123");
+            if (this.userDetailsService.loadUserByUsername(name) == null) { ;
+                user.setAuthorities(authorities);
+                user.setEnabled(true);
+                this.userDetailsService.registerUser(user);
+            }
+        });
     }
 
     @Override
