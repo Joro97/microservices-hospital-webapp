@@ -16,6 +16,8 @@ export class DoctorProfileComponent implements OnInit {
   public avatar: any;
   private newAvatar: File;
   public isImageLoading: boolean;
+  private hovered: boolean;
+  private savable:boolean;
 
   constructor(
     private fileService: FileService,
@@ -23,7 +25,8 @@ export class DoctorProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-   this.getAdditionalDoctorInfo();
+    this.savable = false;
+    this.getAdditionalDoctorInfo();
   }
 
   getAdditionalDoctorInfo() {
@@ -52,7 +55,17 @@ export class DoctorProfileComponent implements OnInit {
   }
 
   onFileChanged(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event:Event) => { // called once readAsDataURL is completed
+        this.avatar = reader.result;
+      }
+    }
     this.newAvatar = event.target.files[0];
+    this.savable = true;
   }
 
   onSubmit() {

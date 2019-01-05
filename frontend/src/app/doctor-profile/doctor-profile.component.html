@@ -1,14 +1,22 @@
-<p>
-  doctor-profile works!
-</p>
-<img [src]="avatar" alt="Doctor's avatar" *ngIf="!isImageLoading; else noImageFound">
-<ng-template #noImageFound>
-  <img src="fallbackImage.png" alt="Fallbackimage">
-</ng-template>
-<input type="file" (change)="onFileChanged($event)" placeholder="Update your avatar" />
-<form [formGroup]="avatarUpdateForm" (ngSubmit)="onSubmit()">
-  <input type="submit" value="Update Avatar" />
-</form>
+<div id="doctor_profile">
 
+  <div id="cover">
+      <form *ngIf="this.savable" id="save" [formGroup]="avatarUpdateForm" (ngSubmit)="onSubmit()">
+        <input id="save_button" type="submit" value="save" />
+      </form>
+  </div>
 
+  <div id="avatar_box" (mouseenter) ="this.hovered=true" (mouseleave) ="this.hovered=false">
+    <img [ngClass]="{'darkened': this.hovered}" class="avatar" [src]="avatar" alt="Doctor's avatar" *ngIf="!isImageLoading; else noImageFound">
+    <ng-template #noImageFound>
+      <img [ngClass]="{'darkened': this.hovered}" class="avatar" src="fallbackImage.png" alt="Fallbackimage">
+    </ng-template>
 
+    <div id ="avatar_overlay" *ngIf="this.hovered">
+      <button id="change_avatar" onclick="document.getElementById('getFile').click()">
+        change avatar
+      </button>
+      <input type="file" id="getFile" style="display:none" (change)="onFileChanged($event)" placeholder="Update your avatar" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+input, select, textarea {
+    outline: none;
+    appearance: unset !important;
+    -moz-appearance: unset !important;
+    -webkit-appearance: unset !important;
+    -o-appearance: unset !important;
+    -ms-appearance: unset !important; }
+
+input {
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding: 6px 30px;
+    font-family: Poppins;
+    box-sizing: border-box; }
+    input::-webkit-input-placeholder {
+        color: #999; }
+    input::-moz-placeholder {
+        color: #999; }
+    input:-ms-input-placeholder {
+        color: #999; }
+    input:-moz-placeholder {
+        color: #999; }
+    input:focus {
+        border-bottom: 1px solid #222; }
+        input:focus::-webkit-input-placeholder {
+        color: #222; }
+        input:focus::-moz-placeholder {
+        color: #222; }
+        input:focus:-ms-input-placeholder {
+        color: #222; }
+        input:focus:-moz-placeholder {
+        color: #222; }

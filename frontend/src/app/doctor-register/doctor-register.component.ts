@@ -4,6 +4,7 @@ import { ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Valida
 @Component({
   selector: 'app-doctor-register',
   templateUrl: './doctor-register.component.html',
+  styleUrls: ['./doctor-register.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
