@@ -109,7 +109,12 @@ class LesionPredictCategoryController(BaseHTTPRequestHandler):
         return numpy.average(predictions, axis=0)
 
     def _prepare_generator(self, image_byte_array):
+
+        if os.path.exists(self.SAVE_TMP_PATH):
+            shutil.rmtree(self.SAVE_TMP_PATH)
+
         os.mkdir(self.SAVE_TMP_PATH)
+
         class_tmp_folder = os.path.join(self.SAVE_TMP_PATH, 'temp')
 
         os.mkdir(class_tmp_folder)
@@ -145,7 +150,7 @@ class LesionPredictCategoryController(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
 
-    hostName = "localhost"
+    hostName = ""
     hostPort = 9000
 
     myServer = HTTPServer((hostName, hostPort), LesionPredictCategoryController)
