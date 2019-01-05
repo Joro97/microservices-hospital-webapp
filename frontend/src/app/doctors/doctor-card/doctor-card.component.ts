@@ -10,14 +10,14 @@ declare var $: any;
 })
 export class DoctorCardComponent implements OnInit {
 
-  private isImageLoading:boolean = true;
-  private avatar:any;
-  
-  private faSpinFast:boolean = false;
-  private faArrowLeft:boolean = false;
-  private faBars:boolean = true;
+  private isImageLoading = true;
+  private avatar: any;
 
-  private mcActive:boolean = false;
+  private faSpinFast = false;
+  private faArrowLeft = false;
+  private faBars = true;
+
+  private mcActive = false;
 
   @Input() doctor: Doctor;
   constructor(private fileService: FileService) { }
@@ -31,7 +31,7 @@ export class DoctorCardComponent implements OnInit {
         this.isImageLoading = false;
         console.log(error);
       });
-      
+
   }
 
   createImageFromBlob(image: Blob) {
@@ -44,16 +44,16 @@ export class DoctorCardComponent implements OnInit {
       reader.readAsDataURL(image);
     }
   }
-  
+
   onClick() {
       this.faSpinFast = true;
-      //const card = $(this).parent('.material-card');
-      //const icon = $(this).children('i');
-      //icon.addClass('fa-spin-fast');
+      // const card = $(this).parent('.material-card');
+      // const icon = $(this).children('i');
+      // icon.addClass('fa-spin-fast');
 
       if (this.mcActive) {
         this.mcActive = false;
-        
+
         setTimeout(() => {
           this.faArrowLeft = false;
           this.faSpinFast = false;
@@ -67,7 +67,7 @@ export class DoctorCardComponent implements OnInit {
           this.faSpinFast = false;
           this.faBars = false;
         }, 800);
-                   
+
       }
 
   }

@@ -11,23 +11,16 @@ declare var $: any;
   styleUrls: ['./doctors.component.css']
 })
 export class DoctorsComponent implements OnInit, OnDestroy {
-  // currentUser: User;
-  // currentUserSubscription: Subscription;
   doctors: Doctor[];
   filteredDoctors: Doctor[];
 
   constructor(
     private doctorService: DoctorService,
     private authenticationService: AuthenticationService) {
-/*    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
-      this.currentUser = user;
-    });*/
   }
 
   ngOnInit() {
-    // this.getDoctors();
-    // Some mock data below to test the search bar
-    this.getDoctors()
+    this.getDoctors();
   }
 
   applyOnClick() {
