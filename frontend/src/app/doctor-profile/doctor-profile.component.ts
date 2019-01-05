@@ -31,15 +31,15 @@ export class DoctorProfileComponent implements OnInit {
 
   getAdditionalDoctorInfo() {
     const docUsername = this.authenticationService.getCurrentUser().user_name;
-        this.isImageLoading = true;
-        this.fileService.getAvatar(docUsername)
-          .subscribe(data => {
-            this.createImageFromBlob(data);
-            this.isImageLoading = false;
-          }, error => {
-            this.isImageLoading = false;
-            console.log(error);
-          });
+    this.isImageLoading = true;
+    this.fileService.getAvatar(docUsername)
+      .subscribe(data => {
+        this.createImageFromBlob(data);
+        this.isImageLoading = false;
+      }, error => {
+        this.isImageLoading = false;
+        console.log(error);
+      });
 
   }
 

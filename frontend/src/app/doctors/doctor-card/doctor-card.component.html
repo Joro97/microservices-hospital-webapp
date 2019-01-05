@@ -1,21 +1,26 @@
-<article class="material-card PrincetonGreen">
+<article [ngClass]="{'mc-active': this.mcActive}" class="material-card PrincetonGreen">
     <h2>
-        <span>Kevin Spacey</span>
+        <span>{{this.doctor.username}}</span>
         <strong>
             <i class="fa fa-fw fa-star"></i>
-            Cardiologist
+            {{this.doctor.specialty}}
         </strong>
     </h2>
     <div class="mc-content">
         <div class="img-container">
-            <img class="img-responsive" src="http://u.lorenzoferrara.net/marlenesco/material-card/thumb-kevin-spacey.jpg">
+            <!--<img class="img-responsive" src="http://u.lorenzoferrara.net/marlenesco/material-card/thumb-kevin-spacey.jpg">-->
+            <img class="img-responsive" [src]="avatar" alt="Doctor's avatar" *ngIf="!isImageLoading; else noImageFound">
+            <ng-template #noImageFound>
+                <img class="img-responsive" src="fallbackImage.png" alt="Fallbackimage">
+            </ng-template>
         </div>
         <div class="mc-description">
             Dr. Kevin Spacey is a professor of medicine at SUNY Downstate College of Medicine in New York and editor-in-chief of The Journal of Clinical Hypertension.
         </div>
     </div>
-    <a class="mc-btn-action">
-        <i class="fa fa-bars"></i>
+    <a class="mc-btn-action" (click)="this.onClick()">
+        <i class="fa" 
+        [ngClass]="{'fa-spin-fast': this.faSpinFast, 'fa-arrow-left': this.faArrowLeft, 'fa-bars': this.faBars}"></i>
     </a>
     <div class="mc-footer">
         <h4 routerLink="/doctors/1/appointment" style="cursor: pointer;">
