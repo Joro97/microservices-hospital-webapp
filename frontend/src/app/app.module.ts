@@ -33,6 +33,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { IconsrowComponent } from './home/iconsrow/iconsrow.component';
+import { DoctorLesionDetectionComponent } from './doctor-lesion-detection/doctor-lesion-detection.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { IconsrowComponent } from './home/iconsrow/iconsrow.component';
     DarkoutComponent,
     DoctorCardComponent,
     AppointmentComponent,
-    IconsrowComponent
+    IconsrowComponent,
+    DoctorLesionDetectionComponent
   ],
   imports: [
     FormsModule,

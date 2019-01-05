@@ -31,24 +31,19 @@ class LesionDetectionModel:
 
         return load_model(self.H5_MODEL_WEIGTHS_PATH)
 
-    def predict(self, lesion_image):
+    def predict_generator(self, generator):
         '''
-        :param lesion_image:  A PIL Image instance with size 224 X 224
-        :return: A probability array
+        :param generator:  Generates augmentations of the passed image.
+        :return: A vector of probability vectors
         '''
-        img_arr = image.img_to_array(lesion_image)
-        img_arr = numpy.expand_dims(img_arr, axis=0)
 
-        #multi dim to one dim
-        ready_image = numpy.vstack([img_arr])
-
-        return self._lesion_categorization_model.predict(ready_image)
+        return self._lesion_categorization_model.predict_generator(generator, steps=20)
 
     def get_most_probable_result(self, prob):
         '''
-        :param prob: Probability array returned from the predict method
+        :param prob: A probability vector
         :return: (Most probable label, probability)
         '''
         label_index = numpy.argmax(prob)
 
-        return self.LABEL_MAP[label_index], prob[0, label_index]
+        return self.LABEL_MAP[label_index], prob[label_index]
