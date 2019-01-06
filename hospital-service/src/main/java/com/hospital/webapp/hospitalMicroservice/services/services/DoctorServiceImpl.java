@@ -38,11 +38,6 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Doctor getDoctorById(long id) {
-        return this.doctorsRepository.findById(id);
-    }
-
-    @Override
     public void registerDoctor(Doctor doctor) throws IllegalArgumentException, IOException {
         if (this.doctorsRepository.findByUsername(doctor.getUsername()) != null) {
             throw new IllegalArgumentException(String.format("Doctor with username %s already exists!",
@@ -62,12 +57,19 @@ public class DoctorServiceImpl implements DoctorService {
         }
         doctor.setScheduleHours(doctorsMonthlyHours);
 
-        String fileName = "/src/main/resources/doctor-default-image.png";
-        File defaultAvatar = new File(System.getProperty("user.dir") + fileName);
-        DBFile dbFile = new DBFile(fileName,
-                Files.probeContentType(defaultAvatar.toPath()), Files.readAllBytes(defaultAvatar.toPath()));
-        doctor.setAvatar(dbFile);
+        if (doctor.getAvatar() == null) {
+            String fileName = "/src/main/resources/doctor-default-image.png";
+            File defaultAvatar = new File(System.getProperty("user.dir") + fileName);
+            DBFile dbFile = new DBFile(fileName,
+                    Files.probeContentType(defaultAvatar.toPath()), Files.readAllBytes(defaultAvatar.toPath()));
+            doctor.setAvatar(dbFile);
+        }
         this.doctorsRepository.save(doctor);
+    }
+
+    @Override
+    public Doctor getByUsername(String username) {
+        return this.doctorsRepository.findByUsername(username);
     }
 
     @Override

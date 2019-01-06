@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hospital.webapp</groupId>
-    <artifactId>authorization-microservice</artifactId>
+    <artifactId>hospital-microservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>authorization-microservice</name>
-    <description>The authorization and authentication microservice for the hospital web app</description>
+    <name>hospital-service</name>
+    <description>The microservice responsible for doctors and patients info in the hospital web app</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
