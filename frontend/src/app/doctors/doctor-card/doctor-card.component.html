@@ -11,7 +11,7 @@
             <!--<img class="img-responsive" src="http://u.lorenzoferrara.net/marlenesco/material-card/thumb-kevin-spacey.jpg">-->
             <img class="img-responsive" [src]="avatar" alt="Doctor's avatar" *ngIf="!isImageLoading; else noImageFound">
             <ng-template #noImageFound>
-                <img class="img-responsive" src="../../assets/images/fallbackImage.png" alt="Fallbackimage">
+                <img class="img-responsive" src="../../../assets/images/doctor-default-image.png" alt="Fallbackimage">
             </ng-template>
         </div>
         <div class="mc-description">
