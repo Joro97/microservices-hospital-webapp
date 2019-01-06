@@ -15,7 +15,11 @@ const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent },
   { path: 'doctors/1/appointment', component: AppointmentComponent},
   { path: 'detail/:id', component: DoctorDetailComponent },
-  { path: 'lesion', component: DoctorLesionDetectionComponent},
+  { path: 'lesion',
+    component: DoctorLesionDetectionComponent,
+    canActivate: [AuthGuard],
+    data: { roles: Role.DOCTOR }
+  },
   {
     path: 'profile',
     component: DoctorProfileComponent,

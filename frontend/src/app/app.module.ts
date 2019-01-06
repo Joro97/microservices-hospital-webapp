@@ -34,6 +34,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { IconsrowComponent } from './home/iconsrow/iconsrow.component';
 import { DoctorLesionDetectionComponent } from './doctor-lesion-detection/doctor-lesion-detection.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { DoctorLesionDetectionComponent } from './doctor-lesion-detection/doctor
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+    NgxPaginationModule
   ],
   providers: [
     RouterExtService
