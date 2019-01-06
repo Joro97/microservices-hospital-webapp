@@ -13,7 +13,7 @@ import {DoctorLesionDetectionComponent} from './doctor-lesion-detection/doctor-l
 
 const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent },
-  { path: 'doctors/1/appointment', component: AppointmentComponent},
+  { path: 'doctors/:username/appointment', component: AppointmentComponent},
   { path: 'detail/:id', component: DoctorDetailComponent },
   { path: 'lesion',
     component: DoctorLesionDetectionComponent,

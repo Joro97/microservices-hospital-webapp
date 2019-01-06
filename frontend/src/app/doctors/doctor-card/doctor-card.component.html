@@ -23,7 +23,7 @@
         [ngClass]="{'fa-spin-fast': this.faSpinFast, 'fa-arrow-left': this.faArrowLeft, 'fa-bars': this.faBars}"></i>
     </a>
     <div class="mc-footer">
-        <h4 routerLink="/doctors/1/appointment" style="cursor: pointer;">
+        <h4 routerLink="/doctors/{{this.doctor.username}}/appointment" style="cursor: pointer;">
             Book an appointment
         </h4>
         <a class="fa fa-fw fa-facebook"></a>
