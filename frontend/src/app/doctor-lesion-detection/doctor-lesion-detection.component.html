@@ -1,11 +1,6 @@
 <p>
   doctor skin lesion detection page
 </p>
-<img [src]="avatar" alt="Lesion image" *ngIf="!isImageLoading; else noImageFound">
-
-<ng-template #noImageFound>
-  <img src="fallbackImage.png" alt="Fallbackimage">
-</ng-template>
 <input type="file" (change)="onFileChanged($event)" placeholder="Select a lesion image" />
 <form [formGroup]="lesionDetectForm" (ngSubmit)="onSubmit()">
   <input type="submit" value="Detect lesion type" />
