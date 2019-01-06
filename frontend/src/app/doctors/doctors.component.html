@@ -5,9 +5,10 @@
       <input type="text" (keyup)="valueChange($event.target.value)">
     </div>
     <div class="row active-with-click">
-        <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let doctor of this.filteredDoctors">
-          <app-doctor-card [doctor]="doctor">
-          </app-doctor-card>
+        <div class="col-md-4 col-sm-6 col-xs-12"
+             *ngFor="let doctor of this.filteredDoctors | paginate: { itemsPerPage: 6, currentPage: p }">
+          <app-doctor-card [doctor]="doctor"></app-doctor-card>
         </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
 </section>
