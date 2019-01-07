@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Doctor } from '../../_models/doctor';
 import { FileService } from '../../_services/file.service';
+import {AuthenticationService} from '../../_services/authentication.service';
 declare var $: any;
 
 @Component({
@@ -20,7 +21,10 @@ export class DoctorCardComponent implements OnInit {
   private mcActive = false;
 
   @Input() doctor: Doctor;
-  constructor(private fileService: FileService) { }
+  constructor(
+    private authService: AuthenticationService,
+    private fileService: FileService,
+    ) { }
 
   ngOnInit() {
     this.fileService.getAvatar(this.doctor.username)
