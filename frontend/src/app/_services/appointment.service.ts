@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
 import * as moment from 'moment';
 import { Moment } from 'moment';
-import {ScheduleMoment} from '../_models/scheduleMoment';
+import { ScheduleMoment } from '../_models/scheduleMoment';
 import 'rxjs-compat/add/operator/map';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -39,7 +39,7 @@ export class AppointmentService {
 
   buildFreeHours(takenHours: Moment[], dateTime: Moment): Moment[] {
     const currWorkHour = dateTime.clone().hour(9).minutes(0);
-    const workdayEnd = dateTime.clone().hour(18).minutes(3);
+    const workdayEnd = dateTime.clone().hour(11).minutes(3);
     const freeHours: Moment[] = [];
 
     while (currWorkHour.isBefore(workdayEnd)) {

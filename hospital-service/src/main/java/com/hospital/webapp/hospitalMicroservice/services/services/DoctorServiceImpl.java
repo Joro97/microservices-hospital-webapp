@@ -66,19 +66,6 @@ public class DoctorServiceImpl implements DoctorService {
                 .collect(Collectors.toList());
     }
 
-  /*  @Override
-    public List<LocalTime> parseScheduleHoursToTimes(List<ScheduleHour> scheduleHours) {
-        return scheduleHours
-                .stream()
-                .map(ScheduleHour::getTime)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<LocalTime> handleFreeHoursRequest(String username, LocalDateTime dateTime) {
-        return parseScheduleHoursToTimes(getFreeScheduleHours(username, dateTime));
-    }*/
-
     @Override
     public void bookAppointment(String doctorUsername, String patientUsername, LocalDateTime dateTime) {
         ScheduleHour bookedHour = new ScheduleHour(dateTime);
