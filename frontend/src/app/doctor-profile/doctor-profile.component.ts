@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Doctor } from '../_models/doctor';
-import { DoctorService } from '../_services/doctor.service';
 import { FileService } from '../_services/file.service';
 import { AuthenticationService } from '../_services/authentication.service';
 
@@ -17,7 +15,7 @@ export class DoctorProfileComponent implements OnInit {
   private newAvatar: File;
   public isImageLoading: boolean;
   private hovered: boolean;
-  private savable:boolean;
+  private savable: boolean;
 
   constructor(
     private fileService: FileService,
@@ -56,20 +54,19 @@ export class DoctorProfileComponent implements OnInit {
 
   onFileChanged(event) {
     if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
+      let reader = new FileReader();
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-      reader.onload = (event:Event) => { // called once readAsDataURL is completed
+      reader.onload = (event: Event) => { // called once readAsDataURL is completed
         this.avatar = reader.result;
-      }
+      };
     }
     this.newAvatar = event.target.files[0];
     this.savable = true;
   }
 
   onSubmit() {
-    console.log('here');
     const docUsername = this.authenticationService.getCurrentUser().user_name;
     this.fileService.updateAvatar(this.newAvatar, docUsername)
       .subscribe(data => {

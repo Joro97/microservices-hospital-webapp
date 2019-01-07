@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { AppointmentService } from '../../_services/appointment.service';
-import { AuthenticationService } from '../../_services/authentication.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {CalendarEvent, CalendarView} from 'angular-calendar';
+import {AppointmentService} from '../../_services/appointment.service';
+import {AuthenticationService} from '../../_services/authentication.service';
+import * as moment from 'moment';
+import {Moment} from 'moment';
 
 
 const colors: any = {
@@ -30,6 +32,9 @@ export class AppointmentComponent implements OnInit {
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   doctorUsername: String;
+  clickedDate: Moment;
+  freeHours: Moment[];
+  takenHours: Moment[];
 
   constructor(
     private authService: AuthenticationService,
@@ -42,6 +47,18 @@ export class AppointmentComponent implements OnInit {
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    this.appointmentService.bookHour(this.doctorUsername, this.authService.getCurrentUser().user_name, new Date(date.toJSON()));
+    this.clickedDate = moment(date, moment.ISO_8601, true);
+    this.appointmentService.getTakenHours(this.doctorUsername, this.clickedDate).subscribe(hours => {
+      this.takenHours = hours;
+      this.freeHours = this.appointmentService.buildFreeHours(this.takenHours, this.clickedDate);
+    });
+  }
+
+  appointmentClicked() {
+    this.appointmentService.bookHour(this.doctorUsername, this.authService.getCurrentUser().user_name, this.clickedDate);
+  }
+
+  onHourClicked(dateStr: string) {
+    this.clickedDate = moment(dateStr, moment.ISO_8601, true);
   }
 }

@@ -1,15 +1,17 @@
 package com.hospital.webapp.hospitalMicroservice.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.hospital.webapp.hospitalMicroservice.models.entity.Doctor;
+import com.hospital.webapp.hospitalMicroservice.models.entity.ScheduleHour;
 import com.hospital.webapp.hospitalMicroservice.services.interfaces.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -39,13 +41,15 @@ public class DoctorsController {
     }
 
     @PostMapping("/schedules/{username}")
-    public List<LocalTime> getDoctorFreeHours(@PathVariable String username, @RequestBody LocalDateTime dateTime) {
-        return this.doctorService.handleFreeHoursRequest(username, dateTime);
+    public List<ScheduleHour> getDoctorBookedHours(@PathVariable String username, @RequestBody ScheduleHour dateTime) {
+        System.out.println(String.format("Date inside getBookedHours: %s", dateTime.getDateTime()));
+        return this.doctorService.getBookedHours(username, dateTime.getDateTime());
     }
 
     @PostMapping("/book/{doctorUsername}/{patientUsername}")
     public void bookHour(@PathVariable String doctorUsername, @PathVariable String patientUsername,
-                         @RequestBody LocalDateTime dateTime) {
-        this.doctorService.bookAppointment(doctorUsername, patientUsername, dateTime);
+                         @RequestBody ScheduleHour dateTime) {
+        System.out.println(String.format("Date inside bookHour: %s", dateTime.getDateTime()));
+        this.doctorService.bookAppointment(doctorUsername, patientUsername, dateTime.getDateTime());
     }
 }
