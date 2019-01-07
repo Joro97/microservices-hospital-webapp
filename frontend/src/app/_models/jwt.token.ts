@@ -5,6 +5,6 @@ export class JwtToken {
     expires_in: number;
     scope: string;
     organization: string;
-    jti: string
+    jti: string;
 }
-  
+

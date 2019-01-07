@@ -9,11 +9,11 @@ import {Role} from './_models/Role';
 import {DoctorProfileComponent} from './doctor-profile/doctor-profile.component';
 import { HomeComponent } from './home/home.component';
 import { AppointmentComponent } from './doctors/appointment/appointment.component';
-import {DoctorLesionDetectionComponent} from './doctor-lesion-detection/doctor-lesion-detection.component';
+import { DoctorLesionDetectionComponent } from './doctor-lesion-detection/doctor-lesion-detection.component';
 
 const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent },
-  { path: 'doctors/1/appointment', component: AppointmentComponent},
+  { path: 'doctors/:username/appointment', component: AppointmentComponent},
   { path: 'detail/:id', component: DoctorDetailComponent },
   { path: 'lesion',
     component: DoctorLesionDetectionComponent,

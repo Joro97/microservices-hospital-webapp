@@ -7,5 +7,6 @@ export const environment = {
   avatarsUrl: '/images', // Plus doctor username, example: /upload/image/cvetan
   lesionUrl: '/lesion',
   patientAppointmentsUrl: '/appointments', // Plus patient username, example: /appointments/ognyan
-  doctorsHoursUrl: '/schedules' // Plus doctor username, example: /schedule/ognyan
+  doctorHoursUrl: '/schedules', // Plus doctor username, example: /schedule/ognyan
+  appointmentBookingUrl: '/book' // Plust patient username / doctor username, example: book/joro/ognyan
 };

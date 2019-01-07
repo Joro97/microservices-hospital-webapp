@@ -40,3 +40,9 @@
     </mwl-calendar-month-view>
   </div>
 </div>
+<ul>
+  <li *ngFor="let freeHour of freeHours" (click)="onHourClicked(freeHour.format('YYYY-MM-DDTHH:mm:ss'))">
+    {{freeHour.format('HH:mm')}} Click me
+  </li>
+</ul>
+<button (click)="appointmentClicked()" >Book hour</button>

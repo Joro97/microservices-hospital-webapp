@@ -10,10 +10,8 @@ import java.util.List;
 
 public interface DoctorService {
     List<Doctor> getAllDoctors();
-    void registerDoctor(Doctor doctor) throws IllegalArgumentException, IOException;
     Doctor getByUsername(String username);
-    List<ScheduleHour> getFreeScheduleHours(String username, LocalDateTime dateTime);
-    List<LocalTime> parseScheduleHoursToTimes(List<ScheduleHour> scheduleHours);
-    List<LocalTime> handleFreeHoursRequest(String username, LocalDateTime dateTime);
+    void registerDoctor(Doctor doctor) throws IllegalArgumentException, IOException;
+    List<ScheduleHour> getBookedHours(String username, LocalDateTime dateTime);
     void bookAppointment(String doctorUsername, String patientUsername, LocalDateTime dateTime);
 }
