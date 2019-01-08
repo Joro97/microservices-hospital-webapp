@@ -63,7 +63,7 @@ export class AppointmentComponent implements OnInit {
 
   onHourClicked(dateStr: string) {
     this.clickedDate = moment(dateStr, moment.ISO_8601, true);
-    alert(`If you want to book ${this.clickedDate.clone().format('HH:mm')} click the button below`);
+    alert(`If you want to book ${this.clickedDate.clone().format('HH:mm')} click the 'Book hour' button below`);
   }
 
   appointmentClicked() {

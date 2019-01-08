@@ -8,7 +8,7 @@ import { Role } from '../core/models/Role';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 
 const routes: Routes = [
-  { path: '', component: DoctorsComponent },
+  { path: '', component: DoctorsComponent, pathMatch: 'full' },
   { path: ':username/appointment', component: AppointmentComponent},
   { path: 'lesion',
     component: DoctorLesionDetectionComponent,
