@@ -23,10 +23,10 @@ export class AppointmentService {
     private http: HttpClient
   ) { }
 
-  bookHour(docUsername: String, patientUsername: String, dateTime: Moment) {
+  bookHour(docUsername: String, patientUsername: String, dateTime: Moment): Observable<any> {
     const url = `${environment.hospitalApiUrl}${environment.appointmentBookingUrl}/${docUsername}/${patientUsername}`;
     return this.http.post(url, { dateTime: dateTime.format('YYYY-MM-DDTHH:mm:ss') })
-      .subscribe(response => console.log(`Booked hour for ${dateTime.toISOString()}`));
+      .pipe();
   }
 
   getTakenHours(docUsername: String, dateTime: Moment): Observable<Moment[]> {
