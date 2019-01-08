@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
 import { NavbarComponent } from './menu/navbar/navbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
@@ -29,7 +28,6 @@ import { HomeModule } from './home/home.module';
 @NgModule({
   declarations: [
     AppComponent,
-    DoctorDetailComponent,
     NavbarComponent,
   ],
   imports: [
