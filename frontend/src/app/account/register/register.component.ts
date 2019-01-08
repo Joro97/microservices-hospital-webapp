@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../_services/authentication.service';
-import { RouterExtService } from '../../_services/router.ext.service';
-import { ConfirmPasswordValidator } from '../../_validators/confirm.password.validator';
-import { DoctorService } from '../../_services/doctor.service';
-import { Role } from '../../_models/Role';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import { RouterExtService } from '../../core/services/router.ext.service';
+import { ConfirmPasswordValidator } from '../../core/helpers/confirm.password.validator';
+import { DoctorService } from '../../core/services/doctor.service';
+import { Role } from '../../core/models/Role';
 import { first } from 'rxjs/operators';
-import { FileService } from '../../_services/file.service';
-import { Doctor } from '../../_models/doctor';
+import { FileService } from '../../core/services/file.service';
+import { Doctor } from '../../core/models/doctor';
 
 @Component({
   selector: 'app-register',

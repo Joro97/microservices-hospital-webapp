@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment.prod';
-import {JwtToken} from '../_models/jwt.token';
+import { environment } from '../../../environments/environment.prod';
+import {JwtToken} from '../models/jwt.token';
 
 @Injectable({
   providedIn: 'root'

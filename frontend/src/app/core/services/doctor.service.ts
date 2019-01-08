@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Doctor } from '../_models/doctor';
-import { environment } from '../../environments/environment.prod';
+import { Doctor } from '../models/doctor';
+import { environment } from '../../../environments/environment.prod';
 
 
 const httpOptions = {

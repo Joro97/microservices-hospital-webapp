@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {FileService} from '../_services/file.service';
-import {AuthenticationService} from '../_services/authentication.service';
-import {LesionDetectionService} from '../_services/lesion.detection.service';
+import {FileService} from '../../core/services/file.service';
+import {AuthenticationService} from '../../core/services/authentication.service';
+import {LesionDetectionService} from '../../core/services/lesion.detection.service';
 
 @Component({
   selector: 'app-doctor-lesion-detection',

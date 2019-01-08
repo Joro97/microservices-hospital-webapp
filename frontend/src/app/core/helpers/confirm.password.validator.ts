@@ -1,4 +1,4 @@
-import {AbstractControl} from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 export class ConfirmPasswordValidator {
     static MatchPassword(control: AbstractControl) {

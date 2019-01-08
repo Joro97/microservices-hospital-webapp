@@ -19,7 +19,7 @@
         <a routerLink="/" mat-button>My appointments</a>
       </div>
       <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)">
-        <a routerLink="lesion" mat-button>Diagnose help</a>
+        <a routerLink="/doctors/lesion" mat-button>Diagnose help</a>
       </div>
       <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN)">
         <a [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>Register Doctor</a>
@@ -44,7 +44,7 @@
       </div>
 
       <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)">
-        <a routerLink="profile" mat-button>My profile</a>
+        <a routerLink="/doctors/profile" mat-button>My profile</a>
       </div>
       <div *ngIf="isUserLoggedIn()" fxShow="true" fxHide.lt-md="true">
         <a (click)="logout()" mat-button>

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../_services/authentication.service';
-import {Role} from '../../_models/Role';
-import { RouterExtService } from '../../_services/router.ext.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import { Role } from '../../core/models/Role';
+import { RouterExtService } from '../../core/services/router.ext.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit { // TODO: Decouple home module from navbar
   public userRole = Role;
 
   constructor(protected authenticationService: AuthenticationService,

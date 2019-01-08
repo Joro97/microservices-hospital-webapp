@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../../environments/environment.prod';
 import * as moment from 'moment';
 import { Moment } from 'moment';
-import { ScheduleMoment } from '../_models/scheduleMoment';
+import { ScheduleMoment } from '../models/scheduleMoment';
 import 'rxjs-compat/add/operator/map';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -23,10 +23,10 @@ export class AppointmentService {
     private http: HttpClient
   ) { }
 
-  bookHour(docUsername: String, patientUsername: String, dateTime: Moment) {
+  bookHour(docUsername: String, patientUsername: String, dateTime: Moment): Observable<any> {
     const url = `${environment.hospitalApiUrl}${environment.appointmentBookingUrl}/${docUsername}/${patientUsername}`;
     return this.http.post(url, { dateTime: dateTime.format('YYYY-MM-DDTHH:mm:ss') })
-      .subscribe(response => console.log(`Booked hour for ${dateTime.toISOString()}`));
+      .pipe();
   }
 
   getTakenHours(docUsername: String, dateTime: Moment): Observable<Moment[]> {

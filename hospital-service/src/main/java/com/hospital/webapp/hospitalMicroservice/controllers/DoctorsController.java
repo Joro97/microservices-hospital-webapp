@@ -42,8 +42,14 @@ public class DoctorsController {
     }
 
     @PostMapping("/book/{doctorUsername}/{patientUsername}")
-    public void bookHour(@PathVariable String doctorUsername, @PathVariable String patientUsername,
+    public ResponseEntity bookHour(@PathVariable String doctorUsername, @PathVariable String patientUsername,
                          @RequestBody ScheduleHour dateTime) {
-        this.doctorService.bookAppointment(doctorUsername, patientUsername, dateTime.getDateTime());
+        try {
+            this.doctorService.bookAppointment(doctorUsername, patientUsername, dateTime.getDateTime());
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 }

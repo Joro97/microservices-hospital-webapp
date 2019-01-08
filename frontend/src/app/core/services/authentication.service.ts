@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
-import { User } from '../_models/user';
-import { JwtToken } from '../_models/jwt.token';
+import { User } from '../models/user';
+import { JwtToken } from '../models/jwt.token';
 import { RouterExtService } from './router.ext.service';
-import {Role} from '../_models/Role';
+import {Role} from '../models/Role';
 
 @Injectable({
   providedIn: 'root'
