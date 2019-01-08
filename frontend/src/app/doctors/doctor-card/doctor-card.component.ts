@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Doctor } from '../../core/models/doctor';
 import { FileService } from '../../core/services/file.service';
-import {AuthenticationService} from '../../core/services/authentication.service';
-declare var $: any;
+import { AuthenticationService } from '../../core/services/authentication.service';
 
 @Component({
   selector: 'app-doctor-card',
@@ -51,9 +50,6 @@ export class DoctorCardComponent implements OnInit {
 
   onClick() {
       this.faSpinFast = true;
-      // const card = $(this).parent('.material-card');
-      // const icon = $(this).children('i');
-      // icon.addClass('fa-spin-fast');
 
       if (this.mcActive) {
         this.mcActive = false;
