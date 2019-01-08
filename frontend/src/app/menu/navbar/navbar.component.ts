@@ -8,7 +8,7 @@ import { RouterExtService } from '../../core/services/router.ext.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit { // TODO: Decouple home module from navbar
   public userRole = Role;
 
   constructor(protected authenticationService: AuthenticationService,

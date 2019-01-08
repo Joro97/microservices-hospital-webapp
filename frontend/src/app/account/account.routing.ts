@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
-const routes: Routes = [
+const routes: Routes = [ // TODO: Make this actual lazy loading
   // signin & signup components rentered by secondary outlet e.g. "sign"
   { path: 'login', component: LoginComponent, outlet: 'sign' },
   { path: 'register', component: RegisterComponent, outlet: 'sign' },

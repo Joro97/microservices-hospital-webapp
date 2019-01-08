@@ -8,8 +8,8 @@ import { Role } from '../core/models/Role';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 
 const routes: Routes = [
-  { path: 'doctors', component: DoctorsComponent },
-  { path: 'doctors/:username/appointment', component: AppointmentComponent},
+  { path: '', component: DoctorsComponent },
+  { path: ':username/appointment', component: AppointmentComponent},
   { path: 'lesion',
     component: DoctorLesionDetectionComponent,
     canActivate: [AuthGuard],
