@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Doctor } from '../../_models/doctor';
-import { FileService } from '../../_services/file.service';
-import {AuthenticationService} from '../../_services/authentication.service';
+import { Doctor } from '../../core/models/doctor';
+import { FileService } from '../../core/services/file.service';
+import {AuthenticationService} from '../../core/services/authentication.service';
 declare var $: any;
 
 @Component({

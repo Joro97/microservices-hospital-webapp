@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorDetailComponent } from './doctor-detail/doctor-detail.component';
-import { AuthGuard } from './_guards/auth.guard';
-import { Role } from './_models/Role';
-import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
+import { AuthGuard } from './core/helpers/auth.guard';
+import { Role } from './core/models/Role';
+import { DoctorProfileComponent } from './doctors/doctor-profile/doctor-profile.component';
 import { HomeComponent } from './home/home.component';
 import { AppointmentComponent } from './doctors/appointment/appointment.component';
-import { DoctorLesionDetectionComponent } from './doctor-lesion-detection/doctor-lesion-detection.component';
+import { DoctorLesionDetectionComponent } from './doctors/doctor-lesion-detection/doctor-lesion-detection.component';
 
 const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent },

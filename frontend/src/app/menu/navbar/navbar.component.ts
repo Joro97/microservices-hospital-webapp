@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../_services/authentication.service';
-import {Role} from '../../_models/Role';
-import { RouterExtService } from '../../_services/router.ext.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import {Role} from '../../core/models/Role';
+import { RouterExtService } from '../../core/services/router.ext.service';
 
 @Component({
   selector: 'app-navbar',

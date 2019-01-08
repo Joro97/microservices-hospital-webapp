@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterExtService } from '../../_services/router.ext.service';
+import { RouterExtService } from '../../core/services/router.ext.service';
 
 @Component({
   selector: 'app-darkout',

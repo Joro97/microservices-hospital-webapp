@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { AppointmentService } from '../../_services/appointment.service';
-import { AuthenticationService } from '../../_services/authentication.service';
+import { AppointmentService } from '../../core/services/appointment.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 

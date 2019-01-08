@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FileService } from '../_services/file.service';
-import { AuthenticationService } from '../_services/authentication.service';
+import { FileService } from '../../core/services/file.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
 
 
 @Component({

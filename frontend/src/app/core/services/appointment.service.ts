@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../../environments/environment.prod';
 import * as moment from 'moment';
 import { Moment } from 'moment';
-import { ScheduleMoment } from '../_models/scheduleMoment';
+import { ScheduleMoment } from '../models/scheduleMoment';
 import 'rxjs-compat/add/operator/map';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';

@@ -9,7 +9,7 @@
   <div id="avatar_box" (mouseenter) ="this.hovered=true" (mouseleave) ="this.hovered=false">
     <img [ngClass]="{'darkened': this.hovered}" class="avatar" [src]="avatar" alt="Doctor's avatar" *ngIf="!isImageLoading; else noImageFound">
     <ng-template #noImageFound>
-      <img [ngClass]="{'darkened': this.hovered}" class="avatar" src="../../assets/images/doctor-default-image.png" alt="Fallbackimage">
+      <img [ngClass]="{'darkened': this.hovered}" class="avatar" src="../../../assets/images/doctor-default-image.png" alt="Fallbackimage">
     </ng-template>
 
     <div id ="avatar_overlay" *ngIf="this.hovered">
