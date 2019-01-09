@@ -7,7 +7,7 @@ import { NotificationService } from '../../core/services/notification.service';
 const toastrNotifications = {
   invalidFormMessage: 'Invalid form data. Please try again',
   invalidFormTitle: 'Error',
-  loginSuccessMessage: 'Welcome Dr ',
+  loginSuccessMessage: 'Welcome ',
   loginSuccessTitle: 'Princeton Plainsboro'
 };
 
