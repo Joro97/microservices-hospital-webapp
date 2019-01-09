@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { RouterExtService } from '../../core/services/router.ext.service';
+import { NotificationService } from '../../core/services/notification.service';
+
+const toastrNotifications = {
+  invalidFormMessage: 'Invalid form data. Please try again',
+  invalidFormTitle: 'Error',
+  loginSuccessMessage: 'Welcome ',
+  loginSuccessTitle: 'Princeton Plainsboro'
+};
 
 @Component({
   selector: 'app-login',
@@ -14,6 +22,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
+    private notificationService: NotificationService,
     private routerExtService: RouterExtService
   ) {
   }
@@ -38,10 +47,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      alert('Invalid form data !');
+      this.notificationService.showError(toastrNotifications.invalidFormMessage, toastrNotifications.invalidFormTitle);
       return;
     }
     this.authenticationService.login(this.f.username.value, this.f.password.value);
+    this.notificationService.showSuccess(`${toastrNotifications.loginSuccessMessage} ${this.f.username.value}`,
+      toastrNotifications.loginSuccessTitle);
     this.routerExtService.router.navigateByUrl(this.routerExtService.getBaseUrl());
   }
 }

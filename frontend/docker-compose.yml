@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  frontend:
+    image: "frontend"
+    hostname: localhost
+    container_name: angular-ui
+    build: .
+    ports:
+      - "80:80"
