@@ -8,6 +8,14 @@ import { Role } from '../../core/models/Role';
 import { first } from 'rxjs/operators';
 import { FileService } from '../../core/services/file.service';
 import { Doctor } from '../../core/models/doctor';
+import { NotificationService } from '../../core/services/notification.service';
+
+const toastrNotifications = {
+  docRegisterSuccessMessage: 'Successfully added a new doctor to Princeton Plainsboro.',
+  docRegisterSuccessTitle: 'Welcome!',
+  docRegisterErrorMessage: 'Failed to add a new doctor. Please try again!',
+  docRegisterErrorTitle: 'Error!'
+};
 
 @Component({
   selector: 'app-register',
@@ -24,6 +32,7 @@ export class RegisterComponent implements OnInit {
     public authenticationService: AuthenticationService,
     private doctorService: DoctorService,
     private fileService: FileService,
+    private notificationService: NotificationService,
     private routerExtService: RouterExtService
   ) {
   }
@@ -90,11 +99,11 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         response => {
+          this.notificationService.showSuccess(toastrNotifications.docRegisterSuccessMessage, toastrNotifications.docRegisterSuccessTitle);
           this.routerExtService.router.navigate(['/home']);
         },
-        errorDoc => {
-          console.log('Failed to add doctor');
-          console.log(errorDoc);
+        error => {
+          this.notificationService.showError(toastrNotifications.docRegisterErrorMessage, toastrNotifications.docRegisterErrorTitle);
         }
       );
   }

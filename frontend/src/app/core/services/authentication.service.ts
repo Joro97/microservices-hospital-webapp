@@ -4,7 +4,7 @@ import * as jwt_decode from 'jwt-decode';
 import { User } from '../models/user';
 import { JwtToken } from '../models/jwt.token';
 import { RouterExtService } from './router.ext.service';
-import {Role} from '../models/Role';
+import { Role } from '../models/Role';
 
 @Injectable({
   providedIn: 'root'
@@ -69,9 +69,9 @@ export class AuthenticationService {
   registerUser(userToRegister) {
     return this.http.post(this.authServiceUrl + '/register/user', userToRegister)
     .subscribe(response => {
-      alert('Registration was successful');
+      console.log('Registration was successful');
     }, error => {
-      alert('error:' + error);
+      console.log('error:' + error);
     });
   }
 
