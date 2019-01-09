@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { AppointmentService } from '../../core/services/appointment.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import * as moment from 'moment';
 import { Moment } from 'moment';
+import { Subject } from 'rxjs';
+import 'rxjs/add/operator/takeUntil';
 
 
 const colors: any = {
@@ -27,14 +29,15 @@ const colors: any = {
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.css']
 })
-export class AppointmentComponent implements OnInit {
+export class AppointmentComponent implements OnInit, OnDestroy {
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
   doctorUsername: String;
-  clickedDate: Moment = moment();
+  clickedDate: Moment = moment(moment().format('YYYY-MM-DDTHH:mm:ss'), moment.ISO_8601, true);
   freeHours: Moment[];
   takenHours: Moment[];
+  private ngUnsubscribe: Subject<any> = new Subject();
 
   constructor(
     private authService: AuthenticationService,
@@ -49,11 +52,12 @@ export class AppointmentComponent implements OnInit {
   }
 
   setupScheduleHours() {
-    this.appointmentService.getTakenHours(this.doctorUsername, this.clickedDate).
-    subscribe(hours => {
-      this.takenHours = hours;
-      this.freeHours = this.appointmentService.buildFreeHours(this.takenHours, this.clickedDate);
-    });
+    this.appointmentService.getTakenHours(this.doctorUsername, this.clickedDate)
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe(hours => {
+        this.takenHours = hours;
+        this.freeHours = this.appointmentService.buildFreeHours(this.takenHours, this.clickedDate);
+      });
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -68,6 +72,12 @@ export class AppointmentComponent implements OnInit {
 
   appointmentClicked() {
     this.appointmentService.bookHour(this.doctorUsername, this.authService.getCurrentUser().user_name, this.clickedDate)
+      .takeUntil(this.ngUnsubscribe)
       .subscribe(_ => this.ngOnInit());
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

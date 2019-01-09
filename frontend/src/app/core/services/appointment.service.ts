@@ -4,8 +4,7 @@ import { environment } from '../../../environments/environment.prod';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 import { ScheduleMoment } from '../models/scheduleMoment';
-import 'rxjs-compat/add/operator/map';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 
@@ -26,7 +25,7 @@ export class AppointmentService {
   bookHour(docUsername: String, patientUsername: String, dateTime: Moment): Observable<any> {
     const url = `${environment.hospitalApiUrl}${environment.appointmentBookingUrl}/${docUsername}/${patientUsername}`;
     return this.http.post(url, { dateTime: dateTime.format('YYYY-MM-DDTHH:mm:ss') })
-      .pipe();
+      .pipe(tap(response => console.log(response)));
   }
 
   getTakenHours(docUsername: String, dateTime: Moment): Observable<Moment[]> {
@@ -38,8 +37,8 @@ export class AppointmentService {
   }
 
   buildFreeHours(takenHours: Moment[], dateTime: Moment): Moment[] {
-    const currWorkHour = dateTime.clone().hour(9).minutes(0);
-    const workdayEnd = dateTime.clone().hour(11).minutes(3);
+    const currWorkHour = dateTime.clone().hour(9).minutes(0).seconds(0);
+    const workdayEnd = dateTime.clone().hour(11).minutes(3).seconds(0);
     const freeHours: Moment[] = [];
 
     while (currWorkHour.isBefore(workdayEnd)) {
