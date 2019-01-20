@@ -26,7 +26,7 @@
         <h4 *ngIf="authService.isUserLoggedIn()" routerLink="/doctors/{{this.doctor.username}}/appointment" style="cursor: pointer;">
             Book an appointment
         </h4>
-        <h4 *ngIf="!authService.isUserLoggedIn()" [routerLink]="[{ outlets: { sign: ['login'] } }]" style="cursor: pointer;">
+        <h4 *ngIf="!authService.isUserLoggedIn()" (click)="redirectToLogin()" style="cursor: pointer;">
           Sign in to book an appointment
         </h4>
         <a class="fa fa-fw fa-facebook"></a>

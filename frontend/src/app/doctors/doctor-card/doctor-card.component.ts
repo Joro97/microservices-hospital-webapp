@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Doctor } from '../../core/models/doctor';
 import { FileService } from '../../core/services/file.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
+import { RouterExtService } from '../../core/services/router.ext.service';
 
 @Component({
   selector: 'app-doctor-card',
@@ -23,6 +24,7 @@ export class DoctorCardComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private fileService: FileService,
+    private routerExtService: RouterExtService
     ) { }
 
   ngOnInit() {
@@ -70,6 +72,11 @@ export class DoctorCardComponent implements OnInit {
 
       }
 
+  }
+
+  redirectToLogin() {
+    this.routerExtService.router.navigateByUrl(
+      this.routerExtService.getCurrentUrl() + '(sign:login)');
   }
 
 }
