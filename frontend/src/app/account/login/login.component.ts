@@ -5,10 +5,12 @@ import { RouterExtService } from '../../core/services/router.ext.service';
 import { NotificationService } from '../../core/services/notification.service';
 
 const toastrNotifications = {
-  invalidFormMessage: 'Invalid form data. Please try again',
+  invalidFormMessage: 'Invalid form data. Please try again.',
   invalidFormTitle: 'Error',
   loginSuccessMessage: 'Welcome ',
-  loginSuccessTitle: 'Princeton Plainsboro'
+  loginSuccessTitle: 'Princeton Plainsboro',
+  loginFailureMessage: 'Invalid credentials. Please try again.',
+  loginFailureTitle: 'Login unsuccessful',
 };
 
 @Component({
@@ -47,12 +49,19 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.invalid) {
+      // Unneeded, button is disabled.
       this.notificationService.showError(toastrNotifications.invalidFormMessage, toastrNotifications.invalidFormTitle);
       return;
     }
-    this.authenticationService.login(this.f.username.value, this.f.password.value);
-    this.notificationService.showSuccess(`${toastrNotifications.loginSuccessMessage} ${this.f.username.value}`,
-      toastrNotifications.loginSuccessTitle);
+    this.authenticationService.login(this.f.username.value, this.f.password.value).subscribe(
+      status => {
+        this.notificationService.showSuccess(`${toastrNotifications.loginSuccessMessage} ${this.f.username.value}`,
+        toastrNotifications.loginSuccessTitle);
+      }, error => {
+        this.notificationService.showError(toastrNotifications.loginFailureMessage, toastrNotifications.loginFailureTitle);
+      }
+    )
+
     this.routerExtService.router.navigateByUrl(this.routerExtService.getBaseUrl());
   }
 }

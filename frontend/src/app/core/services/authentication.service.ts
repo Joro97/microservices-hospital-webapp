@@ -5,6 +5,7 @@ import { User } from '../models/user';
 import { JwtToken } from '../models/jwt.token';
 import { RouterExtService } from './router.ext.service';
 import { Role } from '../models/Role';
+import { map, catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -30,13 +31,14 @@ export class AuthenticationService {
     params.append('client_id', 'fooClientIdPassword');
 
     return this.http.post<JwtToken>(this.authServiceUrl + '/oauth/token', params.toString(), {headers})
-      .subscribe(token => {
-        // TODO: add time of get token for expiration monitoring
-        localStorage.setItem('token', JSON.stringify(token));
-        console.log(token.access_token);
-      }, error => {
-          alert('error:' + error);
-      });
+      .pipe(
+        map(token => {
+          // TODO: add time of get token for expiration monitoring
+          localStorage.setItem('token', JSON.stringify(token));
+          console.log(token.access_token);
+          return true;
+        })
+      )
   }
 
   logout() {
