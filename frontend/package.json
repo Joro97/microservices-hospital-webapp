@@ -33,6 +33,7 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.23.0",
     "ng2-cookies": ">=1.0.12",
+    "ng2-slim-loading-bar": "^4.0.0",
     "ngx-pagination": "^3.2.1",
     "ngx-toastr": "^9.1.1",
     "rxjs": "~6.3.3",
