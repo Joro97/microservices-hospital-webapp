@@ -15,14 +15,23 @@
     max-height:45px;
 }
 
-h4 {
-    font-family: metropolis-regular;
-    font-size: 16px;
+
+h4{
+	color:  #ffffff;
+	font: normal 30px 'Cookie', cursive;
+	margin: 0;
+}
+h4 span{
+	color:  #32CDB8;
 }
 
 .mat-toolbar-row {
     width:80%;
     margin: 0 auto;
+}
+
+.lower {
+    padding-top:4px;
 }
 
 a {

@@ -7,22 +7,22 @@
     <mat-toolbar-row>
 
       <a [routerLink]="[{ outlets: { primary: ['home']} }]" mat-button>
-        <h4>Princeton Plainsboro</h4>
+        <h4>Prinseton<span>Plainsboro</span></h4>
       </a>
 
       <div fxShow="true" fxHide.lt-md="true">
-        <a [routerLink]="[{ outlets: { primary: ['doctors']} }]" mat-button>
+        <a class="lower" [routerLink]="[{ outlets: { primary: ['doctors']} }]" mat-button>
           Doctors
         </a>
       </div>
       <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.USER)">
-        <a routerLink="/" mat-button>My appointments</a>
+        <a class="lower" routerLink="/" mat-button>My appointments</a>
       </div>
       <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)">
-        <a routerLink="/doctors/lesion" mat-button>Diagnose help</a>
+        <a class="lower" routerLink="/doctors/lesion" mat-button>Diagnose help</a>
       </div>
       <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN)">
-        <a [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>Register Doctor</a>
+        <a class="lower" [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>Register Doctor</a>
       </div>
 
       <span class="example-spacer"></span>
