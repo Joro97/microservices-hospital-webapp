@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import { Moment } from 'moment';
 import { Subject } from 'rxjs';
 import 'rxjs/add/operator/takeUntil';
-
+declare var $: any;
 
 const colors: any = {
   red: {
@@ -39,6 +39,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
   takenHours: Moment[];
   private ngUnsubscribe: Subject<any> = new Subject();
 
+  private dayClickedFlag:boolean;
+
   constructor(
     private authService: AuthenticationService,
     private appointmentService: AppointmentService,
@@ -46,9 +48,17 @@ export class AppointmentComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.dayClickedFlag = false;
     this.doctorUsername = this.route.snapshot.params['username'];
     console.log(`Inside onInit clickedDate: ${this.clickedDate.clone().format('YYYY-MM-DDTHH:mm:ss')}`);
     this.setupScheduleHours();
+
+    $(document).ready(function(){
+      $("#hourItems").on("click", ".hourItem", function(){
+        $("#hourItems li").css({"border-color":"gray"});
+        $(this).css({"border-color":"#F891BA"});
+      })
+    });
   }
 
   setupScheduleHours() {
@@ -63,17 +73,22 @@ export class AppointmentComponent implements OnInit, OnDestroy {
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     this.clickedDate = moment(date, moment.ISO_8601, true);
     this.setupScheduleHours();
+    this.dayClickedFlag = true;
   }
 
   onHourClicked(dateStr: string) {
     this.clickedDate = moment(dateStr, moment.ISO_8601, true);
-    alert(`If you want to book ${this.clickedDate.clone().format('HH:mm')} click the 'Book hour' button below`);
+    //alert(`If you want to book ${this.clickedDate.clone().format('HH:mm')} click the 'Book hour' button below`);
   }
 
   appointmentClicked() {
     this.appointmentService.bookHour(this.doctorUsername, this.authService.getCurrentUser().user_name, this.clickedDate)
       .takeUntil(this.ngUnsubscribe)
       .subscribe(_ => this.ngOnInit());
+  }
+
+  clearDayClickedFlag() {
+    this.dayClickedFlag = false;
   }
 
   ngOnDestroy(): void {

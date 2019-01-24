@@ -1,3 +1,25 @@
+<div *ngIf="dayClickedFlag">
+  <div id="darkout" (click)="clearDayClickedFlag()">
+  </div>
+</div>
+  <div class="modal-content" [ngClass]="{'displayed': this.dayClickedFlag}">
+    <div class="modal-header">
+      <span class="close" (click)="clearDayClickedFlag()">&times;</span>
+      <h3>Book Appointment</h3>
+    </div>
+    <div class="modal-body">
+      <ul id="hourItems">
+        <li *ngFor="let freeHour of freeHours"
+        class="hourItem" 
+        (click)="onHourClicked(freeHour.format('YYYY-MM-DDTHH:mm:ss'))">
+          {{freeHour.format('HH:mm')}}
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <input id="button" type="button" value="BOOK HOUR" (click)="appointmentClicked()"/>
+    </div>
+  </div>
 <div class="calendarContainer">
   <div class="row text-center">
     <div class="col-sm-6">
@@ -34,15 +56,10 @@
   <br>
   <div [ngSwitch]="view">
     <mwl-calendar-month-view
+      style="cursor: pointer;"
       *ngSwitchCase="CalendarView.Month"
       [viewDate]="viewDate"
       (dayClicked)="dayClicked($event.day)">
     </mwl-calendar-month-view>
   </div>
 </div>
-<ul>
-  <li *ngFor="let freeHour of freeHours" (click)="onHourClicked(freeHour.format('YYYY-MM-DDTHH:mm:ss'))">
-    {{freeHour.format('HH:mm')}} Click me
-  </li>
-</ul>
-<button (click)="appointmentClicked()" >Book hour</button>

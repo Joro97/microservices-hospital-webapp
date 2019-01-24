@@ -20,7 +20,7 @@ import { DoctorsComponent } from './doctors.component';
     AppointmentComponent,
     DoctorCardComponent,
     DoctorLesionDetectionComponent,
-    DoctorProfileComponent,
+    DoctorProfileComponent
   ],
   imports: [
     DoctorsRoutingModule,
@@ -34,7 +34,7 @@ import { DoctorsComponent } from './doctors.component';
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    }),
+    })
   ],
   exports: [
     DoctorsComponent,

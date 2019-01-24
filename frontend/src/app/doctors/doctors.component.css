@@ -23,6 +23,28 @@
     transform: rotate(359deg);
   }
 }
+
+#search_input[type=text] {
+  width: 350px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('../../assets/images/search_icon.png');
+  background-size: 20px 20px;
+  background-position: 5px 5px; 
+  background-repeat: no-repeat;
+  padding: 5px 20px 5px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+#search_input[type=text]:focus {
+  outline-color: #32CDB8;
+  width: 100%;
+}
+
 .material-card {
   position: relative;
   height: 0;
