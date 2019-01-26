@@ -80,13 +80,13 @@ class SkinLesionsModel:
 
         checkpoint = ModelCheckpoint(
             save_path_and_name,
-            monitor='val_top_3_accuracy',
+            monitor='val_categorical_accuracy',
             verbose=1,
             save_best_only=True,
             mode='max')
 
         reduce_lr = ReduceLROnPlateau(
-            monitor='val_top_3_accuracy',
+            monitor='val_categorical_accuracy',
             factor=0.5,
             patience=2,
             verbose=1,
@@ -107,16 +107,18 @@ class SkinLesionsModel:
 
         return history
 
-    def evaluate_model(self, generators, val_data):
+    def evaluate_model(self, generators, steps):
+        self._compile_model()
+
         LOGGER.info("== Evaluating model ==")
 
         val_loss, val_cat_acc, val_top_2_acc, val_top_3_acc = \
             self._model.evaluate_generator(
                 generators.test_batches,
-                steps=len(val_data))
+                steps=generators.train_steps)
 
-        LOGGER.info('val_loss:', val_loss)
-        LOGGER.info('val_cat_acc:', val_cat_acc)
-        LOGGER.info('val_top_2_acc:', val_top_2_acc)
-        LOGGER.info('val_top_3_acc:', val_top_3_acc)
+        LOGGER.info('val_loss: {} '.format(val_loss))
+        LOGGER.info('val_cat_acc: {}'.format(val_cat_acc))
+        LOGGER.info('val_top_2_acc: {}'.format(val_top_2_acc))
+        LOGGER.info('val_top_3_acc: {}'.format(val_top_3_acc))
 
