@@ -1,7 +1,38 @@
-<p>
-  doctor skin lesion detection page
-</p>
-<input type="file" (change)="onFileChanged($event)" placeholder="Select a lesion image" />
-<form [formGroup]="lesionDetectForm" (ngSubmit)="onSubmit()">
-  <input type="submit" value="Detect lesion type" />
-</form>
+<div id="uploadContainer">
+<div id="width-wrapper">
+  <div class="upload">
+    <div class="upload-files">
+    <header>
+      <p>
+      <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+      <span class="up">up</span>
+      <span class="load">load</span><br/>
+      <span class="title"> Skin Tumor Image</span>
+      </p>
+    </header>
+    <div class="body" id="drop">
+      <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
+      <p class="pointer-none"><b>Drag and drop</b> files here <br /> or <a href="" id="triggerFile">browse</a> to begin the upload</p>
+      <input type="file" (change)="onFileChanged($event)"/>
+    </div>
+    <footer>
+      <div class="divider">
+      </div>
+      <div class="list-files">
+        <img class="uploadedFile" [src]="uploadedFile" alt="Uploaded File" *ngIf="isImageUploaded">
+      <!--   template   -->
+      </div>
+        <button (click)="importerClick($event)" class="importar">CHANGE IMAGE</button>
+        <button (click)="onSubmit($event)" id="importar2" class="importar">
+          <div *ngIf='loading' class="lds-heart"><div></div></div>
+          <span *ngIf='!loading'>DIAGNOSE</span>
+        </button>
+    </footer>
+    </div>
+  </div>
+  <div *ngIf="retrievedInfo" class="result">
+      <h3>Class: {{this.tumorType}}, certainty: {{this.certainty}} %</h3>
+      <p>{{this.tumorInfo}}</p>
+    </div>
+</div>
+</div>
