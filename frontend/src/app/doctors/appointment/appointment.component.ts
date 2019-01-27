@@ -39,7 +39,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
   takenHours: Moment[];
   private ngUnsubscribe: Subject<any> = new Subject();
 
-  private dayClickedFlag:boolean;
+  private dayClickedFlag: boolean;
 
   constructor(
     private authService: AuthenticationService,
@@ -53,11 +53,11 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     console.log(`Inside onInit clickedDate: ${this.clickedDate.clone().format('YYYY-MM-DDTHH:mm:ss')}`);
     this.setupScheduleHours();
 
-    $(document).ready(function(){
-      $("#hourItems").on("click", ".hourItem", function(){
-        $("#hourItems li").css({"border-color":"gray"});
-        $(this).css({"border-color":"#F891BA"});
-      })
+    $(document).ready(function() {
+      $('#hourItems').on('click', '.hourItem', function() {
+        $('#hourItems li').css({'border-color': 'gray'});
+        $(this).css({'border-color': '#F891BA'});
+      });
     });
   }
 
@@ -78,7 +78,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
   onHourClicked(dateStr: string) {
     this.clickedDate = moment(dateStr, moment.ISO_8601, true);
-    //alert(`If you want to book ${this.clickedDate.clone().format('HH:mm')} click the 'Book hour' button below`);
   }
 
   appointmentClicked() {

@@ -3,8 +3,8 @@ package com.hospital.webapp.hospitalMicroservice.controllers;
 import com.hospital.webapp.hospitalMicroservice.models.entity.ScheduleHour;
 import com.hospital.webapp.hospitalMicroservice.services.interfaces.ScheduleHourService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,8 +20,8 @@ public class PatientsController {
         this.scheduleHourService = scheduleHourService;
     }
 
-    @GetMapping("/appointments/{patientUsername}")
-    public List<ScheduleHour> patientAppointments(@PathVariable String patientUsername) {
+    @PostMapping("/appointments")
+    public List<ScheduleHour> patientAppointments(@RequestBody String patientUsername) {
         return this.scheduleHourService.getPatientsAppointments(patientUsername);
     }
 }
