@@ -13,6 +13,10 @@ class SkinLesionsModel:
         mobile_net_model = keras.applications.mobilenet.MobileNet()
         self._model = self._modify_mobile_net_model_architecture(mobile_net_model)
 
+    def predict_gen(self, gens):
+        #self._compile_model()
+        return self._model.predict_generator(gens.test_batches, gens.val_steps)
+
     def _modify_mobile_net_model_architecture(self, mobilenet_base_model):
         '''
         The mobile net should be modified to be able to solve the lesions problem.
@@ -28,7 +32,7 @@ class SkinLesionsModel:
 
         # Create a new dense layer for predictions
         # 7 corresponds to the number of classes
-        layers = Dense(7, activation='softmax')(layers)
+        layers = Dense(9, activation='softmax')(layers)
 
         # inputs=mobile.input selects the input layer, outputs=predictions refers to the
         # dense layer we created above.
@@ -70,8 +74,10 @@ class SkinLesionsModel:
             2: 1.0,  # bkl
             3: 1.0,  # df
             4: 3.0,  # mel # Try to make the model more sensitive to Melanoma.
-            5: 1.0,  # nv
-            6: 1.0,  # vasc
+            5: 3.0, # 'norm_lung'
+            6: 1.0,  # nv
+            7: 3.0, #'pnev_lung',
+            8: 1.0,  # vasc
         }
 
         save_path_and_name = os.path.join(
@@ -101,13 +107,13 @@ class SkinLesionsModel:
             class_weight=class_weights,
             validation_data=generators.valid_batches,
             validation_steps=generators.val_steps,
-            epochs=30,
+            epochs=1,
             verbose=1,
             callbacks=callbacks_list)
 
         return history
 
-    def evaluate_model(self, generators, steps):
+    def evaluate_model(self, generators):
         self._compile_model()
 
         LOGGER.info("== Evaluating model ==")
