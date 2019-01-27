@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: 'doctors', loadChildren: './doctors/doctors.module#DoctorsModule' },
+  { path: 'patients', loadChildren: './patients/patients.module#PatientsModule' },
   { path: 'login', loadChildren: './account/account.module#AccountModule',  },
   { path: 'register', loadChildren: './account/account.module#AccountModule'},
   // uris that do not match any previous path should redirect to home

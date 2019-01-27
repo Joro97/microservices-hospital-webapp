@@ -36,6 +36,14 @@ export class AppointmentService {
       }));
   }
 
+  getPatientsBookedHours(patientUsername: String): Observable<Moment[]> {
+    const url = `${environment.hospitalApiUrl}${environment.patientAppointmentsUrl}`;
+    return this.http.post<ScheduleMoment[]>(url, { patientUsername: patientUsername }, httpOptions)
+      .pipe(map(hoursArr => {
+         return hoursArr.map(scheduleMoment => moment(scheduleMoment.dateTime));
+      }));
+  }
+
   buildFreeHours(takenHours: Moment[], dateTime: Moment): Moment[] {
     const currWorkHour = dateTime.clone().hour(9).minutes(0).seconds(0);
     const workdayEnd = dateTime.clone().hour(11).minutes(3).seconds(0);

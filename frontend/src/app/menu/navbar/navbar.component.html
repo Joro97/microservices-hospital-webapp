@@ -20,7 +20,7 @@
       </div>
       <div *ngIf="isUserLoggedIn() && (authenticationService.userHasRole(userRole.USER) ||
                                        authenticationService.userHasRole(userRole.DOCTOR))">
-        <a class="lower" routerLink="/" mat-button>My appointments</a>
+        <a class="lower" routerLink="/patients/appointments" mat-button>My appointments</a>
       </div>
       <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN)">
         <a class="lower" [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>Register Doctor</a>
