@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AppointmentService} from '../../core/services/appointment.service';
-import {Moment} from 'moment';
-import {AuthenticationService} from '../../core/services/authentication.service';
+import { Moment } from 'moment';
+import { AppointmentService } from '../../core/services/appointment.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
 
 @Component({
   selector: 'app-booked-hours',

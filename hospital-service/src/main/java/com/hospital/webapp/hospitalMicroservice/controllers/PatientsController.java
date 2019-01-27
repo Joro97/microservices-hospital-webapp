@@ -3,7 +3,10 @@ package com.hospital.webapp.hospitalMicroservice.controllers;
 import com.hospital.webapp.hospitalMicroservice.models.entity.ScheduleHour;
 import com.hospital.webapp.hospitalMicroservice.services.interfaces.ScheduleHourService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
