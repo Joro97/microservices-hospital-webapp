@@ -23,7 +23,9 @@ LABELS = [
     'bcc',
     'akiec',
     'vasc',
-    'df'
+    'df',
+    'pnev_lung',
+    'norm_lung'
 ]
 
 LOGGER = logging.getLogger(__name__)
