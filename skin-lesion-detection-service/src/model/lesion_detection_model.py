@@ -22,7 +22,7 @@ class LesionDetectionModel:
     H5_MODEL_WEIGTHS_PATH = os.path.join(root, rel_path)
 
     # Retrieved from the training session. It is the ordered list of the folders.
-    LABEL_MAP = {0: 'akiec', 1: 'bcc', 2: 'bkl', 3: 'df', 4: 'mel', 5: 'nv', 6: 'vasc'}
+    LABEL_MAP = {0: 'akiec', 1: 'bcc', 2: 'bkl', 3: 'df', 4: 'mel', 5: 'norm_lung', 6: 'nv', 7: 'pnev_lung', 8: 'vasc'}
 
     def __init__(self):
         self._lesion_categorization_model = self._load_model_from_h5_file()
