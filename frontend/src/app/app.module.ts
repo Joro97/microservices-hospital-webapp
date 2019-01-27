@@ -5,7 +5,7 @@ import { RouterExtService } from './core/services/router.ext.service';
 import { AccountModule } from './account/account.module';
 import { CoreModule } from './core/core.module';
 import { MenuModule } from './menu/menu.module';
-import {SlimLoadingBarModule} from 'ng2-slim-loading-bar';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 @NgModule({
   declarations: [

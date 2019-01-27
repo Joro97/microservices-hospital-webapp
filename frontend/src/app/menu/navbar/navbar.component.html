@@ -15,7 +15,8 @@
           Doctors
         </a>
       </div>
-      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.USER)">
+      <div *ngIf="isUserLoggedIn() && (authenticationService.userHasRole(userRole.USER) ||
+                                       authenticationService.userHasRole(userRole.DOCTOR))">
         <a class="lower" routerLink="/" mat-button>My appointments</a>
       </div>
       <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)">
