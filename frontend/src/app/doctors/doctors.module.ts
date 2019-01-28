@@ -13,6 +13,8 @@ import { DoctorLesionDetectionComponent } from './doctor-lesion-detection/doctor
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { DoctorsRoutingModule } from './doctors.routing';
 import { DoctorsComponent } from './doctors.component';
+import { ClapButtonComponent } from './appointment/clap-button/clap-button.component';
+import {MatIconModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { DoctorsComponent } from './doctors.component';
     AppointmentComponent,
     DoctorCardComponent,
     DoctorLesionDetectionComponent,
-    DoctorProfileComponent
+    DoctorProfileComponent,
+    ClapButtonComponent
   ],
   imports: [
     DoctorsRoutingModule,
@@ -34,7 +37,8 @@ import { DoctorsComponent } from './doctors.component';
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
-    })
+    }),
+    MatIconModule,
   ],
   exports: [
     DoctorsComponent,
@@ -42,6 +46,7 @@ import { DoctorsComponent } from './doctors.component';
     DoctorCardComponent,
     DoctorLesionDetectionComponent,
     DoctorProfileComponent,
+    ClapButtonComponent
   ]
 })
 export class DoctorsModule {}

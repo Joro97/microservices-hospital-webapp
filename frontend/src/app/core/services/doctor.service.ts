@@ -29,7 +29,7 @@ export class DoctorService {
   }
 
   getDoctor(username: String): Observable<Doctor> {
-    const url = `${environment.hospitalApiUrl}${environment.doctorsUrl}/${username}/profile`;
+    const url = `${environment.hospitalApiUrl}${environment.doctorsUrl}/${username}`;
     return this.http.post<Doctor>(url, { username: username })
       .pipe(catchError(this.handleError<Doctor>(`Failed to get doctor with username: ${username}`)));
   }
