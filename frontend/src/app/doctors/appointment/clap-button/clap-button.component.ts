@@ -115,6 +115,8 @@ export class ClapButtonComponent implements OnInit, OnDestroy {
       this.accCounter++;
       this.totalCount++;
       this.likesToAdd++;
+      this.likeService.canPatientLikeDoctor(this.doctor.username, this.authService.getCurrentUser().user_name)
+        .subscribe(can => { });
     } else {
       this.notificationService.showWarning(`You have reached your like limit for this doctor`, `Princeton Plainsboro`);
     }
@@ -172,9 +174,5 @@ export class ClapButtonComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    for (let i = 0; i < this.likesToAdd; i++) {
-      this.likeService.canPatientLikeDoctor(this.doctor.username, this.authService.getCurrentUser().user_name)
-        .subscribe(can => { });
-    }
   }
 }

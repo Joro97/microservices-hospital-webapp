@@ -1,6 +1,9 @@
-<p>
-  booked-hours works!
-</p>
-<ul>
-  <li *ngFor="let hour of bookedHours">{{hour.format('MM-DD-HH:mm')}}</li>
-</ul>
+<div class="container">
+  <ul>
+    <li *ngFor="let hour of bookedHours">
+      <a>Date: {{hour.format('MM-DD-YY')}}, hour: {{hour.format('HH:mm')}} 
+        <span (click)="close()" id="close"> x </span>
+      </a>
+    </li>
+  </ul>
+</div>

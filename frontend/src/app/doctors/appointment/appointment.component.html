@@ -22,15 +22,17 @@
   </div>
 <div class="calendarContainer">
   <div class="row text-center">
-    <div class="col-sm-6">
+    <div class="col-sm-3" *ngIf="isDocLoaded">
+      <app-clap-button [doctor]="doctor" ></app-clap-button>
+    </div>
+    <div class="col-sm-3" *ngIf="isDocLoaded">
+      <b>{{doctor.username}} <br>
+      {{doctor.specialty}}</b>
+    </div>
+    <div class="col-sm-3">
       <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
     </div>
-    <div class="col-sm-6" *ngIf="isDocLoaded">
-      <div>
-        {{doctor.username}} <br>
-        {{doctor.specialty}}
-      </div>
-      <app-clap-button [doctor]="doctor" ></app-clap-button>
+    <div class="col-sm-3">
       <div class="btn-group">
         <div
           id="previous"
