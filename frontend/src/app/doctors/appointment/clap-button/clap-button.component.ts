@@ -119,7 +119,8 @@ export class ClapButtonComponent implements OnInit, OnDestroy {
       this.notificationService.showWarning(`You have reached your like limit for this doctor`, `Princeton Plainsboro`);
     }
 
-    clickCounter.children[0].innerText = '+' + this.accCounter;
+    let childzero = <HTMLElement> clickCounter.children[0];
+    childzero.innerText = '+' + this.accCounter;
     totalClickCounter.innerText = this.totalCount.toString();
     if (clickCounter.classList.contains('first-active')) {
       this.runAnimationCycle(clickCounter, 'active');
