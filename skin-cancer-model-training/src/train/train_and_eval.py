@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     images_generators = generators.Generators()
 
-    if output_path is None or not os.path.exists(output_path):
+    if not os.path.exists(output_path):
 
         LOGGER.warning('Model save path {} does not exist. Using default path'.format(output_path))
 
@@ -32,4 +32,4 @@ if __name__ == '__main__':
     else:
         model.train(images_generators, output_path)
 
-    #model.evaluate_model(images_generators, generators.get_num_of_images(VALIDATION_FOLDER_PATH))
+    model.evaluate_model(images_generators, generators.get_num_of_images(VALIDATION_FOLDER_PATH))
