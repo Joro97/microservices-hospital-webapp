@@ -1,5 +1,4 @@
 import zipfile
-import numpy as np
 import lesions_model
 import generators
 from sklearn.metrics import classification_report, confusion_matrix
@@ -14,8 +13,8 @@ if __name__ == '__main__':
 
     model = lesions_model.SkinLesionsModel()
 
-    model.load_model_weights(os.path.join(MODEL_SAVE_PATH, 'val_cat_acc_82.h5'))
+    model.load_model_weights(os.path.join(MODEL_SAVE_PATH, 'model.h5'))
 
     images_generators = generators.Generators()
 
-    model.evaluate_model(images_generators)
+    model.evaluate_model(images_generators, generators.get_num_of_images(VALIDATION_FOLDER_PATH))

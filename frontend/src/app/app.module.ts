@@ -9,7 +9,7 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     CoreModule,

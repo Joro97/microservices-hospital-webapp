@@ -5,7 +5,6 @@ import com.hospital.webapp.hospitalMicroservice.models.entity.ScheduleHour;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 public interface DoctorService {
