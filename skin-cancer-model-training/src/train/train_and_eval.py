@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     images_generators = generators.Generators()
 
-    if not os.path.exists(output_path):
+    if output_path is None or not os.path.exists(output_path):
 
         LOGGER.warning('Model save path {} does not exist. Using default path'.format(output_path))
 
