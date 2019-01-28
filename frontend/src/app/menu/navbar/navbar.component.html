@@ -15,14 +15,14 @@
           Doctors
         </a>
       </div>
-      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)">
+      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)" fxShow="true" fxHide.lt-md="true">
         <a class="lower" routerLink="/doctors/lesion" mat-button>Diagnose help</a>
       </div>
       <div *ngIf="isUserLoggedIn() && (authenticationService.userHasRole(userRole.USER) ||
-                                       authenticationService.userHasRole(userRole.DOCTOR))">
+                                       authenticationService.userHasRole(userRole.DOCTOR))" fxShow="true" fxHide.lt-md="true">
         <a class="lower" routerLink="/patients/appointments" mat-button>My appointments</a>
       </div>
-      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN)">
+      <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN)" fxShow="true" fxHide.lt-md="true">
         <a class="lower" [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>Register Doctor</a>
       </div>
 
@@ -58,15 +58,37 @@
   <mat-sidenav-container fxFlexFill>
     <mat-sidenav #sidenav>
       <mat-nav-list>
-        <a href="#" mat-list-item>
-          Doctors
-        </a>
-        <a href="#" mat-list-item>
-            Patients
-          </a>
-        <a href="#" mat-list-item>
-          <mat-icon>account_box</mat-icon> Log in
-        </a>
+          <div>
+            <a class="lower" [routerLink]="[{ outlets: { primary: ['doctors']} }]" mat-button>
+              Doctors
+            </a>
+          </div>
+          <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.DOCTOR)" >
+            <a class="lower" routerLink="/doctors/lesion" mat-button>Diagnose help</a>
+          </div>
+          <div *ngIf="isUserLoggedIn() && (authenticationService.userHasRole(userRole.USER) ||
+                                            authenticationService.userHasRole(userRole.DOCTOR))" >
+            <a class="lower" routerLink="/patients/appointments" mat-button>My appointments</a>
+          </div>
+          <div *ngIf="isUserLoggedIn() && authenticationService.userHasRole(userRole.ADMIN)">
+            <a class="lower" [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>Register Doctor</a>
+          </div>
+          <div *ngIf="!isUserLoggedIn()">
+            <a [routerLink]="[{ outlets: { sign: ['login'] } }]" mat-button>
+              <mat-icon>account_box</mat-icon> Sign in
+            </a>
+          </div>
+    
+          <div *ngIf="!isUserLoggedIn()">
+            <a [routerLink]="[{ outlets: { sign: ['register'] } }]" mat-button>
+              <mat-icon>lock</mat-icon> Sign up
+            </a>
+          </div>
+          <div *ngIf="isUserLoggedIn()">
+            <a (click)="logout()" mat-button>
+              <mat-icon>account_box</mat-icon> Logout
+            </a>
+          </div>
         <a (click)="sidenav.toggle()" mat-list-item>
           <mat-icon>close</mat-icon> Close
         </a>

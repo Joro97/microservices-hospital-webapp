@@ -60,6 +60,11 @@ pre {
     border-radius: 5px;
 }
 
+.row {
+    min-height: 100px;
+    padding-top: 30px;
+}
+
 #hourItems{
     list-style-type: none;
     float: left;

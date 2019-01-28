@@ -50,9 +50,13 @@ a {
 }
 
 .mat-sidenav {
+    top:45px;
     background-color: #314351;
     position: absolute;
     width:300px;
+    height: 100vh;
+    color:white;
+    position: fixed;
 }
 
 .mat-sidenav-content {

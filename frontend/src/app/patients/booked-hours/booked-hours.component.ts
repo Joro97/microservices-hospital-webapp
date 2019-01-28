@@ -25,4 +25,8 @@ export class BookedHoursComponent implements OnInit {
     this.appointmentService.getPatientsBookedHours(userName)
       .subscribe(hours => this.bookedHours = hours);
   }
+
+  private close() {
+    alert("I lied. It doesn't work.")
+  }
 }
