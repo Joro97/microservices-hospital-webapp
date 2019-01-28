@@ -4,7 +4,7 @@ import { Doctor } from '../../../core/models/doctor';
 
 
 const minDeg = 1;
-const maxDeg = 72;
+const maxDeg = 73;
 const particlesClasses = [
   {
     class: 'pop-top'
@@ -46,7 +46,7 @@ export class ClapButtonComponent implements OnInit, OnDestroy {
   }
 
   setupComponent() {
-    document.getElementById('totalCounter').innerText = this.totalCount;
+    document.getElementById('totalCounter').innerText = this.totalCount.toString();
   }
 
   onMouserOver() {
@@ -80,10 +80,11 @@ export class ClapButtonComponent implements OnInit, OnDestroy {
   upClickCounter() {
     const clickCounter = document.getElementById('clicker');
     const totalClickCounter = document.getElementById('totalCounter');
+    // this.totalCount = parseInt(totalClickCounter.innerText, 10);
 
     this.accCounter++;
     clickCounter.children[0].innerText = '+' + this.accCounter;
-    totalClickCounter.innerText = this.totalCount + this.accCounter;
+    totalClickCounter.innerText = (this.totalCount + this.accCounter).toString();
 
     if (clickCounter.classList.contains('first-active')) {
       this.runAnimationCycle(clickCounter, 'active');
@@ -135,6 +136,10 @@ export class ClapButtonComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log(`Ng on destroy count: ${this.totalCount}`);
+    const totalClickCounter = document.getElementById('totalCounter');
+    this.totalCount = parseInt(totalClickCounter.innerText, 10);
+    this.doctor.likes = this.totalCount;
+    this.doctorsService.updateDoctor(this.doctor)
+      .subscribe(doc => console.log(doc));
   }
 }

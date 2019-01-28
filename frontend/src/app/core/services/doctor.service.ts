@@ -35,7 +35,7 @@ export class DoctorService {
   }
 
   updateDoctor(doctor: Doctor): Observable<Doctor> {
-    return this.http.put<Doctor>(`${environment.hospitalApiUrl}${environment.doctorsUrl}`, doctor, httpOptions)
+    return this.http.post<Doctor>(`${environment.hospitalApiUrl}${environment.doctorsUrl}/${doctor.username}`, doctor, httpOptions)
       .pipe(tap(doc => console.log(doc)));
   }
 

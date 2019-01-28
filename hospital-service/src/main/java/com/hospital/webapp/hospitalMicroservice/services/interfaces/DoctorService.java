@@ -12,6 +12,7 @@ public interface DoctorService {
     List<Doctor> getAllDoctors();
     Doctor getByUsername(String username);
     void registerDoctor(Doctor doctor) throws IllegalArgumentException, IOException;
+    Doctor updateDoctor(Doctor doctor);
     List<ScheduleHour> getBookedHours(String username, LocalDateTime dateTime);
     void bookAppointment(String doctorUsername, String patientUsername, LocalDateTime dateTime);
 }
