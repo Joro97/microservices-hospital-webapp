@@ -14,7 +14,7 @@ import { DoctorProfileComponent } from './doctor-profile/doctor-profile.componen
 import { DoctorsRoutingModule } from './doctors.routing';
 import { DoctorsComponent } from './doctors.component';
 import { ClapButtonComponent } from './appointment/clap-button/clap-button.component';
-import {MatIconModule} from '@angular/material';
+import { MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
