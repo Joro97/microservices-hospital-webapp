@@ -1,8 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DoctorService } from '../../../core/services/doctor.service';
 import { Doctor } from '../../../core/models/doctor';
+import { LikesService } from '../../../core/services/likes.service';
+import { AuthenticationService } from '../../../core/services/authentication.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
-
+const maxLikesCount = 10;
 const minDeg = 1;
 const maxDeg = 73;
 const particlesClasses = [
@@ -32,17 +35,25 @@ export class ClapButtonComponent implements OnInit, OnDestroy {
   @Input() doctor: Doctor;
   totalCount: number;
   accCounter: number;
-
+  likesToAdd: number;
+  hasReachedLikeLimit: boolean;
+  isFirstClick: boolean;
 
   constructor(
     private doctorsService: DoctorService,
+    private likeService: LikesService,
+    private authService: AuthenticationService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
-    this.accCounter = 0;
-    this.totalCount = this.doctor.likes;
-    console.log(this.totalCount);
-    this.setupComponent();
+    this.likesToAdd = 0;
+    this.likeService.getDoctorsLikes(this.doctor.username)
+      .subscribe(likes => {
+        this.totalCount = likes ? likes : 0;
+        this.isFirstClick = true;
+        this.setupComponent();
+      });
   }
 
   setupComponent() {
@@ -78,14 +89,38 @@ export class ClapButtonComponent implements OnInit, OnDestroy {
   }
 
   upClickCounter() {
+    if (this.isFirstClick) {
+      this.likeService.getPatientLikesForDoc(this.doctor.username, this.authService.getCurrentUser().user_name)
+        .subscribe(likes => {
+          this.accCounter = likes ? likes : 0;
+          this.increaseLikesForUser();
+        });
+
+      this.isFirstClick = false;
+    } else {
+      this.increaseLikesForUser();
+    }
+
+  }
+
+  increaseLikesForUser() {
     const clickCounter = document.getElementById('clicker');
     const totalClickCounter = document.getElementById('totalCounter');
-    // this.totalCount = parseInt(totalClickCounter.innerText, 10);
 
-    this.accCounter++;
+    if (this.accCounter >= maxLikesCount) {
+      this.hasReachedLikeLimit = true;
+    }
+
+    if (!this.hasReachedLikeLimit) {
+      this.accCounter++;
+      this.totalCount++;
+      this.likesToAdd++;
+    } else {
+      this.notificationService.showWarning(`You have reached your like limit for this doctor`, `Princeton Plainsboro`);
+    }
+
     clickCounter.children[0].innerText = '+' + this.accCounter;
-    totalClickCounter.innerText = (this.totalCount + this.accCounter).toString();
-
+    totalClickCounter.innerText = this.totalCount.toString();
     if (clickCounter.classList.contains('first-active')) {
       this.runAnimationCycle(clickCounter, 'active');
     } else {
@@ -136,10 +171,9 @@ export class ClapButtonComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    const totalClickCounter = document.getElementById('totalCounter');
-    this.totalCount = parseInt(totalClickCounter.innerText, 10);
-    this.doctor.likes = this.totalCount;
-    this.doctorsService.updateDoctor(this.doctor)
-      .subscribe(doc => console.log(doc));
+    for (let i = 0; i < this.likesToAdd; i++) {
+      this.likeService.canPatientLikeDoctor(this.doctor.username, this.authService.getCurrentUser().user_name)
+        .subscribe(can => { });
+    }
   }
 }

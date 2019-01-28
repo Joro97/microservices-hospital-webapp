@@ -51,15 +51,6 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Doctor updateDoctor(Doctor oldDoctor) {
-        System.out.println(String.format("Old doc name: %s, likes %s", oldDoctor.getUsername(), oldDoctor.getLikes()));
-        Doctor newDoctor = this.getByUsername(oldDoctor.getUsername());
-        newDoctor.setLikes(oldDoctor.getLikes());
-        System.out.println(String.format("New doc name: %s, likes %s", newDoctor.getUsername(), newDoctor.getLikes()));
-        return this.doctorsRepository.save(newDoctor);
-    }
-
-    @Override
     public Doctor getByUsername(String username) {
         return this.doctorsRepository.findByUsername(username);
     }

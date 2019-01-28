@@ -41,11 +41,6 @@ public class DoctorsController {
         return this.doctorService.getByUsername(username);
     }
 
-    @PostMapping("/doctors/{username}")
-    public Doctor updateDoctor(@PathVariable String username, @RequestBody Doctor doctor) {
-        return this.doctorService.updateDoctor(doctor);
-    }
-
     @PostMapping("/schedules/{username}")
     public List<ScheduleHour> getDoctorBookedHours(@PathVariable String username, @RequestBody ScheduleHour dateTime) {
         return this.doctorService.getBookedHours(username, dateTime.getDateTime());

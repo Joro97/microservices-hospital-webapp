@@ -26,10 +26,6 @@ public class Doctor {
     @PositiveOrZero
     private int experience;
 
-    @Column
-    @PositiveOrZero
-    private int likes;
-
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private DBFile avatar;
@@ -84,13 +80,5 @@ public class Doctor {
 
     public void setScheduleHours(Set<ScheduleHour> scheduleHours) {
         this.scheduleHours = scheduleHours;
-    }
-
-    public int getLikes() {
-        return likes;
-    }
-
-    public void setLikes(int likes) {
-        this.likes = likes;
     }
 }

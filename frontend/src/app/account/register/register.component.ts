@@ -93,7 +93,6 @@ export class RegisterComponent implements OnInit {
       'username': docUsername,
       'specialty': this.registerForm.get('doctorAdditional').value.specialty,
       'experience': this.registerForm.get('doctorAdditional').value.experience,
-      'likes': 0
     };
 
     this.doctorService.registerDoctor(doctorToRegister)

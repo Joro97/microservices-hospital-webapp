@@ -9,4 +9,5 @@ export const environment = {
   patientAppointmentsUrl: '/appointments', // Plus patient username, example: /appointments/ognyan
   doctorHoursUrl: '/schedules', // Plus doctor username, example: /schedule/ognyan
   appointmentBookingUrl: '/book', // Plus patient username / doctor username, example: book/joro/ognyan
+  likesRetrievalUrl: '/likes'
 };
