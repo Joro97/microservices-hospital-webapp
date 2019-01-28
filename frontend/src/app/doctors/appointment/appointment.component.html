@@ -25,8 +25,8 @@
     <div class="col-sm-6">
       <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
     </div>
-    <div class="col-sm-6">
-      <app-clap-button></app-clap-button>
+    <div class="col-sm-6" *ngIf="isDocLoaded">
+      <app-clap-button [doctor]="doctor" ></app-clap-button>
       <div class="btn-group">
         <div
           id="previous"
