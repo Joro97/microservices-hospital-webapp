@@ -1,0 +1,35 @@
+version: '2.1'
+volumes:
+ oauth2-mysql-data:
+
+services:
+  oauth2:
+    build: oauth-authorization-server
+    environment:
+    - OAUTH2_DB_USER=root
+    - OAUTH2_DB_PASS=secret
+    - OAUTH2_DB_URL=oauth2-mysql
+    - OAUTH2_DB_PORT=3306
+    command: ["--spring.profiles.active=prod"]
+    ports:
+    - "8090:8090"
+    depends_on:
+      oauth2-mysql:
+        condition: service_healthy
+
+  oauth2-mysql:
+    image: mysql:5.7
+    container_name: oauth2-mysql
+    volumes:
+      - oauth2-mysql-data:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=oauth2
+      - MYSQL_ROOT_USER=root
+      - MYSQL_ROOT_PASSWORD=secret
+    ports:
+      - "33061:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10

@@ -4,7 +4,7 @@
 	<artifactId>oauth-authorization-server</artifactId>
 
 	<name>oauth-authorization-server</name>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
