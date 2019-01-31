@@ -70,4 +70,8 @@ services:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
-
+   
+  skin-lesion-service:
+    build: skin-lesion-detection-service
+    ports: 
+      - "9000:9000" 
