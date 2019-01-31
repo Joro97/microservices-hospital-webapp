@@ -3,6 +3,7 @@ package com.hospital.webapp.hospitalMicroservice.config;
 import com.hospital.webapp.hospitalMicroservice.models.entity.DBFile;
 import com.hospital.webapp.hospitalMicroservice.models.entity.Doctor;
 import com.hospital.webapp.hospitalMicroservice.services.interfaces.DoctorService;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -52,8 +53,8 @@ public class DbSeed {
                 String pathToAvatar = "/src/main/resources/doctors-images/" + name + ".jpg";
                 try {
                     File avatar = new File(System.getProperty("user.dir") + pathToAvatar);
-                    DBFile dbFile = new DBFile(pathToAvatar,
-                            Files.probeContentType(avatar.toPath()), Files.readAllBytes(avatar.toPath()));
+                    Tika tika = new Tika();
+                    DBFile dbFile = new DBFile(pathToAvatar, tika.detect(avatar), Files.readAllBytes(avatar.toPath()));
                     doctor.setAvatar(dbFile);
                     this.doctorService.registerDoctor(doctor);
                 } catch (IOException e) {
