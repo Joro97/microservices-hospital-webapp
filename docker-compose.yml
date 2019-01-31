@@ -46,7 +46,7 @@ services:
       - HOSPITAL_DB_USERNAME=root
       - HOSPITAL_DB_PASSWORD=admin
       - HOSPITAL_DB_URL=hospital-mysql
-      - HOSPITAL_DB_PORT=3307
+      - HOSPITAL_DB_PORT=3306
     command: ["--spring.profiles.active=prod"]
     ports:
       - "8000:8000"
@@ -65,7 +65,7 @@ services:
       - MYSQL_ROOT_USER=root
       - MYSQL_ROOT_PASSWORD=admin
     ports:
-      - "33062:3307"
+      - "33062:3306"
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 20s
