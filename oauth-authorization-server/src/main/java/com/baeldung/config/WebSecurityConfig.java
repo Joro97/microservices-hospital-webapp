@@ -21,7 +21,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@PropertySource({ "classpath:persistence.properties" })
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /*@Autowired
