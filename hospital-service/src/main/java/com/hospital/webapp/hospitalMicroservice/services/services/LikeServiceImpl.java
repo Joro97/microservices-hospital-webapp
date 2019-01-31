@@ -34,8 +34,6 @@ public class LikeServiceImpl implements LikeService {
         int doneLikes =
                 this.likesRepository.findAllByDoctorUsernameAndPatientUsername(doctorUsername, patientUsername).size();
 
-        System.out.println(String.format("Trying to add like for %s by %s.\nDone likes: %s", doctorUsername,
-                patientUsername, doneLikes));
         if (doneLikes < LIKES_PER_USER_LIMIT) {
             Like newLike = new Like(doctorUsername, patientUsername);
             this.likesRepository.save(newLike);
