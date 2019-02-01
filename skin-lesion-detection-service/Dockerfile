@@ -1,5 +1,6 @@
 FROM python:3.6
 
+
 ADD images/ /images/
 ADD model-weigths/ /model-weigths/
 ADD requirements.txt .
