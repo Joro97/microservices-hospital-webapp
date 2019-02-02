@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+COPY /target/hospital-microservice.jar hospital-microservice.jar
+COPY "/src/main/resources" "/src/main/resources/"
+EXPOSE 8000
+ENTRYPOINT ["java","-jar","hospital-microservice.jar"]
