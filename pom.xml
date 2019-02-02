@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.nbu</groupId>
+	<artifactId>princeton-plainsboro</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<name>Princeton Plainsboro</name>
+	<packaging>pom</packaging>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<modules>
+		<module>oauth-authorization-server</module>
+		<module>hospital-service</module>
+		<module>skin-lesion-detection-service</module>
+		<module>frontend</module>
+	</modules>
+
+	<profiles>
+	<profile>
+		<id>release</id>
+		<build>
+			<pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>com.spotify</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<version>0.4.3</version>
+						<configuration>
+							<skip>true</skip>
+							<imageName>princetonplainsboro/${project.artifactId}</imageName>
+							<imageTags>
+								<imageTag>latest</imageTag>
+							</imageTags>
+							<dockerDirectory>${project.basedir}</dockerDirectory>
+							<resources>
+								<resource>
+									<targetPath>/</targetPath>
+									<directory>${project.build.directory}</directory>
+									<include>${project.build.finalName}.jar</include>
+								</resource>
+							</resources>
+							<serverId>docker-hub</serverId>
+							<registryUrl>https://registry-1.docker.io/v2/</registryUrl>
+						</configuration>
+						<executions>
+							<execution>
+								<id>docker-build</id>
+								<phase>install</phase>
+								<goals>
+									<goal>build</goal>
+									<goal>push</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</pluginManagement>
+		</build>
+	</profile>
+	</profiles>
+</project>

@@ -3,20 +3,31 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hospital.webapp</groupId>
-    <artifactId>hospital-microservice</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <parent>
+        <groupId>com.nbu</groupId>
+		<artifactId>princeton-plainsboro</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>hospital-service</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>hospital-service</name>
     <description>The microservice responsible for doctors and patients info in the hospital web app</description>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.1.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+    <dependencyManagement>
+		<dependencies>
+			<dependency>
+				<!-- Import dependency management from Spring Boot -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>2.1.1.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -124,14 +135,29 @@
     </dependencies>
 
     <build>
+        <finalName>hospital-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <finalName>hospital-microservice</finalName>
-                </configuration>
+        			<mainClass>com.hospital.webapp.hospitalMicroservice.HospitalMicroserviceApplication</mainClass>
+					<addResources>true</addResources>
+				</configuration>
+                <executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
             </plugin>
+
+            <plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+			</plugin>
         </plugins>
     </build>
 </project>
