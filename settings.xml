@@ -1,0 +1,27 @@
+<!--
+    Copy this file under ~/.m2
+    or pass it to maven when building
+-->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                          https://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<localRepository/>
+	<interactiveMode/>
+	<offline/>
+	<pluginGroups/>
+	<servers>
+		<server>
+            <id>docker-hub</id>
+            <username>princetonplainsboro</username>
+            <password>ask Ognyan Tsvetkov</password>
+            <configuration>
+                <email>ognyan.konstantinov@abv.bg</email>
+            </configuration>
+  		</server>
+	</servers>
+	<mirrors/>
+	<proxies/>
+	<profiles/>
+	<activeProfiles/>
+</settings>

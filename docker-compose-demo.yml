@@ -1,3 +1,5 @@
+# TODO:
+# Extend docker-compose.yml
 version: '2.1'
 volumes:
  oauth2-mysql-data:
@@ -5,12 +7,12 @@ volumes:
 
 services:
   frontend:
-    build: frontend
+    image: "princetonplainsboro/ng-hospital-frontend:latest"
     ports:
       - "8082:80"
 
   oauth2:
-    build: oauth-authorization-server
+    image: "princetonplainsboro/oauth-authorization-server:latest"
     environment:
     - OAUTH2_DB_USER=root
     - OAUTH2_DB_PASS=secret
@@ -41,7 +43,7 @@ services:
       retries: 10
   
   hospital:
-    build: hospital-service
+    image: "princetonplainsboro/hospital-service:latest"
     environment:
       - HOSPITAL_DB_USERNAME=root
       - HOSPITAL_DB_PASSWORD=admin
@@ -72,6 +74,6 @@ services:
       retries: 10
    
   skin-lesion-service:
-    build: skin-lesion-detection-service
+    image: "princetonplainsboro/skin-lesion-detection-service:latest"
     ports: 
       - "9000:9000" 
