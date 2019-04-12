@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  hospitalApiUrl: 'http://localhost:8091/hospital',
+  hospitalApiUrl: 'http://localhost:8091/api/hospital',
   doctorsUrl: '/doctors',
   avatarsUrl: '/images', // Plus doctor username, example: /upload/image/cvetan
   patientAppointmentsUrl: '/appointments', // Plus patient username, example: /appointments/ognyan
@@ -11,6 +11,6 @@ export const environment = {
   tokenUrl: '/oauth/token',
   registerUserUrl: '/register/user',
   loginUrl: '/login',
-  lesionDetectionApiUrl: 'http://localhost:9000/api',
+  lesionDetectionApiUrl: 'http://localhost:8091/api',
   lesionUrl: '/lesion',
 };

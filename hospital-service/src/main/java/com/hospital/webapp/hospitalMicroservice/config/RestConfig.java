@@ -1,3 +1,4 @@
+/*
 package com.hospital.webapp.hospitalMicroservice.config;
 
 import org.springframework.context.annotation.Bean;
@@ -24,3 +25,4 @@ public class RestConfig {
         return new CorsFilter(source);
     }
 }
+*/

@@ -60,7 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthorityRepository authorityRepository;
 
     @Autowired
-    public WebSecurityConfig(DataSource dataSource, PasswordEncoder passwordEncoder, HospitalUserDetailsService userDetailsService, AuthorityRepository authorityRepository) {
+    public WebSecurityConfig(DataSource dataSource, PasswordEncoder passwordEncoder,
+                             HospitalUserDetailsService userDetailsService, AuthorityRepository authorityRepository) {
         this.dataSource = dataSource;
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
