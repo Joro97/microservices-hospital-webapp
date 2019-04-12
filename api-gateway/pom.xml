@@ -11,6 +11,7 @@
     <groupId>com.hospital.webapp</groupId>
     <artifactId>api-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>api-gateway</name>
     <description>The cloud API gateway for Princeton Plainsboro's hospital web application</description>
 
@@ -49,6 +50,9 @@
     </dependencyManagement>
 
     <build>
+        <finalName>
+            api-gateway
+        </finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
