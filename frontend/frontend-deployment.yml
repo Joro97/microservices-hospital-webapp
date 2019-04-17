@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+   name: frontend-pod
+spec:
+   replicas: 3
+   selector:
+      matchLabels:
+         app: frontend
+   template:
+      metadata:
+         labels: 
+            app: frontend
+      spec:
+         containers:
+         - name: ui
+           image: princetonplainsboro/ng-hospital-frontend
+           ports:
+           - containerPort: 80
+             name: http
+             
