@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
    name: hospital-pod
 spec: 
-   replicas: 2
+   replicas: 1
    selector:
       matchLabels:
          app: hospital-backend
@@ -15,6 +15,7 @@ spec:
          containers:
          - name: hospital-service
            image: princetonplainsboro/hospital-service
+           imagePullPolicy: Always
            ports:
            - containerPort: 8000
              name: http

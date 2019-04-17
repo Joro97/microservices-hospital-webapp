@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+   name: lesion-detection-pod
+spec:
+   replicas: 2
+   minReadySeconds: 15
+   strategy:
+      type: RollingUpdate
+      rollingUpdate:
+         maxUnavailable: 1
+         maxSurge: 1
+   template:
+      metadata:
+         labels:
+            app: lesion-detection
+      spec:
+         containers:
+         - name: lesion-detection
+           image: princetonplainsboro/skin-lesion-detection-service
+           imagePullPolicy: IfNotPresent
+           ports:
+           - containerPort: 9000
+             name: http
+      
