@@ -3,10 +3,11 @@ kind: Service
 metadata:
    name: hospital-backend
 spec:
-   type: LoadBalancer 
-   ports:
-   - port: 8000
-     targetPort: 8000
-     protocol: TCP
+   type: LoadBalancer     
    selector: 
-     app: hospital-backend    
+     app: hospital-backend
+   ports:
+   - protocol: TCP
+     port: 8000
+     targetPort: 8000
+

@@ -7,6 +7,12 @@ spec:
    selector:
       matchLabels:
          app: frontend
+   minReadySeconds: 15
+   strategy:
+     type: RollingUpdate
+     rollingUpdate:
+       maxUnavailable: 1
+       maxSurge: 1
    template:
       metadata:
          labels: 
@@ -14,7 +20,8 @@ spec:
       spec:
          containers:
          - name: ui
-           image: princetonplainsboro/ng-hospital-frontend
+           image: test:ogiv1
+           imagePullPolicy: Never
            ports:
            - containerPort: 80
              name: http

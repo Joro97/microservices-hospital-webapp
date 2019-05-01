@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-tutorial
+spec:
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  rules:
+  - host: myminikube.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: frontend
+          servicePort: 8082
+      - path: /api/lesion
+        backend:
+          serviceName: lesion-detection
+          servicePort: 9000
+      - path: /spring-security-oauth-server/*
+        backend:
+          serviceName: oauth-server
+          servicePort: 8090
+      - path: /api/doctors
+        backend:
+          serviceName: hospital-backend
+          servicePort: 8000
+        
