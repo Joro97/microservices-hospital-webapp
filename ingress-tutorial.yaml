@@ -2,6 +2,9 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: ingress-tutorial
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   backend:
     serviceName: default-http-backend
@@ -22,8 +25,7 @@ spec:
         backend:
           serviceName: oauth-server
           servicePort: 8090
-      - path: /api/doctors
+      - path: /api/*
         backend:
           serviceName: hospital-backend
           servicePort: 8000
-        

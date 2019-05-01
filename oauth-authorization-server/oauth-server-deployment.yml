@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: oauth-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: oauth-server
+  template: 
+    metadata:
+      labels:
+        app: oauth-server
+    spec:  
+      containers:
+      - name: oauth-server-2
+        image: princetonplainsboro/oauth-authorization-server
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+          name: http
+

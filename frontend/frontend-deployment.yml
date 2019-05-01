@@ -20,7 +20,7 @@ spec:
       spec:
          containers:
          - name: ui
-           image: test:ogiv1
+           image: test:v10-NK
            imagePullPolicy: Never
            ports:
            - containerPort: 80
