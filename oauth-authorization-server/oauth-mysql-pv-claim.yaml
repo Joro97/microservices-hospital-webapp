@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: mysql-pv-volume
+  name: oauth-mysql-pv-volume
   labels:
     type: local
 spec:
@@ -11,12 +11,12 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath: # If node goes down - all data is lost, PV should be external in production environment
-    path: "/mnt/hospital-data"
+    path: "/mnt/oauth-data"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pv-claim
+  name: oauth-mysql-pv-claim
 spec:
   storageClassName: manual
   accessModes:

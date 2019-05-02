@@ -24,7 +24,7 @@ spec:
            - name: HOSPITAL_DB_USERNAME
              value: root
            - name: HOSPITAL_DB_PASSWORD
-             value: password
+             value: secret
            args: ["--spring.profiles.active=prod"]
            ports:
            - containerPort: 8000
