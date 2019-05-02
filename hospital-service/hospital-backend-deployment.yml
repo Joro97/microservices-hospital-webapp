@@ -16,6 +16,16 @@ spec:
          - name: hospital-service
            image: princetonplainsboro/hospital-service
            imagePullPolicy: Always
+           env:
+           - name: HOSPITAL_DB_URL
+             value: mysql
+           - name: HOSPITAL_DB_PORT
+             value: "3306"
+           - name: HOSPITAL_DB_USERNAME
+             value: root
+           - name: HOSPITAL_DB_PASSWORD
+             value: password
+           args: ["--spring.profiles.active=prod"]
            ports:
            - containerPort: 8000
              name: http
