@@ -18,8 +18,8 @@
             Dr. Kevin Spacey is a professor of medicine at SUNY Downstate College of Medicine in New York and editor-in-chief of The Journal of Clinical Hypertension.
         </div>
     </div>
-    <a class="mc-btn-action" (click)="this.onClick()">
-        <i class="fa" 
+    <a class="mc-btn-action" (click)="this.onClick()" title="Title">
+        <i class="fa"
         [ngClass]="{'fa-spin-fast': this.faSpinFast, 'fa-arrow-left': this.faArrowLeft, 'fa-bars': this.faBars}"></i>
     </a>
     <div class="mc-footer">
@@ -29,9 +29,10 @@
         <h4 *ngIf="!authService.isUserLoggedIn()" (click)="redirectToLogin()" style="cursor: pointer;">
           Sign in to book an appointment
         </h4>
-        <a class="fa fa-fw fa-facebook"></a>
-        <a class="fa fa-fw fa-twitter"></a>
-        <a class="fa fa-fw fa-linkedin"></a>
-        <a class="fa fa-fw fa-google-plus"></a>
+        <a href="https://www.facebook.com/" title="Facebook" class="fa fa-fw fa-facebook"></a>
+        <a href="https://twitter.com/" title="Twitter" class="fa fa-fw fa-twitter"></a>
+        <a href="https://www.linkedin.com/" title="Linkedin" class="fa fa-fw fa-linkedin"></a>
+        <a href="https://aboutme.google.com" title="Google plus"class="fa fa-fw fa-google-plus"></a>
+
     </div>
 </article>
