@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+   name: hospital-backend
+spec:
+   type: LoadBalancer     
+   selector: 
+     app: hospital-backend
+   ports:
+   - protocol: TCP
+     port: 8000
+     targetPort: 8000
+

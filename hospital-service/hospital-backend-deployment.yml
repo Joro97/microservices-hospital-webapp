@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+   name: hospital-pod
+spec: 
+   replicas: 2
+   selector:
+      matchLabels:
+         app: hospital-backend
+   template:
+      metadata:
+         labels:
+            app: hospital-backend
+      spec:
+         containers:
+         - name: hospital-service
+           image: princetonplainsboro/hospital-service
+           imagePullPolicy: Always
+           env:
+           - name: HOSPITAL_DB_URL
+             value: mysql
+           - name: HOSPITAL_DB_PORT
+             value: "3306"
+           - name: HOSPITAL_DB_USERNAME
+             value: root
+           - name: HOSPITAL_DB_PASSWORD
+             value: secret
+           args: ["--spring.profiles.active=prod"]
+           ports:
+           - containerPort: 8000
+             name: http
+             

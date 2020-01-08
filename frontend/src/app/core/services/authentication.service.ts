@@ -4,16 +4,14 @@ import * as jwt_decode from 'jwt-decode';
 import { User } from '../models/user';
 import { JwtToken } from '../models/jwt.token';
 import { RouterExtService } from './router.ext.service';
+import { map, catchError} from 'rxjs/operators';
 import { Role } from '../models/Role';
-import { map, catchError} from "rxjs/operators";
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
-  authServiceUrl: String = 'http://localhost:8090/spring-security-oauth-server';
-
   constructor(private http: HttpClient,
               private routerExtService: RouterExtService) {}
 
@@ -30,7 +28,7 @@ export class AuthenticationService {
     params.append('grant_type', 'password');
     params.append('client_id', 'fooClientIdPassword');
 
-    return this.http.post<JwtToken>(this.authServiceUrl + '/oauth/token', params.toString(), {headers})
+    return this.http.post<JwtToken>(`${environment.authServiceUrl}${environment.tokenUrl}`, params.toString(), {headers})
       .pipe(
         map(token => {
           // TODO: add time of get token for expiration monitoring
@@ -38,7 +36,7 @@ export class AuthenticationService {
           console.log(token.access_token);
           return true;
         })
-      )
+      );
   }
 
   logout() {
@@ -69,7 +67,7 @@ export class AuthenticationService {
   }
 
   registerUser(userToRegister) {
-    return this.http.post(this.authServiceUrl + '/register/user', userToRegister)
+    return this.http.post(`${environment.authServiceUrl}${environment.registerUserUrl}`, userToRegister)
     .subscribe(response => {
       console.log('Registration was successful');
     }, error => {
