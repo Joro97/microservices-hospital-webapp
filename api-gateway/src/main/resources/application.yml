@@ -1,0 +1,15 @@
+zuul:
+  prefix: /api
+  routes:
+    hospital:
+      path: /hospital/**
+      url: http://localhost:8000/api
+      stripPrefix: false
+    oauth-server:
+      path: /auth-server/**
+      url: http://localhost:8090/spring-security-oauth-server
+      sensitive-headers: Authorization
+    leision-detection:
+      path: /lesion
+      url: http://localhost:9000/api
+      stripPrefix: false

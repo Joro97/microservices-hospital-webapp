@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/hospital")
 public class FileController {
     private final DBFileStorageService dbFileStorageService;
 

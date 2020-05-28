@@ -75,3 +75,9 @@ services:
     build: skin-lesion-detection-service
     ports: 
       - "9000:9000" 
+  
+  api-gateway:
+    build: api-gateway
+    ports:
+      - "8091:8091"
+  
