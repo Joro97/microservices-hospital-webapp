@@ -5,5 +5,5 @@ numpy==1.15.4
 pandas==0.23.4
 Pillow==6.2.0
 sklearn==0.0
-tensorflow==1.12.0
+tensorflow==1.15.4
 urllib3==1.24.1
