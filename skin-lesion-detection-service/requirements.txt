@@ -1,7 +1,7 @@
 PyJWT==1.7.1
 Keras==2.2.4
 marshmallow==2.16.3
-numpy==1.15.4
+numpy==1.22.0
 pandas==0.23.4
 Pillow==6.2.0
 sklearn==0.0
